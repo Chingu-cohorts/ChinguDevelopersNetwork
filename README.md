@@ -7,7 +7,7 @@ You must have Golang v1.6+, Node v6.10+ and PostgreSQL v9.4+.
 1. Clone the repository `git clone https://github.com/Oxyrus/ChinguCentral.git`
 2. Compile the Go code `cd ChinguCentral && go build`
 3. Run the compiled file
-4. Install node dependencies `cd client && npm install
+4. Install node dependencies `cd client && npm install`
 5. Run the server `npm run dev`
 6. Enjoy!
 
