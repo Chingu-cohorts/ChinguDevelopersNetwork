@@ -9,7 +9,6 @@ import (
 	"github.com/Oxyrus/ChinguCentral/utils"
 	"github.com/julienschmidt/httprouter"
 	mgo "gopkg.in/mgo.v2"
-	"gopkg.in/mgo.v2/bson"
 )
 
 // AllUsers returns a list of all the records in the database
@@ -22,7 +21,7 @@ func AllUsers(s *mgo.Session) func(w http.ResponseWriter, r *http.Request, _ htt
 
 		var users []models.User
 
-		err := c.Find(bson.M{}).All(&users)
+		err := c.Find(nil).All(&users)
 		if err != nil {
 			utils.ErrorWithJSON(w, "Database error", http.StatusInternalServerError)
 		}
