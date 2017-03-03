@@ -2,7 +2,7 @@
 The home for the Chingu Cohorts.
 
 ## Setup
-You must have Golang v1.6+, Node v6.10+ and PostgreSQL v9.4+.
+You must have Golang v1.6+, Node v6.10+ and MongoDB v3.0+.
 
 1. Clone the repository `git clone https://github.com/Oxyrus/ChinguCentral.git`
 2. Compile the Go code `cd ChinguCentral && go build`
