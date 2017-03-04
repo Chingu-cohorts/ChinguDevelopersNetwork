@@ -24,6 +24,8 @@ func main() {
 	// router.GET("/cohorts", cohortsHandler(session))
 	// router.GET("/cohorts/:name", cohortHandler(session))
 	router.GET("/users", controllers.AllUsers(session))
+	router.POST("/users", controllers.CreateUser(session))
+	router.GET("/users/:name", controllers.UserByName(session))
 	// router.GET("/users/:name", userHandler(session))
 
 	log.Fatal(http.ListenAndServe(":8080", router))
