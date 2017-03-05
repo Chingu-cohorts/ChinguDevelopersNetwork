@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/Oxyrus/ChinguCentral/models"
 	"github.com/Oxyrus/ChinguCentral/utils"
@@ -81,6 +82,8 @@ func CreateCohort(s *mgo.Session) func(w http.ResponseWriter, r *http.Request, p
 			utils.ErrorWithJSON(w, "Incorrect body", http.StatusBadRequest)
 			return
 		}
+
+		cohort.CreatedAt = time.Now()
 
 		c := session.DB("caronte").C("cohorts")
 

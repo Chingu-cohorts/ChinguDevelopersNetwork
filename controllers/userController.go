@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/Oxyrus/ChinguCentral/models"
 	"github.com/Oxyrus/ChinguCentral/utils"
@@ -83,6 +84,7 @@ func CreateUser(s *mgo.Session) func(w http.ResponseWriter, r *http.Request, _ h
 			return
 		}
 
+		user.CreatedAt = time.Now()
 		c := session.DB("caronte").C("users")
 
 		err = c.Insert(user)
@@ -96,8 +98,11 @@ func CreateUser(s *mgo.Session) func(w http.ResponseWriter, r *http.Request, _ h
 			return
 		}
 
-		w.Header().Set("Content-Type", "application/json")
-		w.Header().Set("Location", r.URL.Path+"/"+user.Name)
-		w.WriteHeader(http.StatusCreated)
+		respBody, err := json.MarshalIndent(user, "", " ")
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		utils.ResponseWithJSON(w, respBody, http.StatusCreated)
 	}
 }
