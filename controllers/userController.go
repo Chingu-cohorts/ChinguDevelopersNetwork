@@ -36,6 +36,38 @@ func AllUsers(s *mgo.Session) func(w http.ResponseWriter, r *http.Request, _ htt
 	}
 }
 
+// UserByName returns the data in the database for the request parameter
+func UserByName(s *mgo.Session) func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+		session := s.Copy()
+		defer session.Close()
+
+		name := ps.ByName("name")
+		var user models.User
+
+		c := session.DB("caronte").C("users")
+
+		err := c.Find(bson.M{"name": name}).One(&user)
+		if err != nil {
+			utils.ErrorWithJSON(w, "Database error", http.StatusInternalServerError)
+			log.Println("There was a problem with the request", err)
+			return
+		}
+
+		if user.Name == "" {
+			utils.ErrorWithJSON(w, "User not found", http.StatusNotFound)
+			return
+		}
+
+		respBody, err := json.MarshalIndent(user, "", " ")
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		utils.ResponseWithJSON(w, respBody, http.StatusOK)
+	}
+}
+
 // CreateUser registers an user in the database
 func CreateUser(s *mgo.Session) func(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	return func(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
@@ -67,39 +99,5 @@ func CreateUser(s *mgo.Session) func(w http.ResponseWriter, r *http.Request, _ h
 		w.Header().Set("Content-Type", "application/json")
 		w.Header().Set("Location", r.URL.Path+"/"+user.Name)
 		w.WriteHeader(http.StatusCreated)
-	}
-}
-
-// UserByName returns the data in the database for the request parameter
-func UserByName(s *mgo.Session) func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-		session := s.Copy()
-		defer session.Close()
-
-		name := ps.ByName("name")
-
-		c := session.DB("caronte").C("users")
-
-		var user models.User
-
-		err := c.Find(bson.M{"name": name}).One(&user)
-		if err != nil {
-			// ToDo: This doesn't work, should be fixed
-			utils.ErrorWithJSON(w, "Database error", http.StatusInternalServerError)
-			log.Println("There was a problem with the request", err)
-			return
-		}
-
-		if user.Name == "" {
-			utils.ErrorWithJSON(w, "User not found", http.StatusNotFound)
-			return
-		}
-
-		respBody, err := json.MarshalIndent(user, "", " ")
-		if err != nil {
-			log.Fatal(err)
-		}
-
-		utils.ResponseWithJSON(w, respBody, http.StatusOK)
 	}
 }
