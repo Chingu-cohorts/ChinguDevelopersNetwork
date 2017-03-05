@@ -66,3 +66,39 @@ func CohortByName(s *mgo.Session) func(w http.ResponseWriter, r *http.Request, p
 		utils.ResponseWithJSON(w, respBody, http.StatusOK)
 	}
 }
+
+// CreateCohort saves a cohort to the database
+func CreateCohort(s *mgo.Session) func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+		session := s.Copy()
+		defer session.Close()
+
+		var cohort models.Cohort
+
+		decoder := json.NewDecoder(r.Body)
+		err := decoder.Decode(&cohort)
+		if err != nil {
+			utils.ErrorWithJSON(w, "Incorrect body", http.StatusBadRequest)
+			return
+		}
+
+		c := session.DB("caronte").C("cohorts")
+
+		err = c.Insert(cohort)
+		if err != nil {
+			if mgo.IsDup(err) {
+				utils.ErrorWithJSON(w, "Cohort already exists", http.StatusBadRequest)
+				return
+			}
+			utils.ErrorWithJSON(w, "Database error", http.StatusInternalServerError)
+			return
+		}
+
+		respBody, err := json.MarshalIndent(cohort, "", " ")
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		utils.ResponseWithJSON(w, respBody, http.StatusCreated)
+	}
+}
