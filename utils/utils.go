@@ -21,7 +21,7 @@ func ErrorWithJSON(w http.ResponseWriter, message string, code int) {
 		panic(err)
 	}
 
-	w.Write([]byte(respBody))
+	w.Write(respBody)
 }
 
 // ResponseWithJSON simplifies returning a successful response
