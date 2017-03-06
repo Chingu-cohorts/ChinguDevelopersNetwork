@@ -6,7 +6,7 @@ The home for the Chingu Cohorts. It will host a list of all the cohorts, along w
 ## Setup
 You must have Golang v1.6+, Node v6.10+ and MongoDB v3.0+.
 
-**At the moment we're still writting the API, React client is on its way (you can collaborate, read [here](https://github.com/Oxyrus/ChinguCentral/projects/1)**.
+**At the moment we're still writting the API, React client is on its way (you can collaborate, read [here](https://github.com/Oxyrus/ChinguCentral/projects/1))**.
 
 1. Clone the repository `git clone https://github.com/Oxyrus/ChinguCentral.git`
 2. Compile the Go code `cd ChinguCentral && go build`
