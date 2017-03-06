@@ -1,5 +1,5 @@
 # ChinguCentral
-The home for the Chingu Cohorts.
+The home for the Chingu Cohorts. It will host a list of all the cohorts, along with their members, completed projects and forums. Each member will have a profile in which he will be able to display his contact information, it will also show the projects he/she has participated on, a probably in the near future some medals, because who doesn't like medals?
 
 ## Setup
 You must have Golang v1.6+, Node v6.10+ and MongoDB v3.0+.
@@ -8,7 +8,7 @@ You must have Golang v1.6+, Node v6.10+ and MongoDB v3.0+.
 2. Compile the Go code `cd ChinguCentral && go build`
 3. Run the compiled file
 4. Install node dependencies `cd client && npm install`
-5. Run the server `npm run dev`
+5. Run the server `npm start`
 6. Enjoy!
 
 ## Wireframes
@@ -16,8 +16,8 @@ You must have Golang v1.6+, Node v6.10+ and MongoDB v3.0+.
 
 ## Stack
 * API - Golang
-* Client - VueJS 2
-* Database - MongoDB
+* Client - ReactJS
+* Database - MongoDB?
 
 ## Roadmap
 I have never done a roadmap before, so bear with me.
