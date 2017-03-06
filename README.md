@@ -1,10 +1,12 @@
 # ChinguCentral (WIP)
 The home for the Chingu Cohorts. It will host a list of all the cohorts, along with their members, completed projects and forums. Each member will have a profile in which he will be able to display his contact information, it will also show the projects he/she has participated on, a probably in the near future some medals, because who doesn't like medals?
 
-**This is in very early stages of development, a lot of stuff needs to be done. Find a list of critical stuff [here](https://github.com/Oxyrus/ChinguCentral/projects/1)**
+**This is in very early stages of development, a lot of stuff needs to be done. Find a list of critical stuff [here](https://github.com/Oxyrus/ChinguCentral/projects/1)**.
 
 ## Setup
 You must have Golang v1.6+, Node v6.10+ and MongoDB v3.0+.
+
+** At the moment we're still writting the API, React client is on its way (you can collaborate, read [here](https://github.com/Oxyrus/ChinguCentral/projects/1) **.
 
 1. Clone the repository `git clone https://github.com/Oxyrus/ChinguCentral.git`
 2. Compile the Go code `cd ChinguCentral && go build`
