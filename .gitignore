@@ -22,3 +22,8 @@ _testmain.go
 *.exe
 *.test
 *.prof
+
+# misc
+.DS_Store
+
+ChinguCentral
