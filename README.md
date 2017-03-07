@@ -8,6 +8,8 @@ You must have Golang v1.6+, Node v6.10+ and MongoDB v3.0+.
 
 **At the moment we're still writting the API, React client is on its way (you can collaborate, read [here](https://github.com/Oxyrus/ChinguCentral/projects/1))**.
 
+**-Run server**
+
 Until we set up a dependency manager for Go, install the following packages manually:
 
 ```
@@ -20,9 +22,15 @@ $ go get github.com/Oxyrus/ChinguCentral
 1. Clone the repository `git clone https://github.com/Oxyrus/ChinguCentral.git`
 2. Compile the Go code `cd ChinguCentral && go build`
 3. Run the compiled file
-4. Install node dependencies `cd client && npm install`
-5. Run the server `npm start`
-6. Enjoy!
+
+**-Run client**
+
+1. Go client folder `cd client`
+2. Install dependecies `npm install`
+3. Run client server `npm start`
+4. Go to: http://localhost:3000
+
+Enyoy
 
 ## Wireframes
 * [Home](https://wireframe.cc/3310As)
