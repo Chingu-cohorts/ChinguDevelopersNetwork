@@ -1,3 +1,33 @@
+.App-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 70px;
+}
 .App-intro {
-  font-size: large;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.App-intro-image {
+  width: 700px;
+  height: 250px;
+  background-color: gray;
+}
+.App-intro-btn-container {
+  margin: 30px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.App-intro-btn {
+  width: 200px;
+  height: 40px;
+  border-radius: 15px;
+  font-size: 1.2em;
+  background-color: #fff;
+  border: 1px solid #000;
+}
+.App-intro-line {
+  width: 500px;
 }

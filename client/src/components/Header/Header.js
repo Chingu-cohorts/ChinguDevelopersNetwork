@@ -3,7 +3,7 @@ import './Header.css';
 
 const Header = () => (
   <nav className="Header-container">
-    <h2 className="Header-logo">Chingu Central</h2>
+    <h1 className="Header-logo">Chingu Central</h1>
 
     <ul className="Header-nav">
       <li className="Header-nav-item">
