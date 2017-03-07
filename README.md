@@ -28,6 +28,7 @@ $ go get github.com/Oxyrus/ChinguCentral
 1. Go client folder `cd client`
 2. Install dependecies `npm install`
 3. Run client server `npm start`
+4. Go to: http://localhost:3000
 
 Enyoy
 
