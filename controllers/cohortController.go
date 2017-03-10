@@ -137,7 +137,6 @@ func UpdateCohort(s *mgo.Session) func(w http.ResponseWriter, r *http.Request, p
 				return
 			}
 		}
-
 		w.WriteHeader(http.StatusNoContent)
 	}
 }
@@ -158,11 +157,10 @@ func DeleteCohort(s *mgo.Session) func(w http.ResponseWriter, r *http.Request, p
 				utils.ErrorWithJSON(w, "Database error", http.StatusInternalServerError)
 				return
 			case mgo.ErrNotFound:
-				utils.ErrorWithJSON(w, "Book not found", http.StatusNotFound)
+				utils.ErrorWithJSON(w, "Cohort not found", http.StatusNotFound)
 				return
 			}
 		}
-
 		w.WriteHeader(http.StatusNoContent)
 	}
 }

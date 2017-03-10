@@ -106,3 +106,62 @@ func CreateUser(s *mgo.Session) func(w http.ResponseWriter, r *http.Request, _ h
 		utils.ResponseWithJSON(w, respBody, http.StatusCreated)
 	}
 }
+
+// UpdateUser finds an user by its name and updates its information
+func UpdateUser(s *mgo.Session) func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+		session := s.Copy()
+		defer session.Close()
+
+		var user models.User
+		name := ps.ByName("name")
+
+		decoder := json.NewDecoder(r.Body)
+		err := decoder.Decode(&user)
+		if err != nil {
+			utils.ErrorWithJSON(w, "Wrong body", http.StatusBadRequest)
+			return
+		}
+
+		c := session.DB("caronte").C("users")
+
+		err = c.Update(bson.M{"name": name}, user)
+		if err != nil {
+			switch err {
+			default:
+				utils.ErrorWithJSON(w, "Database error", http.StatusInternalServerError)
+				log.Println("Failed to update user")
+				return
+			case mgo.ErrNotFound:
+				utils.ErrorWithJSON(w, "User not found", http.StatusNotFound)
+				log.Println("User not found: ", err)
+				return
+			}
+		}
+		w.WriteHeader(http.StatusNoContent)
+	}
+}
+
+// DeleteUser finds an user by its name and removes it from the database
+func DeleteUser(s *mgo.Session) func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+		session := s.Copy()
+		defer session.Close()
+
+		name := ps.ByName("name")
+		c := session.DB("caronte").C("users")
+
+		err := c.Remove(bson.M{"name": name})
+		if err != nil {
+			switch err {
+			default:
+				utils.ErrorWithJSON(w, "Database error", http.StatusInternalServerError)
+				return
+			case mgo.ErrNotFound:
+				utils.ErrorWithJSON(w, "User not found", http.StatusNotFound)
+				return
+			}
+		}
+		w.WriteHeader(http.StatusNoContent)
+	}
+}

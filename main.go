@@ -22,13 +22,19 @@ func main() {
 
 	router := httprouter.New()
 
-	// router.GET("/", rootHandler(session))
+	// Cohort routes
 	router.GET("/cohorts", controllers.AllCohorts(session))
 	router.GET("/cohorts/:name", controllers.CohortByName(session))
 	router.POST("/cohorts", controllers.CreateCohort(session))
+	router.PUT("/cohorts/:name", controllers.UpdateCohort(session))
+	router.DELETE("/cohorts/:name", controllers.DeleteCohort(session))
+
+	// User routes
 	router.GET("/users", controllers.AllUsers(session))
-	router.POST("/users", controllers.CreateUser(session))
 	router.GET("/users/:name", controllers.UserByName(session))
+	router.POST("/users", controllers.CreateUser(session))
+	router.PUT("/users/:name", controllers.UpdateUser(session))
+	router.DELETE("/users/:name", controllers.DeleteUser(session))
 
 	n := negroni.Classic()
 	n.UseHandler(router)
