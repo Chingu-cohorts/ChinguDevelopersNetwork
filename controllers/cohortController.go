@@ -105,3 +105,64 @@ func CreateCohort(s *mgo.Session) func(w http.ResponseWriter, r *http.Request, p
 		utils.ResponseWithJSON(w, respBody, http.StatusCreated)
 	}
 }
+
+// UpdateCohort finds a cohort by its name and updates it
+func UpdateCohort(s *mgo.Session) func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+		session := s.Copy()
+		defer session.Close()
+
+		var cohort models.Cohort
+
+		name := ps.ByName("name")
+
+		decoder := json.NewDecoder(r.Body)
+		err := decoder.Decode(&cohort)
+		if err != nil {
+			utils.ErrorWithJSON(w, "Invalid body", http.StatusBadRequest)
+			return
+		}
+
+		c := session.DB("caronte").C("cohorts")
+
+		err = c.Update(bson.M{"name": name}, &cohort)
+		if err != nil {
+			switch err {
+			default:
+				utils.ErrorWithJSON(w, "Database Error", http.StatusInternalServerError)
+				log.Println("Failed to update cohort: ", err)
+				return
+			case mgo.ErrNotFound:
+				utils.ErrorWithJSON(w, "Cohort not found", http.StatusNotFound)
+				return
+			}
+		}
+
+		w.WriteHeader(http.StatusNoContent)
+	}
+}
+
+// DeleteCohort finds a cohort by its name and removes it from the database
+func DeleteCohort(s *mgo.Session) func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	return func(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+		session := s.Copy()
+		defer session.Close()
+
+		name := ps.ByName("name")
+		c := session.DB("caronte").C("cohorts")
+
+		err := c.Remove(bson.M{"name": name})
+		if err != nil {
+			switch err {
+			default:
+				utils.ErrorWithJSON(w, "Database error", http.StatusInternalServerError)
+				return
+			case mgo.ErrNotFound:
+				utils.ErrorWithJSON(w, "Book not found", http.StatusNotFound)
+				return
+			}
+		}
+
+		w.WriteHeader(http.StatusNoContent)
+	}
+}
