@@ -90,9 +90,7 @@ func DeleteCohort(w http.ResponseWriter, r *http.Request, ps httprouter.Params) 
 	if cohort.ID != 0 {
 		db.Delete(&cohort)
 		w.WriteHeader(http.StatusNoContent)
-		return
 	} else {
 		utils.ErrorWithJSON(w, "Cohort not found", http.StatusNotFound)
-		return
 	}
 }
