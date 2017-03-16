@@ -28,11 +28,10 @@ func main() {
 	router.DELETE("/cohorts/:id", controllers.DeleteCohort)
 
 	// User routes
-	// router.GET("/users", controllers.AllUsers)
-	// router.GET("/users/:name", controllers.UserByName)
-	// router.POST("/users", controllers.CreateUser)
-	// router.PUT("/users/:name", controllers.UpdateUser)
-	// router.DELETE("/users/:name", controllers.DeleteUser)
+	router.GET("/users", controllers.AllUsers)
+	router.GET("/users/:id", controllers.UserByID)
+	router.POST("/users", controllers.CreateUser)
+	router.DELETE("/users/:id", controllers.DeleteUser)
 
 	n := negroni.Classic()
 	n.UseHandler(router)
