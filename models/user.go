@@ -13,6 +13,7 @@ type User struct {
 	Username string `gorm:"type:varchar(30); unique_index; not null" json:"username"`
 	Email    string `gorm:"type:varchar(100); unique_index; not null" json:"email"`
 	Country  string `gorm:"type:varchar(30); not null" json:"country,omitempty"`
+	Password string `gorm:"type:varchar(255); not null" json:"-"`
 
 	CohortID uint `json:"cohort_id,omitempty"`
 }

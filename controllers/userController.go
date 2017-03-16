@@ -5,6 +5,8 @@ import (
 	"log"
 	"net/http"
 
+	"golang.org/x/crypto/bcrypt"
+
 	"github.com/Oxyrus/ChinguCentral/models"
 	"github.com/Oxyrus/ChinguCentral/utils"
 	"github.com/julienschmidt/httprouter"
@@ -61,6 +63,13 @@ func CreateUser(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	}
 
 	if user.Email != "" && user.Name != "" && user.Username != "" {
+		password := []byte(user.Password)
+		hashedPwd, err := bcrypt.GenerateFromPassword(password, bcrypt.DefaultCost)
+		if err != nil {
+			panic(err)
+		}
+
+		user.Password = string(hashedPwd)
 		db.Create(&user)
 	} else {
 		utils.ErrorWithJSON(w, "Email, Name and Username are required", http.StatusBadRequest)
