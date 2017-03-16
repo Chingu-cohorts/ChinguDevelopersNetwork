@@ -38,7 +38,7 @@ Enjoy!
 ## Stack
 * API - Golang
 * Client - ReactJS
-* Database - MongoDB?
+* Database - PostgreSQL
 
 ## Roadmap
 I have never done a roadmap before, so bear with me.
