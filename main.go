@@ -6,35 +6,33 @@ import (
 	"time"
 
 	"github.com/Oxyrus/ChinguCentral/controllers"
+	"github.com/Oxyrus/ChinguCentral/models"
+	"github.com/Oxyrus/ChinguCentral/utils"
 	"github.com/julienschmidt/httprouter"
 	"github.com/urfave/negroni"
-	mgo "gopkg.in/mgo.v2"
 )
 
+func init() {
+	db := utils.InitDB()
+	db.AutoMigrate(&models.Cohort{})
+}
+
 func main() {
-	session, err := mgo.Dial("localhost")
-	if err != nil {
-		panic(err)
-	}
-	defer session.Close()
-
-	session.SetMode(mgo.Monotonic, true)
-
 	router := httprouter.New()
 
 	// Cohort routes
-	router.GET("/cohorts", controllers.AllCohorts(session))
-	router.GET("/cohorts/:name", controllers.CohortByName(session))
-	router.POST("/cohorts", controllers.CreateCohort(session))
-	router.PUT("/cohorts/:name", controllers.UpdateCohort(session))
-	router.DELETE("/cohorts/:name", controllers.DeleteCohort(session))
+	router.GET("/cohorts", controllers.AllCohorts)
+	router.GET("/cohorts/:id", controllers.CohortByID)
+	router.POST("/cohorts", controllers.CreateCohort)
+	// router.PUT("/cohorts/:name", controllers.UpdateCohort)
+	router.DELETE("/cohorts/:id", controllers.DeleteCohort)
 
 	// User routes
-	router.GET("/users", controllers.AllUsers(session))
-	router.GET("/users/:name", controllers.UserByName(session))
-	router.POST("/users", controllers.CreateUser(session))
-	router.PUT("/users/:name", controllers.UpdateUser(session))
-	router.DELETE("/users/:name", controllers.DeleteUser(session))
+	// router.GET("/users", controllers.AllUsers)
+	// router.GET("/users/:name", controllers.UserByName)
+	// router.POST("/users", controllers.CreateUser)
+	// router.PUT("/users/:name", controllers.UpdateUser)
+	// router.DELETE("/users/:name", controllers.DeleteUser)
 
 	n := negroni.Classic()
 	n.UseHandler(router)
