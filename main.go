@@ -14,7 +14,7 @@ import (
 
 func init() {
 	db := utils.InitDB()
-	db.AutoMigrate(&models.Cohort{})
+	db.AutoMigrate(&models.Cohort{}, &models.User{})
 }
 
 func main() {
