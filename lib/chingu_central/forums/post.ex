@@ -7,8 +7,8 @@ defmodule ChinguCentral.Forums.Post do
     # field :accounts_users_id, :id
     # field :forums_categories_id, :id
     
-    belongs_to :accounts_users, ChinguCentral.Accounts.User
-    belongs_to :forums_categories, ChinguCentral.Forums.Category
+    belongs_to :accounts_user, ChinguCentral.Accounts.User, foreign_key: :accounts_users_id
+    belongs_to :forums_category, ChinguCentral.Forums.Category, foreign_key: :forums_categories_id
 
     timestamps()
   end
