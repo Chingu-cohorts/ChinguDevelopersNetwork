@@ -41,6 +41,6 @@ config :chingu_central, ChinguCentral.Repo,
   adapter: Ecto.Adapters.Postgres,
   username: "postgres",
   password: "postgres",
-  database: "chingu_central_dev",
+  database: "chingu_dev",
   hostname: "localhost",
   pool_size: 10
