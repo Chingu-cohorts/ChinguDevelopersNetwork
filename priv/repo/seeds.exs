@@ -40,16 +40,16 @@ for _ <- 1..20 do
   Repo.insert!(%Post{
     title: Faker.Lorem.sentence,
     content: Faker.Lorem.paragraph,
-    accounts_users_id: Enum.random(1..2),
+    accounts_users_id: Enum.random(1..20),
     forums_categories_id: Enum.random(1..5)
   })
 end
 
 # Seed forum comments
-for _ <- 1..20 do
+for _ <- 1..100 do
   Repo.insert!(%Comment{
     content: Faker.Lorem.sentence,
-    accounts_users_id: Enum.random(1..2),
+    accounts_users_id: Enum.random(1..20),
     forums_posts_id: Enum.random(1..20)
   })
 end

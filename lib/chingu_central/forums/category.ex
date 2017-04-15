@@ -5,6 +5,8 @@ defmodule ChinguCentral.Forums.Category do
     field :description, :string
     field :name, :string
 
+    has_many :forums_posts, ChinguCentral.Forums.Post, foreign_key: :forums_categories_id
+
     timestamps()
   end
 end

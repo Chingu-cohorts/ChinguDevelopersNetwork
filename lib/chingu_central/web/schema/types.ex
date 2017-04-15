@@ -8,6 +8,7 @@ defmodule ChinguCentral.Schema.Types do
     field :email, :string
     field :username, :string
     field :forums_posts, list_of(:forums_post), resolve: assoc(:forums_posts)
+    field :forums_comments, list_of(:forums_comment), resolve: assoc(:forums_comments)
     field :applications_cohorts, list_of(:applications_cohort), resolve: assoc(:applications_cohorts)
   end
   
@@ -24,11 +25,20 @@ defmodule ChinguCentral.Schema.Types do
     field :content, :string
     field :accounts_user, :accounts_user, resolve: assoc(:accounts_user)
     field :forums_category, :forums_category, resolve: assoc(:forums_category)
+    field :forums_comments, list_of(:forums_comment), resolve: assoc(:forums_comments)
+  end
+  
+  object :forums_comment do
+    field :id, :id
+    field :content, :string
+    field :accounts_user, :accounts_user, resolve: assoc(:accounts_users)
+    field :forums_post, :forums_post, resolve: assoc(:forums_posts)
   end
   
   object :forums_category do
     field :id, :id
     field :name, :string
     field :description, :string
+    field :forums_posts, list_of(:forums_post), resolve: assoc(:forums_posts)
   end
 end

@@ -15,6 +15,10 @@ defmodule ChinguCentral.Schema do
       resolve &ChinguCentral.Forums.CategoryResolver.all/2
     end
     
+    field :forums_comments, list_of(:forums_comment) do
+      resolve &ChinguCentral.Forums.CommentResolver.all/2
+    end
+    
     field :applications_cohorts, list_of(:applications_cohort) do
       resolve &ChinguCentral.Applications.CohortResolver.all/2
     end
