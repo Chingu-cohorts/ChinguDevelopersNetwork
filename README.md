@@ -1,15 +1,25 @@
 # ChinguCentral
 
-So far, there is no client. Only an API that is being developed.
+Our goal is to improve the whole Chingu Project, we take it to the next level.
 
-We're using Phoenix 1.3, Elixir 1.4 and GraphQL for our API endpoint.
+## Stack
 
-To start your Phoenix server:
+* Elixir, Phoenix Framework, GraphQL API, PostgreSQL.
+* React/Vue/Angular (to be decided).
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.setup`
-  * Start Phoenix endpoint with `mix phx.server`
+## License
 
-Now you can visit [`localhost:8080/graphiql`](http://localhost:8080/graphiql) from your browser and play around with the API.
+Copyright (C) 2017  Project Chingu
 
-If you want to deploy the API, check out [Phoenix docs](http://www.phoenixframework.org/docs/deployment).
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
