@@ -37,7 +37,8 @@ defmodule ChinguCentral.Mixfile do
      {:absinthe, "~> 1.2"},
      {:absinthe_plug, "~> 1.2"},
      {:absinthe_ecto, git: "https://github.com/absinthe-graphql/absinthe_ecto.git"},
-     {:faker, "~> 0.7.0"}]
+     {:faker, "~> 0.7.0"},
+     {:comeonin, "~> 3.0"}]
   end
 
   # Aliases are shortcuts or tasks specific to the current project.
