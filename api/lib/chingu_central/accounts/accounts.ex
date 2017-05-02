@@ -22,9 +22,14 @@ defmodule ChinguCentral.Accounts do
 
   defp user_changeset(%User{} = user, attrs) do
     user
-    |> cast(attrs, [:username, :email, :name, :encrypted_password])
-    |> validate_required([:username, :email, :name, :encrypted_password])
+    |> cast(attrs, [:username, :email, :name, :password])
+    |> validate_required([:username, :email, :name, :password])
     |> unique_constraint(:username)
     |> unique_constraint(:email)
+    |> put_change(:encrypted_password, hashed_password(changeset.params["password"]))
+  end
+
+  defp hashed_password(password) do
+    Comeonin.Bcrypt.hashpwsalt(password)
   end
 end
