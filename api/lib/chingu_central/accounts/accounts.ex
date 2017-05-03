@@ -26,7 +26,16 @@ defmodule ChinguCentral.Accounts do
     |> validate_required([:username, :email, :name, :password])
     |> unique_constraint(:username)
     |> unique_constraint(:email)
-    |> put_change(:encrypted_password, hashed_password(changeset.params["password"]))
+  end
+
+  def create(changeset, repo) do
+    if changeset.valid? do
+      changeset
+      |> put_change(:encrypted_password, hashed_password(changeset.params["password"]))
+      |> Repo.insert
+    else
+      changeset
+    end
   end
 
   defp hashed_password(password) do
