@@ -31,10 +31,15 @@ defmodule ChinguCentral.Accounts do
   def registration_changeset(%User{} = user, attrs) do
     user
     |> user_changeset(attrs)
-    |> put_change(:encrypted_password, hashed_password(changeset.params["password"]))
+    |> hash_password
   end
 
-  defp hashed_password(password) do
-    Comeonin.Bcrypt.hashpwsalt(password)
+  defp hash_password(changeset) do
+    case changeset do
+      %Ecto.Changeset{valid?: true, changes: %{password: password}} ->
+        put_change(changeset, :encrypted_password, Comeonin.Bcrypt.hashpwsalt(password))
+      _ ->
+        changeset
+      end
   end
 end
