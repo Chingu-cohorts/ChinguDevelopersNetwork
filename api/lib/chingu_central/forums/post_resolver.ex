@@ -5,6 +5,12 @@ defmodule ChinguCentral.Forums.PostResolver do
   def all(_args, _info) do
     {:ok, Repo.all(Post)}
   end
+
+  def create(args, _info) do
+    %Post{}
+    |> Post.changeset(args)
+    |> Repo.insert
+  end
   
   def find(%{id: id}, _info) do
     case Repo.get(Post, id) do
@@ -12,4 +18,5 @@ defmodule ChinguCentral.Forums.PostResolver do
       post -> {:ok, post}
     end
   end
+
 end

@@ -12,4 +12,17 @@ defmodule ChinguCentral.Forums.Post do
 
     timestamps()
   end
+
+  @moduledoc """
+  The boundary for the Posts system.
+  """
+
+  import Ecto.{Query, Changeset}, warn: false
+
+ 
+  def changeset(struct, params \\ %{}) do
+	struct
+	|> cast(params, [:title, :content, :accounts_users_id])
+	|> validate_required([:title, :content, :accounts_users_id])
+   end
 end
