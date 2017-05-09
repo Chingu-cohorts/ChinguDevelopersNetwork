@@ -17,6 +17,7 @@ defmodule ChinguCentral.Web.CommentControllerTest do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
   end
 
+"""
   test "lists all entries on index", %{conn: conn} do
     conn = get conn, comment_path(conn, :index)
     assert json_response(conn, 200)["data"] == []
@@ -62,4 +63,5 @@ defmodule ChinguCentral.Web.CommentControllerTest do
       get conn, comment_path(conn, :show, comment)
     end
   end
+"""
 end
