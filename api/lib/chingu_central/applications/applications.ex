@@ -24,7 +24,9 @@ defmodule ChinguCentral.Applications do
     cohort
     |> cast(attrs, [:name, :description])
     |> validate_required([:name, :description])
-    |> unique_constraint(:name)
+    |> unique_constraint(:name)       
+    |> validate_length(:name, min:3, max:30)
+    |> validate_format(:name, ~r/^[a-zA-Z]+$/)
   end
   
   @doc """

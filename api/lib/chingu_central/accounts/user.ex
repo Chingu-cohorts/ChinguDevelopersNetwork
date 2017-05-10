@@ -3,7 +3,8 @@ defmodule ChinguCentral.Accounts.User do
 
   schema "accounts_users" do
     field :email, :string
-    field :encrypted_password, :string
+    field :hashed_password, :string
+    field :password, :string, virtual: true
     field :name, :string
     field :username, :string
     

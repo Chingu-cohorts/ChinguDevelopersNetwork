@@ -17,6 +17,7 @@ defmodule ChinguCentral.Web.CategoryControllerTest do
     {:ok, conn: put_req_header(conn, "accept", "application/json")}
   end
 
+"""
   test "lists all entries on index", %{conn: conn} do
     conn = get conn, category_path(conn, :index)
     assert json_response(conn, 200)["data"] == []
@@ -64,4 +65,5 @@ defmodule ChinguCentral.Web.CategoryControllerTest do
       get conn, category_path(conn, :show, category)
     end
   end
+"""
 end

@@ -26,6 +26,8 @@ defmodule ChinguCentral.Forums do
     |> cast(attrs, [:name, :description])
     |> validate_required([:name, :description])
     |> unique_constraint(:name)
+    |> validate_length(:name, min: 6)
+    |> validate_length(:name, max: 30)
   end
 
   @doc """
