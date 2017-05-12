@@ -45,7 +45,7 @@ defmodule ChinguCentral.Forums do
     post
     |> cast(attrs, [:title, :content, :forums_categories_id, :accounts_users_id])
     |> validate_required([:title, :content, :forums_categories_id, :accounts_users_id])
-  end
+  end 
 
   @doc """
   Returns an `%Ecto.Changeset{}` for tracking comment changes.

@@ -53,6 +53,7 @@ defmodule ChinguCentral.Schema do
     field :create_post, type: :forums_post do
       arg :title, non_null(:string)
       arg :content, non_null(:string)
+      arg :forums_categories_id, non_null(:integer)
       arg :accounts_users_id, non_null(:integer)
    
       resolve &ChinguCentral.Forums.PostResolver.create/2

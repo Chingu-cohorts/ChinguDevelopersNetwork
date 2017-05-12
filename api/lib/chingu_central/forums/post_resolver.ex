@@ -1,5 +1,6 @@
 defmodule ChinguCentral.Forums.PostResolver do
   alias ChinguCentral.Repo
+  alias ChinguCentral.Forums
   alias ChinguCentral.Forums.Post
   
   def all(_args, _info) do
@@ -8,7 +9,7 @@ defmodule ChinguCentral.Forums.PostResolver do
 
   def create(args, _info) do
     %Post{}
-    |> Post.changeset(args)
+    |> Forums.change_post(args)
     |> Repo.insert
   end
   
