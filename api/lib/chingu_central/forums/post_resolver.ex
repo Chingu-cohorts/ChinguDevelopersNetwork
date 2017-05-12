@@ -9,7 +9,7 @@ defmodule ChinguCentral.Forums.PostResolver do
 
   def create(args, _info) do
     %Post{}
-    |> Forums.change_post(args)
+    |> Forums.change_post
     |> Repo.insert
   end
   
