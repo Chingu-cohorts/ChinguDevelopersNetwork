@@ -72,6 +72,9 @@ defmodule ChinguCentral.Accounts do
     user
     |> cast(attrs, [:username, :email, :name, :password])
     |> validate_required([:username, :email, :name, :password])
+    |> validate_format(:email, ~r/[a-z0-9!#$%&'*+\/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+\/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z]+/)
+    |> validate_length(:email, min: 6, max: 40)
+    |> validate_length(:username, min: 3, max: 30)
     |> unique_constraint(:username)
     |> unique_constraint(:email)
   end
