@@ -1,11 +1,18 @@
 # ChinguCentral
 
-Our goal is to improve the whole Chingu Project, we take it to the next level.
+Our goal is to improve the whole Chingu Project, we want to take it to the next level.
 
 ## Stack
 
-* Elixir, Phoenix Framework, GraphQL API, PostgreSQL.
-* React/Vue/Angular (to be decided).
+* Backend: Golang, PostgreSQL.
+* Frontend: Vue.
+
+## Setup
+
+1. Make sure you have Golang, PostgreSQL and Node 6+ installed.
+2. Compile the code `$ go build`.
+3. Run the binary generated (name depends on your OS).
+4. Have fun! Visit [http://localhost:8080](http://localhost:8080).
 
 ## License
 
