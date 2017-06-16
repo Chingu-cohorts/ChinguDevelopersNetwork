@@ -16,7 +16,7 @@ func ListCohorts(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	defer db.Close()
 
 	var cohorts []models.Cohort
-	db.Preload("Users").Find(&cohorts)
+	db.Preload("Users.Cohort").Find(&cohorts)
 
 	respBody, err := json.MarshalIndent(cohorts, "", " ")
 	if err != nil {
@@ -58,6 +58,7 @@ func CreateCohort(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	err := decoder.Decode(&cohort)
 	if err != nil {
 		utils.JSONMessage(w, "Wrong body", http.StatusBadRequest)
+		return
 	}
 
 	// Verify name and description as both are required
