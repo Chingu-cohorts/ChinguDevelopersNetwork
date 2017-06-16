@@ -36,6 +36,10 @@ func main() {
 	r.GET("/api/cohorts/:id", controllers.ShowCohort)
 	r.POST("/api/cohorts", controllers.CreateCohort)
 
+	r.GET("/api/users", controllers.ListUsers)
+	r.GET("/api/users/:id", controllers.ShowUser)
+	r.POST("/api/users", controllers.CreateUser)
+
 	n := negroni.Classic()
 	n.Use(c)
 	n.UseHandler(r)
