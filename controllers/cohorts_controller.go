@@ -41,13 +41,13 @@ func ShowCohort(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		}
 
 		utils.JSONResponse(w, respBody, http.StatusOK)
+		return
 	}
 
 	utils.JSONMessage(w, "Cohort not found", http.StatusNotFound)
 }
 
 // CreateCohort saves a new cohort to the database
-// ToDo: Fix message when a cohort already exists
 func CreateCohort(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	db := utils.InitDB()
 	defer db.Close()
@@ -60,10 +60,23 @@ func CreateCohort(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		utils.JSONMessage(w, "Wrong body", http.StatusBadRequest)
 	}
 
+	// Verify name and description as both are required
 	if cohort.Name != "" && cohort.Description != "" {
+		// Verify if there's a cohort with that name already
+		var existingCohort models.Cohort
+		db.Where("name = ?", cohort.Name).First(&existingCohort)
+
+		// Cohort with that name already exists, don't create it
+		if existingCohort.ID != 0 {
+			utils.JSONMessage(w, "Cohort with given name already exists", http.StatusBadRequest)
+			return
+		}
+
 		db.Create(&cohort)
+
 	} else {
 		utils.JSONMessage(w, "Name and Description are required", http.StatusBadRequest)
+		return
 	}
 
 	respBody, err := json.MarshalIndent(cohort, "", " ")

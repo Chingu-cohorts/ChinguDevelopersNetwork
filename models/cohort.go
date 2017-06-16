@@ -5,7 +5,7 @@ import "time"
 // Cohort represents a cohort of the site
 type Cohort struct {
 	ID          uint   `gorm:"primary_key" json:"id"`
-	Name        string `gorm:"not_null;unique" json:"name"`
+	Name        string `gorm:"not_null;unique_index" json:"name"`
 	Description string `gorm:"not_null" json:"description"`
 
 	Users []User `json:"users,omitempty"`
