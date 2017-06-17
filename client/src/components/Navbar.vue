@@ -5,8 +5,18 @@
         <a class="nav-item">
           <img src="https://i.imgur.com/CH034bi.png" alt="The Zoo">
         </a>
-        <a class="nav-item is-tab is-hidden-mobile is-active">Home</a>
-        <a class="nav-item is-tab is-hidden-mobile">Cohorts</a>
+        <router-link 
+          :to="{ name: 'Hello'}"
+          exact-active-class="is-active" 
+          class="nav-item is-tab is-hidden-mobile">
+          Home
+        </router-link>
+        <router-link
+          :to="{ name: 'CohortList'}"
+          exact-active-class="is-active"
+          class="nav-item is-tab is-hidden-mobile">
+          Cohorts
+        </router-link>
         <a class="nav-item is-tab is-hidden-mobile">Forums</a>
         <a class="nav-item is-tab is-hidden-mobile">Projects</a>
       </div>

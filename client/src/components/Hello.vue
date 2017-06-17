@@ -14,6 +14,8 @@
             ></individual-cohort>
           </div>
 
+          <h3 class="has-text-centered">And many more...</h3>
+
           <div class="block has-text-centered">
             <a class="button is-primary is-inverted is-outlined is-large">
               <span class="icon">
