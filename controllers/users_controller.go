@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"strings"
 
 	"github.com/Chingu-cohorts/ChinguCentral/models"
 	"github.com/Chingu-cohorts/ChinguCentral/utils"
@@ -32,7 +33,10 @@ func ShowUser(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	defer db.Close()
 
 	var user models.User
-	db.Preload("Cohort").First(&user, ps.ByName("id"))
+	// Username must match exactly the one stored
+	lowerCaseUsername := strings.ToLower(ps.ByName("username"))
+	validUsername := strings.Title(lowerCaseUsername)
+	db.Where("username = ?", validUsername).Preload("Cohort").First(&user)
 
 	if user.ID != 0 {
 		respBody, err := json.MarshalIndent(user, "", " ")
@@ -41,6 +45,7 @@ func ShowUser(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 		}
 
 		utils.JSONResponse(w, respBody, http.StatusOK)
+		return
 	}
 
 	utils.JSONMessage(w, "User not found", http.StatusNotFound)

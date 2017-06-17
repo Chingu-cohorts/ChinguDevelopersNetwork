@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"log"
 	"net/http"
+	"strings"
 
 	"github.com/Chingu-cohorts/ChinguCentral/models"
 	"github.com/Chingu-cohorts/ChinguCentral/utils"
@@ -32,7 +33,10 @@ func ShowCohort(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	defer db.Close()
 
 	var cohort models.Cohort
-	db.Preload("Users").First(&cohort, ps.ByName("id"))
+	// We have to modify the string as the query must match exactly the name of the cohort
+	lowerCaseCohortName := strings.ToLower(ps.ByName("name"))
+	validCohortName := strings.Title(lowerCaseCohortName)
+	db.Where("name = ?", validCohortName).Preload("Users.Cohort").First(&cohort)
 
 	if cohort.ID != 0 {
 		respBody, err := json.MarshalIndent(cohort, "", " ")
@@ -73,6 +77,7 @@ func CreateCohort(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 			return
 		}
 
+		// Cohort with given name doesn't exist, go ahead and create it
 		db.Create(&cohort)
 
 	} else {
