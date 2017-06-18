@@ -9,6 +9,12 @@ type User struct {
 	Email     string `gorm:"not_null;unique_index" json:"email"`
 	FirstName string `json:"first_name,omitempty"`
 	LastName  string `json:"last_name,omitempty"`
+	About     string `json:"about,omitempty"`
+
+	GithubUsername   string `json:"github_username,omitempty"`
+	MediumUsername   string `json:"medium_username,omitempty"`
+	TwitterUsername  string `json:"twitter_username,omitempty"`
+	LinkedinUsername string `json:"linkedin_username,omitempty"`
 
 	Cohort   Cohort `json:"cohort,omitempty"`
 	CohortID uint   `gorm:"not null" json:"cohort_id"`
