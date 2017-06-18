@@ -10,7 +10,11 @@
         </h2>
 
         <div class="columns is-multiline row">
-          
+          <individual-user
+            v-for="user in users"
+            :user="user"
+            :key="user.id"
+          ></individual-user>
         </div>
       </div>
     </div>
@@ -19,9 +23,14 @@
 
 <script>
 import { mapState } from 'vuex'
+import IndividualUser from './IndividualUser'
 
 export default {
   name: 'user-list',
+
+  components: {
+    IndividualUser
+  },
 
   computed: mapState([
     'users'
