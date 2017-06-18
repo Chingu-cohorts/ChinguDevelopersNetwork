@@ -1,5 +1,7 @@
 <template>
+  
   <div class="column is-one-third">
+    <router-link :to="{ name: 'ShowCohort', params: { name: cohort.name }}">
     <div class="card">
       <div class="card-image">
         <figure class="image is-4by3">
@@ -18,7 +20,9 @@
         </div>
       </div>
     </div>
+    </router-link>
   </div>
+  
 </template>
 
 <script>
