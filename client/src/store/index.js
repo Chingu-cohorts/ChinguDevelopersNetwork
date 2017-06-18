@@ -42,7 +42,7 @@ const store = new Vuex.Store({
       })
     },
 
-    LOAD_USER_DATA: function ({ commit, username }) {
+    LOAD_USER_DATA: function ({ commit }, username) {
       http.get('/users/' + username).then(res => {
         commit('SET_CURRENT_USER_DATA', { user: res.data })
       }, err => {
