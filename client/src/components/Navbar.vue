@@ -36,6 +36,7 @@
           <figure class="image is-32x32" style="margin-right: 8px;">
             <img src="https://i.imgur.com/N8iiBNO.jpg">
           </figure>
+          Profile
         </a>
         <a class="nav-item is-tab">Logout</a>
       </div>
