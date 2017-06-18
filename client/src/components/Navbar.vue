@@ -2,20 +2,22 @@
   <nav class="nav has-shadow">
     <div class="container">
       <div class="nav-left">
-        <a class="nav-item">
+        <router-link
+          :to="{name: 'Hello'}"
+          class="nav-item">
           <img src="https://i.imgur.com/CH034bi.png" alt="The Zoo">
-        </a>
-        <router-link 
-          :to="{ name: 'Hello'}"
-          exact-active-class="is-active" 
-          class="nav-item is-tab is-hidden-mobile">
-          Home
         </router-link>
         <router-link
           :to="{ name: 'CohortList'}"
           exact-active-class="is-active"
           class="nav-item is-tab is-hidden-mobile">
           Cohorts
+        </router-link>
+        <router-link
+          :to="{ name: 'UserList'}"
+          exact-active-class="is-active"
+          class="nav-item is-tab is-hidden-mobile">
+          Users
         </router-link>
         <a class="nav-item is-tab is-hidden-mobile">Forums</a>
         <a class="nav-item is-tab is-hidden-mobile">Projects</a>
