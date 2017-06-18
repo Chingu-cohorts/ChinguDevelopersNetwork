@@ -4,12 +4,13 @@ import "time"
 
 // User represents an user of the application
 type User struct {
-	ID        uint   `gorm:"primary_key" json:"id"`
-	Username  string `gorm:"not_null;unique_index" json:"username"`
-	Email     string `gorm:"not_null;unique_index" json:"email"`
-	FirstName string `json:"first_name,omitempty"`
-	LastName  string `json:"last_name,omitempty"`
-	About     string `json:"about,omitempty"`
+	ID         uint   `gorm:"primary_key" json:"id"`
+	Username   string `gorm:"not_null;unique_index" json:"username"`
+	Email      string `gorm:"not_null;unique_index" json:"email"`
+	FirstName  string `json:"first_name,omitempty"`
+	LastName   string `json:"last_name,omitempty"`
+	About      string `json:"about,omitempty"`
+	Experience uint   `json:"experience,omitempty"`
 
 	GithubUsername   string `json:"github_username,omitempty"`
 	MediumUsername   string `json:"medium_username,omitempty"`
