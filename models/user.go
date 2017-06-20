@@ -8,6 +8,7 @@ type User struct {
 	Username          string `gorm:"not_null;unique_index" json:"username"`
 	Email             string `gorm:"not_null;unique_index" json:"email"`
 	EncryptedPassword string `gorm:"not_null" json:"-"`
+	Password          string `gorm:"-" json:"password,omitempty"`
 	FirstName         string `json:"first_name,omitempty"`
 	LastName          string `json:"last_name,omitempty"`
 	About             string `json:"about,omitempty"`
@@ -21,7 +22,7 @@ type User struct {
 	Cohort   Cohort `json:"cohort,omitempty"`
 	CohortID uint   `gorm:"not null" json:"cohort_id"`
 
-	Projects []Project `gorm:"many2many:user_projects"`
+	Projects []Project `gorm:"many2many:user_projects" json:"projects,omitempty"`
 
 	CreatedAt time.Time  `json:"created_at"`
 	UpdatedAt time.Time  `json:"updated_at"`
