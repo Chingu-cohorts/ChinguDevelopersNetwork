@@ -12,7 +12,9 @@ Our goal is to improve the whole Chingu Project, we want to take it to the next 
 1. Make sure you have Golang, PostgreSQL and Node 6+ installed.
 2. Compile the code `$ go build`.
 3. Run the binary generated (name depends on your OS).
-4. Have fun! Visit [http://localhost:8080](http://localhost:8080).
+4. Open a new terminal and cd into the client.
+5. Run the development server `$ yarn start`
+6. Have fun! Visit [http://localhost:8080](http://localhost:8080).
 
 ## License
 
