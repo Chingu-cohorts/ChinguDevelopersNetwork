@@ -43,6 +43,8 @@ func main() {
 	r.GET("/api/users", controllers.ListUsers)
 	r.GET("/api/users/:username", controllers.ShowUser)
 	r.POST("/api/users", controllers.CreateUser)
+	r.POST("/api/users/login", controllers.Login)
+	r.DELETE("/api/users/:username", controllers.DeleteUser)
 
 	n := negroni.Classic()
 	n.Use(c)

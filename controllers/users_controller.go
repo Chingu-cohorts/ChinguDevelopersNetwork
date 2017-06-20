@@ -6,6 +6,8 @@ import (
 	"net/http"
 	"strings"
 
+	"golang.org/x/crypto/bcrypt"
+
 	"github.com/Chingu-cohorts/ChinguCentral/models"
 	"github.com/Chingu-cohorts/ChinguCentral/utils"
 	"github.com/julienschmidt/httprouter"
@@ -65,7 +67,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		return
 	}
 
-	if user.Username != "" && user.Email != "" {
+	if user.Username != "" && user.Email != "" && user.Password != "" {
 		// Used to check for an user with the same email
 		var existingUserWithEmail models.User
 		db.Where("email = ?", user.Email).First(&existingUserWithEmail)
@@ -92,7 +94,18 @@ func CreateUser(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 			return
 		}
 
-		// User was successfully created, format to JSON and response
+		// We can create the user
+		// Start by hashing the password
+		password := []byte(user.Password)
+		hashedPassword, err := bcrypt.GenerateFromPassword(password, bcrypt.DefaultCost)
+		if err != nil {
+			log.Fatalf("Error hashing password: %v", err)
+		}
+
+		// Assign the user the hashed password
+		user.EncryptedPassword = string(hashedPassword)
+
+		// Save the user to the database
 		db.Create(&user)
 
 		respBody, err := json.MarshalIndent(user, "", " ")
@@ -104,5 +117,56 @@ func CreateUser(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		return
 	}
 
-	utils.JSONMessage(w, "Email and Username are required", http.StatusBadRequest)
+	utils.JSONMessage(w, "Email, username and password are required", http.StatusBadRequest)
+}
+
+// Login verifies the credentials and returns a JWT token
+func Login(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	db := utils.InitDB()
+	defer db.Close()
+
+	// The user that comes along with the POST request
+	var user models.User
+	decoder := json.NewDecoder(r.Body)
+	err := decoder.Decode(&user)
+	if err != nil {
+		utils.JSONMessage(w, "Invalid data", http.StatusBadRequest)
+		return
+	}
+
+	// savedUser is the user found in the database
+	var savedUser models.User
+	username := user.Username
+
+	db.Where("username = ?", username).First(&savedUser)
+
+	if savedUser.ID == 0 {
+		utils.JSONMessage(w, "User not found", http.StatusNotFound)
+		return
+	}
+
+	err = bcrypt.CompareHashAndPassword([]byte(savedUser.EncryptedPassword), []byte(user.Password))
+	if err != nil {
+		utils.JSONMessage(w, "Wrong password", http.StatusBadRequest)
+		return
+	}
+
+	utils.JSONMessage(w, "Correct password", http.StatusOK)
+}
+
+// DeleteUser finds and user by its username and deletes it
+func DeleteUser(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	db := utils.InitDB()
+	defer db.Close()
+
+	var user models.User
+	db.Where("username = ?", ps.ByName("username")).First(&user)
+
+	if user.ID != 0 {
+		db.Delete(&user)
+		utils.JSONMessage(w, "User deleted", http.StatusOK)
+		return
+	}
+
+	utils.JSONMessage(w, "User not found", http.StatusOK)
 }
