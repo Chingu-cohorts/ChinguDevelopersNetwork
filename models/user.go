@@ -12,7 +12,7 @@ type User struct {
 	FirstName         string `json:"first_name,omitempty"`
 	LastName          string `json:"last_name,omitempty"`
 	About             string `json:"about,omitempty"`
-	Experience        uint   `gorm:"default:0" json:"experience,omitempty"`
+	Experience        uint   `gorm:"default:0" json:"experience"`
 
 	GithubUsername   string `json:"github_username,omitempty"`
 	MediumUsername   string `json:"medium_username,omitempty"`
