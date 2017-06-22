@@ -1,15 +1,23 @@
 <template>
   <div class="column is-one-quarter">
     <router-link :to="{ name: 'ShowUser', params: { username: user.username }}">
-      <img class="user-image" style="background: url('http://lorempixel.com/300/300/')">
+      <img class="user-image" :src="userGravatar">
     </router-link>
   </div>
 </template>
 
 <script>
+import md5 from 'blueimp-md5'
 export default {
   name: 'individual-user',
-  props: ['user']
+  props: ['user'],
+  computed: {
+    userGravatar (props) {
+      let hash = md5(props.user.email)
+      let gravatarUrl = 'https://gravatar.com/avatar/' + hash + '?s=512'
+      return gravatarUrl
+    }
+  }
 }
 </script>
 

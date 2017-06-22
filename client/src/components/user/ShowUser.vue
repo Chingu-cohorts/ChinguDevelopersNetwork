@@ -1,10 +1,10 @@
 <template>
 <div>
-  <section class="hero is-primary">
+  <section class="hero user-profile-background">
     <div class="hero-body">
       <div class="container has-text-centered">
         <figure class="image is-256x256">
-          <img src="http://lorempixel.com/300/300/">
+          <img :src="userGravatar">
         </figure>
         <h1 class="title">
           {{ currentUser.first_name }} {{ currentUser.last_name }}
@@ -32,7 +32,7 @@
         <div class="level-item has-text-centered">
           <div>
             <p class="heading">Projects Completed</p>
-            <p class="title">42</p>
+            <p class="title">{{ userCompletedProjects }}</p>
           </div>
         </div>
         <div class="level-item has-text-centered">
@@ -55,7 +55,7 @@
         <div class="column is-one-quarter">
           <div class="content">
             <h2>About</h2>
-            <p>I've been coding since I was 12 years old, six years later, I am changing the world.</p>
+            <p>{{ userAbout }}</p>
           </div>
           <div class="block has-text-centered">
             <a class="button is-primary is-outlined">
@@ -159,14 +159,36 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
+import md5 from 'blueimp-md5'
 
 export default {
   name: 'show-user',
 
-  computed: mapState([
-    'currentUser'
-  ]),
+  computed: {
+    currentUser () {
+      return this.$store.state.currentUser
+    },
+
+    userAbout (state) {
+      if (state.currentUser.about) {
+        return state.currentUser.about
+      }
+      return 'No about'
+    },
+
+    userCompletedProjects (state) {
+      if (state.currentUser.projects) {
+        return state.currentUser.projects
+      }
+      return '0'
+    },
+
+    userGravatar (state) {
+      let hash = md5(state.currentUser.email)
+      let gravatarUrl = 'https://gravatar.com/avatar/' + hash + '?s=512'
+      return gravatarUrl
+    }
+  },
 
   mounted () {
     let { username } = this.$route.params
@@ -176,6 +198,18 @@ export default {
 </script>
 
 <style scoped>
+.user-profile-background {
+  background-image: linear-gradient(135deg, #81FBB8 0%, #28C76F 100%)
+}
+
+.hero-body .title, .subtitle {
+  color: #fff;
+}
+
+.hero-body .fa {
+  color: #fff;
+}
+
 .is-256x256 {
   height: 256px;
   width: 256px;
