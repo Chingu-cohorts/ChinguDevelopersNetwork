@@ -118,7 +118,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
 import IndividualCohort from './cohort/IndividualCohort'
 
 export default {
@@ -128,9 +127,13 @@ export default {
     IndividualCohort
   },
 
-  computed: mapState([
-    'cohorts'
-  ]),
+  computed: {
+    cohorts () {
+      let cohortList = this.$store.state.cohorts
+      let slicedList = cohortList.slice(0, 3)
+      return slicedList
+    }
+  },
 
   mounted () {
     this.$store.dispatch('LOAD_COHORTS_LIST')
