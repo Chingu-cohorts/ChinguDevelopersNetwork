@@ -36,9 +36,8 @@ func ShowUser(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 	var user models.User
 	// Username must match exactly the one stored
-	lowerCaseUsername := strings.ToLower(ps.ByName("username"))
-	validUsername := strings.Title(lowerCaseUsername)
-	db.Where("username = ?", validUsername).Preload("Cohort").First(&user)
+	lowercaseParams := strings.ToLower(ps.ByName("username"))
+	db.Where("username = ?", lowercaseParams).Preload("Cohort").First(&user)
 
 	if user.ID != 0 {
 		respBody, err := json.MarshalIndent(user, "", " ")
@@ -68,6 +67,9 @@ func CreateUser(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	}
 
 	if user.Username != "" && user.Email != "" && user.Password != "" {
+		// Only lowercase usernames allowed
+		user.Username = strings.ToLower(user.Username)
+
 		// Used to check for an user with the same email
 		var existingUserWithEmail models.User
 		db.Where("email = ?", user.Email).First(&existingUserWithEmail)
