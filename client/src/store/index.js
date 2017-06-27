@@ -14,7 +14,8 @@ const store = new Vuex.Store({
     cohorts: [],
     users: [],
     currentCohort: {},
-    currentUser: {}
+    currentUser: {},
+    collapsed: false
   },
 
   actions: {
@@ -48,6 +49,10 @@ const store = new Vuex.Store({
       }, err => {
         console.error(err)
       })
+    },
+
+    COLLAPSE_NAVBAR: function ({ commit }) {
+      commit('COLLAPSE_MAIN_NAVBAR')
     }
   },
 
@@ -66,6 +71,10 @@ const store = new Vuex.Store({
 
     SET_CURRENT_USER_DATA: (state, { user }) => {
       state.currentUser = user
+    },
+
+    COLLAPSE_MAIN_NAVBAR: (state) => {
+      state.collapsed = !state.collapsed
     }
   }
 })

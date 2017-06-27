@@ -22,14 +22,30 @@
         <a class="nav-item is-tab is-hidden-mobile">Forums</a>
         <a class="nav-item is-tab is-hidden-mobile">Projects</a>
       </div>
-      <span class="nav-toggle">
+      <span class="nav-toggle" v-on:click="collapse">
         <span></span>
         <span></span>
         <span></span>
       </span>
-      <div class="nav-right nav-menu">
-        <a class="nav-item is-tab is-hidden-tablet is-active">Home</a>
-        <a class="nav-item is-tab is-hidden-tablet">Cohorts</a>
+      <div class="nav-right nav-menu" v-bind:class="{'is-active': collapsed}">
+        <router-link
+          :to="{name: 'Hello'}"
+          class="nav-item is-tab is-hidden-tablet"
+          exact-active-class="is-active">
+          Home
+        </router-link>
+        <router-link
+          :to="{name: 'CohortList'}"
+          class="nav-item is-tab is-hidden-tablet"
+          exact-active-class="is-active">
+          Cohorts
+        </router-link>
+        <router-link
+          :to="{name: 'UserList'}"
+          class="nav-item is-tab is-hidden-tablet"
+          exact-active-class="is-active">
+          Users
+        </router-link>
         <a class="nav-item is-tab is-hidden-tablet">Forums</a>
         <a class="nav-item is-tab is-hidden-tablet">Projects</a>
         <a class="nav-item is-tab">
@@ -38,6 +54,8 @@
           </figure>
           Profile
         </a>
+        <a class="nav-item is-tab">Sign up</a>
+        <a class="nav-item is-tab">Sign in</a>
         <a class="nav-item is-tab">Logout</a>
       </div>
     </div>
@@ -46,6 +64,18 @@
 
 <script>
 export default {
-  name: 'navbar'
+  name: 'navbar',
+
+  computed: {
+    collapsed () {
+      return this.$store.state.collapsed
+    }
+  },
+
+  methods: {
+    collapse (e) {
+      this.$store.dispatch('COLLAPSE_NAVBAR')
+    }
+  }
 }
 </script>
