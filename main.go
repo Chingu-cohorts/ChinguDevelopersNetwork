@@ -19,6 +19,16 @@ func init() {
 	defer db.Close()
 
 	db.AutoMigrate(&models.Cohort{}, &models.User{})
+
+	cohorts, err := utils.LoadCohortSeed("cohorts.json")
+	if err != nil {
+		log.Fatalf("Something went wrong reading the cohorts file: %v", err)
+	}
+
+	// Iterate over cohorts to save them
+	for _, cohort := range cohorts.Cohorts {
+		db.Create(&cohort)
+	}
 }
 
 func main() {
