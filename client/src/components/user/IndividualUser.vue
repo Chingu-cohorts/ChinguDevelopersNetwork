@@ -1,5 +1,5 @@
 <template>
-  <div class="column is-one-quarter">
+  <div class="column is-2">
     <router-link :to="{ name: 'ShowUser', params: { username: user.username }}">
       <img class="user-image" :src="userGravatar">
     </router-link>
