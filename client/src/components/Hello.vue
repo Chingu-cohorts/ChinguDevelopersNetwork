@@ -129,9 +129,8 @@ export default {
 
   computed: {
     cohorts () {
-      let cohortList = this.$store.state.cohorts
-      let slicedList = cohortList.slice(0, 3)
-      return slicedList
+      let cohortList = this.$store.state.cohorts.slice(0, 3)
+      return cohortList
     }
   },
 
