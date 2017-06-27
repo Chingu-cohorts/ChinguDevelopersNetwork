@@ -38,7 +38,7 @@
         <div class="level-item has-text-centered">
           <div>
             <p class="heading">Reputation</p>
-            <p class="title">Sage</p>
+            <p class="title">{{ userReputationLevel }}</p>
           </div>
         </div>
         <div class="level-item has-text-centered">
@@ -61,6 +61,11 @@
           <div class="block has-text-centered">
             <a class="button is-primary is-outlined">
               Contact
+            </a>
+          </div>
+          <div class="block has-text-centered">
+            <a class="button is-danger is-outlined">
+              <i class="fa fa-heart"></i> Recommend {{ currentUser.first_name }} 
             </a>
           </div>
         </div>
@@ -98,7 +103,7 @@
           </article>
 
         </div>
-        
+
       </div>
     </div>
   </section>
@@ -129,6 +134,35 @@ export default {
       }
 
       return '0'
+    },
+
+    userReputationLevel (state) {
+      let experience = state.currentUser.experience
+      let reputation
+
+      let assignRep = (name) => {
+        reputation = name
+      }
+
+      switch (true) {
+        case experience >= 1000:
+          assignRep('Legend')
+          break
+        case experience >= 500:
+          assignRep('Sage')
+          break
+        case experience >= 100:
+          assignRep('Senior')
+          break
+        case experience >= 10:
+          assignRep('Member')
+          break
+        default:
+          assignRep('Neutral')
+          break
+      }
+
+      return reputation
     },
 
     userGravatar (state) {
