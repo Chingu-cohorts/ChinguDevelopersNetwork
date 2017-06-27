@@ -54,8 +54,12 @@
           </figure>
           Profile
         </a>
+        <router-link
+          :to="{name: 'SignIn'}"
+          class="nav-item is-tab">
+          Sign in
+        </router-link>
         <a class="nav-item is-tab">Sign up</a>
-        <a class="nav-item is-tab">Sign in</a>
         <a class="nav-item is-tab">Logout</a>
       </div>
     </div>
