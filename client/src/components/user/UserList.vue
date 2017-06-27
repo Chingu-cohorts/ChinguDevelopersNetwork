@@ -6,7 +6,7 @@
           Users
         </h1>
         <h2 class="subtitle">
-          We got hundreds of members
+          We got an incredible community
         </h2>
 
         <div class="columns is-multiline row">
