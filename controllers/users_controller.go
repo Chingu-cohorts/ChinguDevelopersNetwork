@@ -38,6 +38,7 @@ func ShowUser(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	// Username must match exactly the one stored
 	lowercaseParams := strings.ToLower(ps.ByName("username"))
 	db.Where("username = ?", lowercaseParams).Preload("Cohort").First(&user)
+	db.Model(&user).Association("Projects").Find(&user.Projects)
 
 	if user.ID != 0 {
 		respBody, err := json.MarshalIndent(user, "", " ")
