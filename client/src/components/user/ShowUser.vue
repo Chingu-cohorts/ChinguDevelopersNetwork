@@ -65,7 +65,7 @@
           </div>
           <div class="block has-text-centered">
             <a class="button is-danger is-outlined">
-              <i class="fa fa-heart"></i> Recommend {{ currentUser.first_name }} 
+              Recommend
             </a>
           </div>
         </div>
