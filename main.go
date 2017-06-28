@@ -18,7 +18,7 @@ func init() {
 	db := utils.InitDB()
 	defer db.Close()
 
-	db.AutoMigrate(&models.Cohort{}, &models.User{})
+	db.AutoMigrate(&models.Cohort{}, &models.User{}, &models.Project{})
 
 	cohorts, err := utils.LoadCohortSeed("cohorts.json")
 	if err != nil {
@@ -55,6 +55,8 @@ func main() {
 	r.POST("/api/users", controllers.CreateUser)
 	r.POST("/api/users/login", controllers.Login)
 	r.DELETE("/api/users/:username", controllers.DeleteUser)
+
+	r.GET("/api/projects", controllers.ListProjects)
 
 	n := negroni.Classic()
 	n.Use(c)
