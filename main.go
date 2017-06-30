@@ -18,7 +18,7 @@ func init() {
 	db := utils.InitDB()
 	defer db.Close()
 
-	db.AutoMigrate(&models.Cohort{}, &models.User{}, &models.Project{})
+	db.AutoMigrate(&models.Cohort{}, &models.User{}, &models.Project{}, &models.Post{}, &models.Comment{})
 
 	cohorts, err := utils.LoadCohortSeed("cohorts.json")
 	if err != nil {
