@@ -19,7 +19,7 @@ type User struct {
 	LinkedinUsername string `json:"linkedin_username,omitempty"`
 
 	Cohort   Cohort `json:"cohort,omitempty"`
-	CohortID uint   `gorm:"not null" json:"cohort_id"`
+	CohortID uint   `json:"cohort_id"`
 
 	Projects []Project `gorm:"many2many:user_projects" json:"projects,omitempty"`
 
