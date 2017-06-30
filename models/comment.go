@@ -11,4 +11,6 @@ type Comment struct {
 
 	User   User `json:"user,omitempty"`
 	UserID uint `gorm:"not null" json:"user_id"`
+
+	CommentReports []CommentReport `json:"comment_reports,omitempty"`
 }
