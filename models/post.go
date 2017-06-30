@@ -13,4 +13,6 @@ type Post struct {
 	UserID uint `gorm:"not null" json:"user_id"`
 
 	Comments []Comment `json:"comments,omitempty"`
+
+	PostReports []PostReport `json:"post_reports,omitempty"`
 }
