@@ -48,19 +48,16 @@
         </router-link>
         <a class="nav-item is-tab is-hidden-tablet">Forums</a>
         <a class="nav-item is-tab is-hidden-tablet">Projects</a>
-        <a class="nav-item is-tab">
-          <figure class="image is-32x32" style="margin-right: 8px;">
-            <img src="https://i.imgur.com/N8iiBNO.jpg">
-          </figure>
-          Profile
-        </a>
         <router-link
           :to="{name: 'SignIn'}"
           class="nav-item is-tab">
-          Sign in
+          Login
         </router-link>
-        <a class="nav-item is-tab">Sign up</a>
-        <a class="nav-item is-tab">Logout</a>
+        <router-link
+          :to="{name: 'SignUp'}"
+          class="nav-item is-tab">
+          Register
+        </router-link>
       </div>
     </div>
   </nav>
