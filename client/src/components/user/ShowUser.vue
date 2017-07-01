@@ -18,7 +18,7 @@
         <a href="https://github.com/Oxyrus">
           <i class="fa fa-github"></i>
         </a>
-        <a href="https://twitter.com/im_oxy">
+        <a href="https://linkedin.com/Oxyrus">
           <i class="fa fa-linkedin"></i>
         </a>
       </div>
@@ -59,14 +59,10 @@
             <p>{{ userAbout }}</p>
           </div>
           <div class="block has-text-centered">
-            <a class="button is-primary is-outlined">
-              Contact
-            </a>
+            <a class="button is-primary is-outlined">Contact</a>
           </div>
           <div class="block has-text-centered">
-            <a class="button is-danger is-outlined">
-              Recommend
-            </a>
+            <a class="button is-danger is-outlined">Recommend</a>
           </div>
         </div>
 
@@ -130,7 +126,7 @@ export default {
 
     userCompletedProjects (state) {
       if (state.currentUser.projects) {
-        return state.currentUser.projects
+        return state.currentUser.projects.length
       }
 
       return '0'
