@@ -6,6 +6,7 @@ import ShowCohort from '@/components/cohort/ShowCohort'
 import UserList from '@/components/user/UserList'
 import ShowUser from '@/components/user/ShowUser'
 import SignIn from '@/components/user/SignIn'
+import SignUp from '@/components/user/SignUp'
 
 Vue.use(Router)
 
@@ -35,6 +36,11 @@ export default new Router({
       path: '/users/:username',
       name: 'ShowUser',
       component: ShowUser
+    },
+    {
+      path: '/signup',
+      name: 'SignUp',
+      component: SignUp
     },
     {
       path: '/signin',
