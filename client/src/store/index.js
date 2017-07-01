@@ -4,9 +4,14 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 
+const jwt = window.localStorage.getItem('token')
+
 const http = axios.create({
   baseURL: 'http://localhost:8081/api',
-  timeout: 5000
+  timeout: 5000,
+  headers: {
+    'Authorization': jwt
+  }
 })
 
 const store = new Vuex.Store({
@@ -48,6 +53,46 @@ const store = new Vuex.Store({
         commit('SET_CURRENT_USER_DATA', { user: res.data })
       }, err => {
         console.error(err)
+      })
+    },
+
+    POST_REGISTRATION_DATA: function ({ commit }, user) {
+      return new Promise((resolve, reject) => {
+        http.post('/users', {
+          username: user.username,
+          email: user.email,
+          password: user.password
+        }).then(res => {
+          console.log(res.data.token)
+          resolve()
+        }).catch(err => {
+          if (err.response) {
+            console.log(err.response.data)
+          } else {
+            console.error(err)
+          }
+          reject()
+        })
+      })
+    },
+
+    POST_LOGIN_DATA: function ({ commit }, user) {
+      return new Promise((resolve, reject) => {
+        http.post('/users/login', {
+          username: user.username,
+          password: user.password
+        }).then(res => {
+          console.log(res)
+          localStorage.setItem('token', res.data.token)
+          resolve()
+        }).catch(err => {
+          if (err.response) {
+            console.log(err.response)
+          } else {
+            console.error(err)
+          }
+          reject()
+        })
       })
     },
 
