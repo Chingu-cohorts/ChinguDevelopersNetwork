@@ -25,3 +25,33 @@ func ListProjects(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 	utils.JSONResponse(w, respBody, http.StatusOK)
 }
+
+// ShowProject returns the data for a project with given id
+func ShowProject(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	db := utils.InitDB()
+	defer db.Close()
+
+	var project models.Project
+	db.First(&project, ps.ByName("id"))
+
+	if project.ID != 0 {
+		respBody, err := json.MarshalIndent(project, "", " ")
+		if err != nil {
+			log.Fatalf("Error showing project: %v", err)
+		}
+
+		utils.JSONResponse(w, respBody, http.StatusOK)
+		return
+	}
+
+	utils.JSONMessage(w, "Project not found", http.StatusNotFound)
+}
+
+// CreateProject saves a new project to the database
+func CreateProject(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	db := utils.InitDB()
+	defer db.Close()
+	
+	// We will need to get the user ID to append a new project to him
+	
+}

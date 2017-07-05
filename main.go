@@ -40,7 +40,11 @@ func main() {
 
 	// Setup CORS
 	c := cors.New(cors.Options{
-		AllowedOrigins: []string{"http://localhost:8080"},
+		AllowedOrigins:   []string{"http://localhost:8080"},
+		AllowCredentials: true,
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE"},
+		AllowedHeaders:   []string{"Authorization"},
+		ExposedHeaders:   []string{"Authorization"},
 	})
 
 	// Instantiate router
@@ -48,15 +52,17 @@ func main() {
 
 	r.GET("/api/cohorts", controllers.ListCohorts)
 	r.GET("/api/cohorts/:name", controllers.ShowCohort)
-	r.POST("/api/cohorts", controllers.CreateCohort)
+	r.POST("/api/cohorts", utils.AuthRequest(controllers.CreateCohort))
 
 	r.GET("/api/users", controllers.ListUsers)
 	r.GET("/api/users/:username", controllers.ShowUser)
 	r.POST("/api/users", controllers.CreateUser)
 	r.POST("/api/users/login", controllers.Login)
-	r.DELETE("/api/users/:username", controllers.DeleteUser)
+	r.DELETE("/api/users/:username", utils.AuthRequest(controllers.DeleteUser))
+	r.GET("/api/currentuser", utils.AuthRequest(controllers.CurrentUser))
 
 	r.GET("/api/projects", controllers.ListProjects)
+	r.GET("/api/projects/:id", controllers.ShowProject)
 
 	n := negroni.Classic()
 	n.Use(c)

@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
 	"strings"
@@ -154,7 +155,15 @@ func Login(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		return
 	}
 
-	utils.JSONMessage(w, "Correct password", http.StatusOK)
+	token := utils.GenerateJWT(savedUser)
+	result := models.ResponseToken{Token: token}
+
+	respBody, err := json.MarshalIndent(result, "", " ")
+	if err != nil {
+		log.Fatalf("Error marshalizing token: %v", err)
+	}
+
+	utils.JSONResponse(w, respBody, http.StatusOK)
 }
 
 // DeleteUser finds and user by its username and deletes it
@@ -172,4 +181,43 @@ func DeleteUser(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	}
 
 	utils.JSONMessage(w, "User not found", http.StatusOK)
+}
+
+// CurrentUser returns the data for the logged in user
+func CurrentUser(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	db := utils.InitDB()
+	defer db.Close()
+
+	// First we get the JWT token from the request
+	token := r.Header.Get("Authorization")
+
+	// Read the data from the JWT
+	tokenData, _ := utils.ReadJWT(token)
+
+	// The data contained in the token is old, all we need
+	// is the id, so we can look up for the user in the database
+	// and return the data there
+	userID := tokenData.User.ID
+
+	var user models.User
+
+	//db.Preload("Cohort").First(&user, userID)
+	//db.Model(&user).Association("Projects").Find(&user.Projects)
+
+	db.Where("id = ?", userID).Preload("Cohort").First(&user)
+	db.Model(&user).Association("Projects").Find(&user.Projects)
+
+	isTokenValid := utils.ValidateToken(token)
+
+	respBody, err := json.MarshalIndent(user, "", " ")
+	if err != nil {
+		log.Fatalf("Error in current user: %v", err)
+	}
+
+	utils.JSONResponse(w, respBody, http.StatusOK)
+
+	fmt.Println("--------------------------------------")
+	fmt.Println(user.Cohort)
+	fmt.Println(isTokenValid)
+	fmt.Println("--------------------------------------")
 }
