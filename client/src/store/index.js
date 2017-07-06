@@ -20,7 +20,7 @@ const store = new Vuex.Store({
     users: [],
     currentCohort: {},
     currentUser: {},
-    collapsed: false
+    loggedUser: {}
   },
 
   actions: {
@@ -96,8 +96,12 @@ const store = new Vuex.Store({
       })
     },
 
-    COLLAPSE_NAVBAR: function ({ commit }) {
-      commit('COLLAPSE_MAIN_NAVBAR')
+    LOAD_LOGGED_USER_DATA: function ({ commit }) {
+      http.get('/currentuser').then(res => {
+        commit('SET_LOGGED_USER_DATA', { user: res.data })
+      }).catch(err => {
+        console.error(err)
+      })
     }
   },
 
@@ -118,8 +122,8 @@ const store = new Vuex.Store({
       state.currentUser = user
     },
 
-    COLLAPSE_MAIN_NAVBAR: (state) => {
-      state.collapsed = !state.collapsed
+    SET_LOGGED_USER_DATA: (state, { user }) => {
+      state.loggedUser = user
     }
   }
 })
