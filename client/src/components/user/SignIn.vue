@@ -68,7 +68,7 @@ export default {
       }
 
       this.$store.dispatch('POST_LOGIN_DATA', user).then(() => {
-        this.$router.push({name: 'Hello'})
+        window.location = '/'
       }).catch(err => {
         console.error(err)
       })
