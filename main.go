@@ -40,11 +40,12 @@ func main() {
 
 	// Setup CORS
 	c := cors.New(cors.Options{
-		AllowedOrigins:   []string{"http://localhost:8080"},
+		AllowedOrigins:   []string{"*"},
 		AllowCredentials: true,
-		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE"},
-		AllowedHeaders:   []string{"Authorization"},
-		ExposedHeaders:   []string{"Authorization"},
+		AllowedMethods:   []string{"GET", "POST"},
+		AllowedHeaders:   []string{"Authorization", "Content-Type"},
+		ExposedHeaders:   []string{"Authorization", "Content-Type"},
+		Debug:            true,
 	})
 
 	// Instantiate router
@@ -59,7 +60,7 @@ func main() {
 	r.POST("/api/users", controllers.CreateUser)
 	r.POST("/api/users/login", controllers.Login)
 	r.DELETE("/api/users/:username", utils.AuthRequest(controllers.DeleteUser))
-	r.GET("/api/currentuser", utils.AuthRequest(controllers.CurrentUser))
+	r.GET("/api/currentuser", controllers.CurrentUser)
 
 	r.GET("/api/projects", controllers.ListProjects)
 	r.GET("/api/projects/:id", controllers.ShowProject)
