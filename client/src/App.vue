@@ -12,11 +12,20 @@
 import Navbar from './components/Navbar'
 import MainFooter from './components/MainFooter'
 
+let token = localStorage.getItem('token')
+
 export default {
   name: 'app',
+
   components: {
     Navbar,
     MainFooter
+  },
+
+  mounted () {
+    if (token) {
+      this.$store.dispatch('LOAD_LOGGED_USER_DATA')
+    }
   }
 }
 </script>
