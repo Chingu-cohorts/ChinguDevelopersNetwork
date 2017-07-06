@@ -48,16 +48,22 @@
         </router-link>
         <a class="nav-item is-tab is-hidden-tablet">Forums</a>
         <a class="nav-item is-tab is-hidden-tablet">Projects</a>
-        <router-link
-          :to="{name: 'SignIn'}"
-          class="nav-item is-tab">
-          Login
-        </router-link>
-        <router-link
-          :to="{name: 'SignUp'}"
-          class="nav-item is-tab">
-          Register
-        </router-link>
+
+        <template v-if="loggedUser.username">
+          <a class="nav-item is-tab" @click="reloadUser">{{ loggedUser.username }}</a>
+        </template>
+        <template v-else>
+          <router-link
+            :to="{name: 'SignIn'}"
+            class="nav-item is-tab">
+            Login
+          </router-link>
+          <router-link
+            :to="{name: 'SignUp'}"
+            class="nav-item is-tab">
+            Register
+          </router-link>
+        </template>
       </div>
     </div>
   </nav>
@@ -67,15 +73,34 @@
 export default {
   name: 'navbar',
 
+  data () {
+    return {
+      collapsed: false
+    }
+  },
+
   computed: {
-    collapsed () {
-      return this.$store.state.collapsed
+    loggedUser () {
+      return this.$store.state.loggedUser
     }
   },
 
   methods: {
     collapse (e) {
-      this.$store.dispatch('COLLAPSE_NAVBAR')
+      this.collapsed = !this.collapsed
+    },
+
+    // You will see, young padawan, only changing the route
+    // doesn't actually re render the component, so we need
+    // to change the route and manually dispatch the mutation
+    // in order to get the current route data
+    reloadUser (e) {
+      e.preventDefault()
+
+      let { username } = this.$store.state.loggedUser
+
+      this.$router.push({name: 'ShowUser', params: { username }})
+      this.$store.dispatch('LOAD_USER_DATA', username)
     }
   }
 }
