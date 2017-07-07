@@ -18,6 +18,7 @@ const store = new Vuex.Store({
   state: {
     cohorts: [],
     users: [],
+    posts: [],
     currentCohort: {},
     currentUser: {},
     loggedUser: {}
@@ -51,6 +52,14 @@ const store = new Vuex.Store({
     LOAD_USER_DATA: function ({ commit }, username) {
       http.get('/users/' + username).then(res => {
         commit('SET_CURRENT_USER_DATA', { user: res.data })
+      }, err => {
+        console.error(err)
+      })
+    },
+
+    LOAD_POSTS_LIST: function ({ commit }) {
+      http.get('/posts').then(res => {
+        commit('SET_POSTS_LIST', { list: res.data })
       }, err => {
         console.error(err)
       })
@@ -120,6 +129,10 @@ const store = new Vuex.Store({
 
     SET_CURRENT_USER_DATA: (state, { user }) => {
       state.currentUser = user
+    },
+
+    SET_POSTS_LIST: (state, { list }) => {
+      state.posts = list
     },
 
     SET_LOGGED_USER_DATA: (state, { user }) => {
