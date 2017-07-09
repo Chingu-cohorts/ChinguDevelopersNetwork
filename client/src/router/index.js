@@ -6,6 +6,8 @@ import ShowCohort from '@/components/cohort/ShowCohort'
 import UserList from '@/components/user/UserList'
 import ShowUser from '@/components/user/ShowUser'
 import PostList from '@/components/forum/PostList'
+import ShowPost from '@/components/forum/ShowPost'
+import NewPost from '@/components/forum/NewPost'
 import SignIn from '@/components/user/SignIn'
 import SignUp from '@/components/user/SignUp'
 
@@ -39,11 +41,6 @@ export default new Router({
       component: ShowUser
     },
     {
-      path: '/forum',
-      name: 'PostList',
-      component: PostList
-    },
-    {
       path: '/signup',
       name: 'SignUp',
       component: SignUp
@@ -52,6 +49,21 @@ export default new Router({
       path: '/signin',
       name: 'SignIn',
       component: SignIn
+    },
+    {
+      path: '/forum',
+      name: 'PostList',
+      component: PostList
+    },
+    {
+      path: '/forum/:id(\\d+)/:slug',
+      name: 'ShowPost',
+      component: ShowPost
+    },
+    {
+      path: '/new-post',
+      name: 'NewPost',
+      component: NewPost
     }
   ],
   mode: 'history'
