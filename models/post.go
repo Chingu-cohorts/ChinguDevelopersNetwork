@@ -4,8 +4,8 @@ package models
 type Post struct {
 	BaseModel
 
-	Title    string `json:"title"`
-	Content  string `json:"content"`
+	Title    string `gorm:"not_null" json:"title"`
+	Content  string `gorm:"not_null" json:"content"`
 	IsPinned bool   `gorm:"default:false" json:"is_pinned"`
 	IsLocked bool   `gorm:"default:false" json:"is_closed"`
 
