@@ -10,22 +10,28 @@
   </section>
   <div class="container">
     <div class="columns forum-container">
+
       <div class="column is-8">
-        <individual-post></individual-post>
-        <individual-post></individual-post>
+        <individual-post
+          v-for="post in posts"
+          :post="post"
+          :key="post.id">
+        </individual-post>
       </div>
+
       <div class="column is-4">
-        <a class="box button is-primary is-outlined is-medium new-post">
-          <span class="icon is-small">
-            <i class="fa fa-check"></i>
-          </span>
-          <span>New Post</span>
-        </a>
+        <template v-if="loggedUser.username">
+          <router-link
+            :to="{ name: 'NewPost' }"
+            class="box button is-primary is-outlined is-medium new-post"
+          >New Post</router-link>
+        </template>
         <div class="box member-of-the-day">
           <h2 class="has-text-centered is-primary">Member of the day</h2>
           <img class="image is-128x128" src="https://gravatar.com/avatar/3196ff4ca2acf9464de8a7c5b5e62957?s=256">
         </div>
       </div>
+
     </div>
   </div>
 </div>
@@ -38,19 +44,36 @@ import IndividualPost from './IndividualPost'
 export default {
   name: 'PostList',
 
+  data () {
+    return {
+      interval: null
+    }
+  },
+
   components: {
     IndividualPost
   },
 
   computed: mapState([
-    'posts'
-  ])
+    'posts',
+    'loggedUser'
+  ]),
 
-  /*
+  methods: {
+    loadData () {
+      this.$store.dispatch('LOAD_POSTS_LIST')
+    }
+  },
+
   mounted () {
     this.$store.dispatch('LOAD_POSTS_LIST')
+
+    this.interval = setInterval(() => this.loadData(), 30000)
+  },
+
+  beforeDestroy () {
+    clearInterval(this.interval)
   }
-  */
 }
 </script>
 
