@@ -8,9 +8,12 @@
 
 <script>
 import md5 from 'blueimp-md5'
+
 export default {
   name: 'individual-user',
+
   props: ['user'],
+
   computed: {
     userGravatar (props) {
       let hash = md5(props.user.email)
