@@ -5,7 +5,7 @@
       <div class="column is-one-quarter-mobile is-2-desktop">
         <div class="media-left">
           <figure class="image is-64x64">
-            <img src="https://gravatar.com/avatar/3196ff4ca2acf9464de8a7c5b5e62957?s=512" alt="Image">
+            <img :src="userGravatar" alt="User avatar">
           </figure>
         </div>
       </div>
@@ -14,8 +14,11 @@
         <div class="media-content">
           <div class="content">
             <p>
-              <a>The purpose of this project</a> <small>@oxyrus</small> <small>31m ago</small>
-              <br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean efficitur sit amet massa fringilla egestas. Nullam condimentum luctus turpis.
+              <router-link
+                :to="{name: 'ShowPost', params: { id: post.id, slug: postSlug }}">
+                {{ post.title }}
+                </router-link> <small>@{{ post.user.username }}</small> <small>{{ timeAgo }}</small>
+              <br>{{ post.content }}
             </p>
           </div>
         </div>
@@ -33,8 +36,31 @@
 </template>
 
 <script>
+import md5 from 'blueimp-md5'
+import moment from 'moment'
+
 export default {
-  name: 'IndividualPost'
+  name: 'IndividualPost',
+
+  props: ['post'],
+
+  computed: {
+    userGravatar (props) {
+      let hash = md5(props.post.user.email)
+      let gravatarUrl = 'https://gravatar.com/avatar/' + hash + '?s=512'
+      return gravatarUrl
+    },
+
+    timeAgo (props) {
+      let date = new Date(props.post.updated_at)
+      return moment(date, 'YYYYMMDD').fromNow()
+    },
+
+    postSlug (props) {
+      let { title } = props.post
+      return title.toLowerCase().split(' ').join('-')
+    }
+  }
 }
 </script>
 
@@ -45,6 +71,10 @@ img {
 
 figure {
   margin: 0 auto;
+}
+
+.media {
+  width: 100%;
 }
 
 .media-right h2 {
