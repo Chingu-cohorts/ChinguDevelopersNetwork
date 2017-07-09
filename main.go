@@ -65,6 +65,10 @@ func main() {
 	r.GET("/api/projects", controllers.ListProjects)
 	r.GET("/api/projects/:id", controllers.ShowProject)
 
+	r.GET("/api/posts", controllers.ListPosts)
+	r.GET("/api/posts/:id", controllers.ShowPost)
+	r.POST("/api/posts", controllers.CreatePost)
+
 	n := negroni.Classic()
 	n.Use(c)
 	n.UseHandler(r)
