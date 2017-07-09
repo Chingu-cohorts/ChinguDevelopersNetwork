@@ -46,7 +46,7 @@ func GenerateJWT(user models.User) string {
 	claims := models.Claim{
 		User: user,
 		StandardClaims: jwt.StandardClaims{
-			ExpiresAt: time.Now().Add(time.Hour * 1).Unix(),
+			ExpiresAt: time.Now().Add(time.Hour * 744).Unix(),
 			Issuer:    "ChinguCentral",
 		},
 	}
