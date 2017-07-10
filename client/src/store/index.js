@@ -65,6 +65,25 @@ const store = new Vuex.Store({
       })
     },
 
+    CREATE_FORUM_POST: function ({ commit }, post) {
+      return new Promise((resolve, reject) => {
+        http.post('/posts', {
+          title: post.title,
+          content: post.content
+        }).then(res => {
+          console.log(res.data)
+          resolve()
+        }).catch(err => {
+          if (err.response) {
+            console.log(err.response.data)
+          } else {
+            console.error(err)
+          }
+          reject()
+        })
+      })
+    },
+
     POST_REGISTRATION_DATA: function ({ commit }, user) {
       return new Promise((resolve, reject) => {
         http.post('/users', {
