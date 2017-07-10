@@ -2,7 +2,6 @@ package controllers
 
 import (
 	"encoding/json"
-	"fmt"
 	"log"
 	"net/http"
 	"strings"
@@ -207,17 +206,10 @@ func CurrentUser(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	db.Where("id = ?", userID).Preload("Cohort").First(&user)
 	db.Model(&user).Association("Projects").Find(&user.Projects)
 
-	isTokenValid := utils.ValidateToken(token)
-
 	respBody, err := json.MarshalIndent(user, "", " ")
 	if err != nil {
 		log.Fatalf("Error in current user: %v", err)
 	}
 
 	utils.JSONResponse(w, respBody, http.StatusOK)
-
-	fmt.Println("--------------------------------------")
-	fmt.Println(user.Cohort)
-	fmt.Println(isTokenValid)
-	fmt.Println("--------------------------------------")
 }
