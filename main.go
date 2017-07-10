@@ -42,7 +42,7 @@ func main() {
 	c := cors.New(cors.Options{
 		AllowedOrigins:   []string{"*"},
 		AllowCredentials: true,
-		AllowedMethods:   []string{"GET", "POST"},
+		AllowedMethods:   []string{"GET", "POST", "PUT"},
 		AllowedHeaders:   []string{"Authorization", "Content-Type"},
 		ExposedHeaders:   []string{"Authorization", "Content-Type"},
 		Debug:            true,
@@ -60,14 +60,14 @@ func main() {
 	r.POST("/api/users", controllers.CreateUser)
 	r.POST("/api/users/login", controllers.Login)
 	r.DELETE("/api/users/:username", utils.AuthRequest(controllers.DeleteUser))
-	r.GET("/api/currentuser", controllers.CurrentUser)
+	r.GET("/api/currentuser", utils.AuthRequest(controllers.CurrentUser))
 
 	r.GET("/api/projects", controllers.ListProjects)
 	r.GET("/api/projects/:id", controllers.ShowProject)
 
 	r.GET("/api/posts", controllers.ListPosts)
 	r.GET("/api/posts/:id", controllers.ShowPost)
-	r.POST("/api/posts", controllers.CreatePost)
+	r.POST("/api/posts", utils.AuthRequest(controllers.CreatePost))
 
 	n := negroni.Classic()
 	n.Use(c)
