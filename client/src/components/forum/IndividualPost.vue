@@ -15,8 +15,7 @@
           <div class="content">
             <p>
               <router-link
-                :to="{name: 'ShowPost', params: { id: post.id, slug: postSlug }}">
-                {{ post.title }}
+                :to="{name: 'ShowPost', params: { id: post.id, slug: postSlug }}">{{ post.title }}
                 </router-link> <small>@{{ post.user.username }}</small> <small>{{ timeAgo }}</small>
               <br>{{ post.content }}
             </p>
@@ -26,7 +25,7 @@
 
       <div class="column is one-quarter-mobile is-2-desktop">
         <div class="media-right has-text-centered">
-          <h2>2K</h2>
+          <h2>{{ commentsCount }}</h2>
           <span>Comments</span>
         </div>
       </div>
@@ -59,6 +58,14 @@ export default {
     postSlug (props) {
       let { title } = props.post
       return title.toLowerCase().split(' ').join('-')
+    },
+
+    commentsCount (props) {
+      if (props.post.comments) {
+        return props.post.comments.length
+      }
+
+      return '0'
     }
   }
 }
