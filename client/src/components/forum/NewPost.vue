@@ -23,7 +23,7 @@
 
         <div class="field is-grouped">
           <p class="control">
-            <button class="button is-primary">Submit</button>
+            <button class="button is-primary" @click="savePost">Submit</button>
           </p>
           <p class="control">
             <button class="button is-link">Cancel</button>
@@ -52,12 +52,29 @@ export default {
     }
   },
 
+  components: {
+    markdownEditor
+  },
+
   computed: mapState([
     'loggedUser'
   ]),
 
-  components: {
-    markdownEditor
+  methods: {
+    savePost (e) {
+      let { title, content } = this.post
+
+      let post = {
+        title,
+        content
+      }
+
+      this.$store.dispatch('CREATE_FORUM_POST', post).then(() => {
+        this.$router.push({ name: 'PostList' })
+      }).catch(err => {
+        console.error(err)
+      })
+    }
   },
 
   mounted () {
