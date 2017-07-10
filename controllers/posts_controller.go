@@ -65,6 +65,10 @@ func CreatePost(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		return
 	}
 
+	token := r.Header.Get("Authorization")
+	tokenData, _ := utils.ReadJWT(token)
+	post.UserID = tokenData.User.ID
+
 	if post.Title != "" && post.Content != "" && post.UserID != 0 {
 		db.Create(&post)
 	} else {
