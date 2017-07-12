@@ -7,6 +7,7 @@ import (
 
 	"github.com/Chingu-cohorts/ChinguCentral/models"
 	"github.com/Chingu-cohorts/ChinguCentral/utils"
+	"github.com/gosimple/slug"
 	"github.com/julienschmidt/httprouter"
 )
 
@@ -71,6 +72,9 @@ func CreatePost(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	// It's done in db level as well, but it's a nice thing to do
 	// at API level
 	if post.Title != "" && post.Content != "" && post.UserID != 0 {
+		// Generate a slug and assign it
+		post.Slug = slug.Make(post.Title)
+
 		db.Create(&post)
 	} else {
 		utils.JSONMessage(w, "Title and content are required", http.StatusBadRequest)
