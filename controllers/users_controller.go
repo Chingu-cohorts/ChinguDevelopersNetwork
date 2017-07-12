@@ -37,9 +37,11 @@ func ShowUser(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	var user models.User
 	// Username must match exactly the one stored
 	lowercaseParams := strings.ToLower(ps.ByName("username"))
+	// ORM things, don't ask
 	db.Where("username = ?", lowercaseParams).Preload("Cohort").First(&user)
 	db.Model(&user).Association("Projects").Find(&user.Projects)
 
+	// If the user exists, its ID must be different than 0
 	if user.ID != 0 {
 		respBody, err := json.MarshalIndent(user, "", " ")
 		if err != nil {
@@ -67,6 +69,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		return
 	}
 
+	// If there's valid data, we can start working
 	if user.Username != "" && user.Email != "" && user.Password != "" {
 		// Only lowercase usernames allowed
 		user.Username = strings.ToLower(user.Username)
@@ -143,17 +146,20 @@ func Login(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 	db.Where("username = ?", username).First(&savedUser)
 
+	// If we found the user
 	if savedUser.ID == 0 {
 		utils.JSONMessage(w, "User not found", http.StatusNotFound)
 		return
 	}
 
+	// Compares the saved hash with the password sent in the request
 	err = bcrypt.CompareHashAndPassword([]byte(savedUser.EncryptedPassword), []byte(user.Password))
 	if err != nil {
 		utils.JSONMessage(w, "Wrong password", http.StatusBadRequest)
 		return
 	}
 
+	// Generate JWT and send it
 	token := utils.GenerateJWT(savedUser)
 	result := models.ResponseToken{Token: token}
 
@@ -173,6 +179,7 @@ func DeleteUser(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	var user models.User
 	db.Where("username = ?", ps.ByName("username")).First(&user)
 
+	// If we found the user
 	if user.ID != 0 {
 		db.Delete(&user)
 		utils.JSONMessage(w, "User deleted", http.StatusOK)

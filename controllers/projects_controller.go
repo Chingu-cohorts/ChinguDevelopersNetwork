@@ -34,6 +34,7 @@ func ShowProject(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	var project models.Project
 	db.First(&project, ps.ByName("id"))
 
+	// If the project was found, its ID must be different than 0
 	if project.ID != 0 {
 		respBody, err := json.MarshalIndent(project, "", " ")
 		if err != nil {
@@ -45,13 +46,4 @@ func ShowProject(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	}
 
 	utils.JSONMessage(w, "Project not found", http.StatusNotFound)
-}
-
-// CreateProject saves a new project to the database
-func CreateProject(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-	db := utils.InitDB()
-	defer db.Close()
-	
-	// We will need to get the user ID to append a new project to him
-	
 }

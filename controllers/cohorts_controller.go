@@ -34,10 +34,13 @@ func ShowCohort(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 	var cohort models.Cohort
 	// We have to modify the string as the query must match exactly the name of the cohort
+	// TBD: It's actually pretty sad but cohorts may be longer than 1 word
+	// That sucks but I have to come up with something
 	lowerCaseCohortName := strings.ToLower(ps.ByName("name"))
 	validCohortName := strings.Title(lowerCaseCohortName)
 	db.Where("name = ?", validCohortName).Preload("Users.Cohort").First(&cohort)
 
+	// If the cohort was found, the ID must be different than 0
 	if cohort.ID != 0 {
 		respBody, err := json.MarshalIndent(cohort, "", " ")
 		if err != nil {
