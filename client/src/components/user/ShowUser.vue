@@ -114,13 +114,14 @@ export default {
 
   computed: {
     currentUser () {
-      return this.$store.state.currentUser
+      return this.$store.state.user.currentUser
     },
 
     userAbout (state) {
       if (state.currentUser.about) {
         return state.currentUser.about
       }
+
       return 'No about'
     },
 

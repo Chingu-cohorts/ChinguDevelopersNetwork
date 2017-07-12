@@ -37,7 +37,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
 import { markdownEditor } from 'vue-simplemde'
 
 export default {
@@ -56,9 +55,11 @@ export default {
     markdownEditor
   },
 
-  computed: mapState([
-    'loggedUser'
-  ]),
+  computed: {
+    loggedUser () {
+      return this.$store.state.user.loggedUser
+    }
+  },
 
   methods: {
     savePost (e) {

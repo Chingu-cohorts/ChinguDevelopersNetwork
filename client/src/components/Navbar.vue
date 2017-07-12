@@ -72,7 +72,7 @@ export default {
 
   computed: {
     loggedUser () {
-      return this.$store.state.loggedUser
+      return this.$store.state.user.loggedUser
     }
   },
 
@@ -88,7 +88,7 @@ export default {
     reloadUser (e) {
       e.preventDefault()
 
-      let { username } = this.$store.state.loggedUser
+      let { username } = this.$store.state.user.loggedUser
 
       this.$router.push({name: 'ShowUser', params: { username }})
       this.$store.dispatch('LOAD_USER_DATA', username)

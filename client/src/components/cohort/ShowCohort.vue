@@ -5,14 +5,14 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
-
 export default {
   name: 'show-cohort',
 
-  computed: mapState([
-    'currentCohort'
-  ]),
+  computed: {
+    currentCohort () {
+      return this.$store.state.cohort.currentCohort
+    }
+  },
 
   mounted () {
     let { name } = this.$route.params

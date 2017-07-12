@@ -22,7 +22,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
 import IndividualUser from './IndividualUser'
 
 export default {
@@ -32,9 +31,11 @@ export default {
     IndividualUser
   },
 
-  computed: mapState([
-    'users'
-  ]),
+  computed: {
+    users () {
+      return this.$store.state.user.users
+    }
+  },
 
   mounted () {
     this.$store.dispatch('LOAD_USERS_LIST')
