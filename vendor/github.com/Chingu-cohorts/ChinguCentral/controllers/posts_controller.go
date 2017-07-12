@@ -32,9 +32,9 @@ func ShowPost(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	defer db.Close()
 
 	var post models.Post
-	db.First(&post, ps.ByName("id"))
+	db.First(&post, ps.ByName("postID"))
 
-	// If we found the post...
+	// If the post exists, it's ID must be different than 0
 	if post.ID != 0 {
 		respBody, err := json.MarshalIndent(post, "", " ")
 		if err != nil {
@@ -55,9 +55,6 @@ func CreatePost(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 	var post models.Post
 
-	// I still have to get the user id from the token
-	// and update it in the structure as well
-
 	decoder := json.NewDecoder(r.Body)
 	err := decoder.Decode(&post)
 	if err != nil {
@@ -65,10 +62,14 @@ func CreatePost(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 		return
 	}
 
+	// Get the user id from the token and assign it
 	token := r.Header.Get("Authorization")
 	tokenData, _ := utils.ReadJWT(token)
 	post.UserID = tokenData.User.ID
 
+	// Check if there's a title and a content
+	// It's done in db level as well, but it's a nice thing to do
+	// at API level
 	if post.Title != "" && post.Content != "" && post.UserID != 0 {
 		db.Create(&post)
 	} else {

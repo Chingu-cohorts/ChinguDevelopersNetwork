@@ -22,3 +22,5 @@ import:
 - package: golang.org/x/crypto
   subpackages:
   - bcrypt
+- package: github.com/gosimple/slug
+  version: ~1.0.3
