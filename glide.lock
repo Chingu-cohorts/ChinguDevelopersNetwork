@@ -1,12 +1,6 @@
-hash: 48ae10a7949db5d2218a4b676c167b13ee5f3aa178949ffc3677e30cfb4617fc
-updated: 2017-07-12T13:15:03.6151982-05:00
+hash: 1cd25a675a961f06e169b76f9d8dd1d8871f89e605970c15576e23335f0bdeb8
+updated: 2017-07-12T13:58:15.420441-05:00
 imports:
-- name: github.com/Chingu-cohorts/ChinguCentral
-  version: 2cc881925544502e4538fb8e9947fbe6e1fb216c
-  subpackages:
-  - controllers
-  - models
-  - utils
 - name: github.com/dgrijalva/jwt-go
   version: d2709f9f1f31ebcda9651b03077758c1f3a0018c
   subpackages:
@@ -26,6 +20,8 @@ imports:
   subpackages:
   - hstore
   - oid
+- name: github.com/rainycape/unidecode
+  version: cb7f23ec59bec0d61b19c56cd88cee3d0cc1870c
 - name: github.com/rs/cors
   version: 8dd4211afb5d08dbb39a533b9bb9e4b486351df6
 - name: github.com/urfave/negroni
