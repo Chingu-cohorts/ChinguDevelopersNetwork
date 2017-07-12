@@ -6,6 +6,7 @@ type Post struct {
 
 	Title    string `gorm:"not_null" json:"title"`
 	Content  string `gorm:"not_null" json:"content"`
+	Slug     string `gorm:"not_null" json:"slug"`
 	IsPinned bool   `gorm:"default:false" json:"is_pinned"`
 	IsLocked bool   `gorm:"default:false" json:"is_closed"`
 
