@@ -1,9 +1,0 @@
-{
-  "database": {
-    "host": "localhost",
-    "name": "chingucentral",
-    "user": "postgres",
-    "password": "postgresql"
-  },
-  "port": ":8081"
-}
