@@ -44,6 +44,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'sign-in',
 
@@ -53,6 +55,16 @@ export default {
         username: '',
         password: ''
       }
+    }
+  },
+
+  computed: mapState([
+    'loggedUser'
+  ]),
+
+  mounted () {
+    if (this.loggedUser) {
+      this.$router.push({ name: 'Hello' })
     }
   },
 
