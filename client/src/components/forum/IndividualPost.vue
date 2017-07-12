@@ -17,7 +17,7 @@
               <router-link
                 :to="{name: 'ShowPost', params: { id: post.id, slug: postSlug }}">{{ post.title }}
                 </router-link> <small>@{{ post.user.username }}</small> <small>{{ timeAgo }}</small>
-              <br>{{ post.content }}
+              <br>{{ truncatePost }}
             </p>
           </div>
         </div>
@@ -66,6 +66,14 @@ export default {
       }
 
       return '0'
+    },
+
+    truncatePost (props) {
+      let { post } = props
+      let num = 130
+
+      if (post.content.length <= num) return post.content
+      return post.content.slice(0, num - 3) + '...'
     }
   }
 }
