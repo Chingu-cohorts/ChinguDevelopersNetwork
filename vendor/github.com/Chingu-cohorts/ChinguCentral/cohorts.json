@@ -1,0 +1,56 @@
+{
+  "cohorts": [
+    {
+      "name": "Ewoks",
+      "description": "The Ewoks cohort"
+    },
+    {
+      "name": "Tapirs",
+      "description": "The Tapirs cohort"
+    },
+    {
+      "name": "Sloths",
+      "description": "The Sloths cohort"
+    },
+    {
+      "name": "Kiwis",
+      "description": "The Kiwis cohort"
+    },
+    {
+      "name": "Platypus",
+      "description": "The Platypus cohort"
+    },
+    {
+      "name": "Bearded-Dragons",
+      "description": "The Bearded-Dragons cohort"
+    },
+    {
+      "name": "Armadillos",
+      "description": "The Armadillos cohort"
+    },
+    {
+      "name": "Red-Pandas",
+      "description": "The Red-Pandas cohort"
+    },
+    {
+      "name": "Honey-Badgers",
+      "description": "The Honey-Badgers cohort"
+    },
+    {
+      "name": "Elephants",
+      "description": "The Elephants cohort"
+    },
+    {
+      "name": "Dolphins",
+      "description": "The Dolphins cohort"
+    },
+    {
+      "name": "Pumas",
+      "description": "The Pumas cohort"
+    },
+    {
+      "name": "Llamas",
+      "description": "The Llamas cohort"
+    }
+  ]
+}
