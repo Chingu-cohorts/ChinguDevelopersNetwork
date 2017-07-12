@@ -38,7 +38,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
 import IndividualPost from './IndividualPost'
 
 export default {
@@ -54,10 +53,15 @@ export default {
     IndividualPost
   },
 
-  computed: mapState([
-    'posts',
-    'loggedUser'
-  ]),
+  computed: {
+    posts () {
+      return this.$store.state.forum.posts
+    },
+
+    loggedUser () {
+      return this.$store.state.user.loggedUser
+    }
+  },
 
   methods: {
     loadData () {
