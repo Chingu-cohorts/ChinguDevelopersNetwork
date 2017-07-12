@@ -56,8 +56,8 @@ export default {
     },
 
     postSlug (props) {
-      let { title } = props.post
-      return title.toLowerCase().split(' ').join('-')
+      let { slug } = props.post
+      return slug
     },
 
     commentsCount (props) {
