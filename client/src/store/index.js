@@ -130,6 +130,11 @@ const store = new Vuex.Store({
       }).catch(err => {
         console.error(err)
       })
+    },
+
+    LOGOUT_USER: function ({ commit }) {
+      window.localStorage.removeItem('token')
+      commit('REMOVE_LOGGED_USER_DATA')
     }
   },
 
@@ -156,6 +161,10 @@ const store = new Vuex.Store({
 
     SET_LOGGED_USER_DATA: (state, { user }) => {
       state.loggedUser = user
+    },
+
+    REMOVE_LOGGED_USER_DATA: (state) => {
+      state.loggedUser = {}
     }
   }
 })

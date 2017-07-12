@@ -45,6 +45,7 @@
     <div class="navbar-end">
       <template v-if="loggedUser.username">
         <a class="navbar-item" @click="reloadUser">{{ loggedUser.username }}</a>
+        <a class="navbar-item" @click="logout">Logout</a>
       </template>
       <template v-else>
         <router-link
@@ -91,6 +92,11 @@ export default {
 
       this.$router.push({name: 'ShowUser', params: { username }})
       this.$store.dispatch('LOAD_USER_DATA', username)
+    },
+
+    logout (e) {
+      this.$store.dispatch('LOGOUT_USER')
+      window.location = '/'
     }
   }
 }
