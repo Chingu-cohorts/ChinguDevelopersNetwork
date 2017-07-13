@@ -20,3 +20,10 @@ import:
 - package: github.com/gosimple/slug
   version: ~1.0.3
 - package: github.com/rainycape/unidecode
+- package: github.com/prometheus/client_golang
+  version: ~0.8.0
+  subpackages:
+  - prometheus
+- package: github.com/zbindenren/negroni-prometheus
+  version: ~0.1.0
+- package: github.com/beorn7/perks

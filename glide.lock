@@ -1,10 +1,18 @@
-hash: 1cd25a675a961f06e169b76f9d8dd1d8871f89e605970c15576e23335f0bdeb8
-updated: 2017-07-12T13:58:15.420441-05:00
+hash: f126da86ed67b5023581d028c50f3fadf6f3a4b04eda2515b22237fa67d213e0
+updated: 2017-07-12T21:16:38.6990465-05:00
 imports:
+- name: github.com/beorn7/perks
+  version: 4c0e84591b9aa9e6dcfdf3e020114cd81f89d5f9
+  subpackages:
+  - quantile
 - name: github.com/dgrijalva/jwt-go
   version: d2709f9f1f31ebcda9651b03077758c1f3a0018c
   subpackages:
   - request
+- name: github.com/golang/protobuf
+  version: 0a4f71a498b7c4812f64969510bcb4eca251e33a
+  subpackages:
+  - proto
 - name: github.com/gosimple/slug
   version: 32efb997950eba210b1880d8cf52b601c1b5abe3
 - name: github.com/jinzhu/gorm
@@ -20,12 +28,36 @@ imports:
   subpackages:
   - hstore
   - oid
+- name: github.com/matttproud/golang_protobuf_extensions
+  version: c12348ce28de40eed0136aa2b644d0ee0650e56c
+  subpackages:
+  - pbutil
+- name: github.com/prometheus/client_golang
+  version: c5b7fccd204277076155f10851dad72b76a49317
+  subpackages:
+  - prometheus
+- name: github.com/prometheus/client_model
+  version: 6f3806018612930941127f2a7c6c453ba2c527d2
+  subpackages:
+  - go
+- name: github.com/prometheus/common
+  version: 3e6a7635bac6573d43f49f97b47eb9bda195dba8
+  subpackages:
+  - expfmt
+  - internal/bitbucket.org/ww/goautoneg
+  - model
+- name: github.com/prometheus/procfs
+  version: e645f4e5aaa8506fc71d6edbc5c4ff02c04c46f2
+  subpackages:
+  - xfs
 - name: github.com/rainycape/unidecode
   version: cb7f23ec59bec0d61b19c56cd88cee3d0cc1870c
 - name: github.com/rs/cors
   version: 8dd4211afb5d08dbb39a533b9bb9e4b486351df6
 - name: github.com/urfave/negroni
   version: fde5e16d32adc7ad637e9cd9ad21d4ebc6192535
+- name: github.com/zbindenren/negroni-prometheus
+  version: fc4e664b054e13e568e6cacd913d8d238545d88b
 - name: golang.org/x/crypto
   version: dd85ac7e6a88fc6ca420478e934de5f1a42dd3c6
   subpackages:
