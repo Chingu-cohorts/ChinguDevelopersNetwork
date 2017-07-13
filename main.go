@@ -9,8 +9,10 @@ import (
 	"github.com/Chingu-cohorts/ChinguCentral/models"
 	"github.com/Chingu-cohorts/ChinguCentral/utils"
 	"github.com/julienschmidt/httprouter"
+	"github.com/prometheus/client_golang/prometheus"
 	"github.com/rs/cors"
 	"github.com/urfave/negroni"
+	negroniprometheus "github.com/zbindenren/negroni-prometheus"
 )
 
 func init() {
@@ -48,8 +50,12 @@ func main() {
 		Debug:            true,
 	})
 
+	m := negroniprometheus.NewMiddleware("chingu")
+
 	// Instantiate router
 	r := httprouter.New()
+
+	r.Handler("GET", "/metrics", prometheus.Handler())
 
 	r.GET("/api/cohorts", controllers.ListCohorts)
 	r.GET("/api/cohorts/:name", controllers.ShowCohort)
@@ -73,6 +79,7 @@ func main() {
 
 	n := negroni.Classic()
 	n.Use(c)
+	n.Use(m)
 	n.UseHandler(r)
 
 	// Configure server
