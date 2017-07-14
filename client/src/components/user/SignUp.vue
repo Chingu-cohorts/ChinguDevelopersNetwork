@@ -1,27 +1,17 @@
 <template>
-<div>
-  <section class="hero is-primary">
-    <div class="hero-body">
-      <div class="container">
-        <h1 class="title">Sign Up</h1>
-        <h2 class="subtitle">Register to start applying to cohorts</h2>
-      </div>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="columns">
-      <div class="container">
-        <div class="column is-half is-offset-one-quarter">
+<section class="section signup">
+  <div class="columns">
+    <div class="container">
+      <div class="column is-half is-offset-one-quarter signup-container">
+        <h1 class="title has-text-centered">Time to make history</h1>
+        <div class="form-container">
+          <p class="has-text-centered description">Take a new path, join a community like no one, do the unimaginable.</p>
           <div class="field">
             <p class="control has-icons-left">
               <input class="input" type="text" placeholder="Username" v-model="user.username">
               <span class="icon is-small is-left">
                 <i class="fa fa-user"></i>
               </span>
-            </p>
-            <p v-if="user.username.length < 4" class="help is-danger">
-              Username must be at least 4 characters long
             </p>
           </div>
           <div class="field">
@@ -39,23 +29,20 @@
                 <i class="fa fa-lock"></i>
               </span>
             </p>
-            <p v-if="user.password.length < 6" class="help is-danger">
-              Password must be at least 6 characters long
-            </p>
           </div>
           <div class="field">
             <p class="control">
-              <button class="button is-primary is-outlined" type="submit" v-on:click="registerUser">
+              <button class="button is-primary" type="submit" v-on:click="registerUser">
                 Register
               </button>
             </p>
           </div>
-          <p>By registering you agree to our <a>Terms of Service</a>.</p>
+          <p class="has-text-centered">By registering you agree to our <a>Terms of Service</a></p>
         </div>
       </div>
     </div>
-  </section>
-</div>
+  </div>
+</section>
 </template>
 
 <script>
@@ -104,3 +91,64 @@ export default {
   }
 }
 </script>
+
+<style scoped>
+.signup {
+  background: url(/static/images/signup-bg.jpg) no-repeat center center fixed;
+  background-size: cover;
+  height: 100%;
+}
+
+.signup-container {
+  background-color: rgba(0, 0, 0, .3);
+  border-radius: 0.5em;
+  margin-top: 2em;
+  color: #f9f9f9;
+}
+
+.signup-container h1 {
+  font-weight: 700;
+  text-transform: uppercase; 
+  color: #f9f9f9;
+}
+
+.signup-container .fa {
+  color: #f9f9f9;
+}
+
+.signup-container input {
+  background-color: rgba(255, 255, 255, .15);
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  color: #f9f9f9;
+}
+
+.signup-container input:focus {
+  background-color: rgba(255, 255, 255, .3);
+  border: 1px solid #15df89;
+}
+
+.signup-container input::-webkit-input-placeholder {
+  color: #f9f9f9;
+}
+
+.signup-container .form-container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.signup-container .form-container .description {
+  margin-bottom: 1em;
+}
+
+.signup-container .form-container .button {
+  display: flex;
+  margin: 0 auto;
+}
+
+.control.has-icons-left .input,
+.control.has-icons-left .select select {
+  padding-left: 2.4em;
+}
+</style>
