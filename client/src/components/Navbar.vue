@@ -1,5 +1,5 @@
 <template>
-<nav class="navbar is-transparent">
+<nav class="navbar">
   <div class="navbar-brand">
     <router-link
       :to="{name: 'Hello'}"
@@ -104,6 +104,6 @@ export default {
 
 <style scoped>
 .navbar {
-  border-bottom: 1px solid #ececec;
+  border-bottom: 1px solid #f9f9f9;
 }
 </style>
