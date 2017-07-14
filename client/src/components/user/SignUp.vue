@@ -8,7 +8,23 @@
           <p class="has-text-centered description">Take a new path, join a community like no one, do the unimaginable.</p>
           <div class="field">
             <p class="control has-icons-left">
-              <input class="input" type="text" placeholder="Username" v-model="user.username">
+              <input class="input" type="text" placeholder="First name" v-model="user.first_name">
+              <span class="icon is-small is-left">
+                <i class="fa fa-address-book"></i>
+              </span>
+            </p>
+          </div>
+          <div class="field">
+            <p class="control has-icons-left">
+              <input class="input" type="text" placeholder="Last name" v-model="user.last_name">
+              <span class="icon is-small is-left">
+                <i class="fa fa-grav"></i>
+              </span>
+            </p>
+          </div>
+          <div class="field">
+            <p class="control has-icons-left">
+              <input class="input" type="text" placeholder="Username" v-model="user.username" required>
               <span class="icon is-small is-left">
                 <i class="fa fa-user"></i>
               </span>
@@ -16,7 +32,7 @@
           </div>
           <div class="field">
             <p class="control has-icons-left">
-              <input class="input" type="text" placeholder="Email" v-model="user.email">
+              <input class="input" type="text" placeholder="Email" v-model="user.email" required>
               <span class="icon is-small is-left">
                 <i class="fa fa-envelope"></i>
               </span>
@@ -24,7 +40,7 @@
           </div>
           <div class="field">
             <p class="control has-icons-left">
-              <input class="input" type="password" placeholder="Password" v-model="user.password">
+              <input class="input" type="password" placeholder="Password" v-model="user.password" required>
               <span class="icon is-small is-left">
                 <i class="fa fa-lock"></i>
               </span>
@@ -54,6 +70,8 @@ export default {
   data () {
     return {
       user: {
+        first_name: '',
+        last_name: '',
         username: '',
         email: '',
         password: ''
@@ -74,19 +92,24 @@ export default {
   methods: {
     registerUser (e) {
       e.preventDefault()
-      let { username, email, password } = this.user
+      let user = this.user
 
-      let user = {
-        username,
-        email,
-        password
+      let isValid = this.validateUser(user)
+
+      if (isValid) {
+        this.$store.dispatch('POST_REGISTRATION_DATA', user).then(() => {
+          this.$router.push({name: 'SignIn'})
+        }).catch(err => {
+          console.error(err)
+        })
       }
+    },
 
-      this.$store.dispatch('POST_REGISTRATION_DATA', user).then(() => {
-        this.$router.push({name: 'SignIn'})
-      }).catch(err => {
-        console.error(err)
-      })
+    // If you know of a better way to do it
+    // please let me know
+    // P.S. this is validated server side so don't worry
+    validateUser (user) {
+      return user.email !== '' && user.username !== '' && user.password !== ''
     }
   }
 }
