@@ -81,7 +81,7 @@
       </div>
     </section>
 
-    <section class="hero is-primary">
+    <section class="hero is-dark">
       <div class="hero-body">
         <div class="container has-text-centered">
           <h1 class="title">Share your love</h1>
