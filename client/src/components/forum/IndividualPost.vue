@@ -35,8 +35,8 @@
 </template>
 
 <script>
-import md5 from 'blueimp-md5'
 import moment from 'moment'
+import { gravatar } from '@/components/utils'
 
 export default {
   name: 'IndividualPost',
@@ -45,9 +45,8 @@ export default {
 
   computed: {
     userGravatar (props) {
-      let hash = md5(props.post.user.email)
-      let gravatarUrl = 'https://gravatar.com/avatar/' + hash + '?s=512'
-      return gravatarUrl
+      let { email } = props.post.user
+      return gravatar(email)
     },
 
     timeAgo (props) {
