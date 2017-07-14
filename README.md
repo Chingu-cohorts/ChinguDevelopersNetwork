@@ -1,6 +1,6 @@
 # ChinguCentral
 
-Our goal is to improve the whole Chingu Project, we want to take it to the next level.
+The future home for the Chingu project.
 
 ## Stack
 
