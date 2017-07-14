@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import md5 from 'blueimp-md5'
+import { gravatar } from '@/components/utils'
 
 export default {
   name: 'individual-user',
@@ -16,9 +16,8 @@ export default {
 
   computed: {
     userGravatar (props) {
-      let hash = md5(props.user.email)
-      let gravatarUrl = 'https://gravatar.com/avatar/' + hash + '?s=512'
-      return gravatarUrl
+      let { email } = props.user
+      return gravatar(email)
     }
   }
 }
