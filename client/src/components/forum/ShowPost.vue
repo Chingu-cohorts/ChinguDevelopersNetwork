@@ -20,7 +20,8 @@
           <div class="column is-12-mobile is-10-desktop">
             <div class="box">
               <div class="content">
-                <h1>{{ currentPost.title }}</h1>
+                <h1 class="has-text-centered">{{ currentPost.title }}</h1>
+                <hr>
                 <div v-html="content">{{ currentPost.content }}</div>
               </div>
             </div>
@@ -32,8 +33,8 @@
 </template>
 
 <script>
-import md5 from 'blueimp-md5'
 import MarkdownIt from 'markdown-it'
+import { gravatar } from '@/components/utils'
 
 export default {
   name: 'ShowPost',
@@ -51,9 +52,8 @@ export default {
     },
 
     userGravatar (state) {
-      let hash = md5(state.currentPost.user.email)
-      let gravatarUrl = 'https://gravatar.com/avatar/' + hash + '?s=512'
-      return gravatarUrl
+      let { email } = state.currentPost.user
+      return gravatar(email)
     },
 
     content (state) {
@@ -70,6 +70,11 @@ export default {
 </script>
 
 <style scoped>
+hr {
+  width: 40%;
+  margin: 0 auto;
+}
+
 .forum-post {
   margin-top: 1em;
   margin-bottom: 1em;
