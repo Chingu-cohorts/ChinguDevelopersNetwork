@@ -1,6 +1,6 @@
 <template>
   <div>
-    <section class="hero is-primary">
+    <section class="hero is-dark is-bold">
       <div class="hero-body">
         <div class="container">
           <h1 class="title">Cohorts</h1>
@@ -118,7 +118,7 @@
 </template>
 
 <script>
-import IndividualCohort from './cohort/IndividualCohort'
+import IndividualCohort from '@/components/cohort/IndividualCohort'
 
 export default {
   name: 'hello',
