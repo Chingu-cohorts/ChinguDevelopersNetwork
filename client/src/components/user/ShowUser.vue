@@ -107,7 +107,7 @@
 </template>
 
 <script>
-import md5 from 'blueimp-md5'
+import { reputation, gravatar } from '@/components/utils'
 
 export default {
   name: 'show-user',
@@ -134,38 +134,13 @@ export default {
     },
 
     userReputationLevel (state) {
-      let experience = state.currentUser.experience
-      let reputation
-
-      let assignRep = (name) => {
-        reputation = name
-      }
-
-      switch (true) {
-        case experience >= 1000:
-          assignRep('Legend')
-          break
-        case experience >= 500:
-          assignRep('Sage')
-          break
-        case experience >= 100:
-          assignRep('Senior')
-          break
-        case experience >= 10:
-          assignRep('Member')
-          break
-        default:
-          assignRep('Neutral')
-          break
-      }
-
-      return reputation
+      let { experience } = state.currentUser
+      return reputation(experience)
     },
 
     userGravatar (state) {
-      let hash = md5(state.currentUser.email)
-      let gravatarUrl = 'https://gravatar.com/avatar/' + hash + '?s=512'
-      return gravatarUrl
+      let { email } = state.currentUser
+      return gravatar(email)
     }
   },
 
