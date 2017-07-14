@@ -3,7 +3,8 @@ import { http } from '../api'
 
 // Initial state
 const state = {
-  posts: []
+  posts: [],
+  currentPost: {}
 }
 
 // Actions
@@ -16,7 +17,15 @@ const actions = {
     })
   },
 
-  CREATE_FORUM_POST: function ({ commit }, post) {
+  LOAD_FORUM_POST ({ commit }, postId) {
+    http.get('/posts/' + postId).then(res => {
+      commit(types.SET_CURRENT_POST_DATA, { post: res.data })
+    }, err => {
+      console.error(err)
+    })
+  },
+
+  CREATE_FORUM_POST ({ commit }, post) {
     return new Promise((resolve, reject) => {
       http.post('/posts', {
         title: post.title,
@@ -40,6 +49,10 @@ const actions = {
 const mutations = {
   [types.SET_POSTS_LIST] (state, { list }) {
     state.posts = list
+  },
+
+  [types.SET_CURRENT_POST_DATA] (state, { post }) {
+    state.currentPost = post
   }
 }
 
