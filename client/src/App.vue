@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import Navbar from './components/Navbar'
-import MainFooter from './components/MainFooter'
+import Navbar from '@/components/Navbar'
+import MainFooter from '@/components/MainFooter'
 
 let token = localStorage.getItem('token')
 
@@ -31,6 +31,12 @@ export default {
 </script>
 
 <style>
+#app {
+  font-family: 'Raleway', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 .fade-enter-active, .fade-leave-active {
   transition-property: opacity;
   transition-duration: .25s;
