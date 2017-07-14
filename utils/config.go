@@ -14,7 +14,8 @@ type Config struct {
 		User     string `json:"user"`
 		Password string `json:"password"`
 	} `json:"database"`
-	Port string `json:"port"`
+	Port  string `json:"port"`
+	Debug bool   `json:"debug"`
 }
 
 // LoadSettings loads the configuration for the application

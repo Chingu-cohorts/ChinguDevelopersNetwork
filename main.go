@@ -47,7 +47,7 @@ func main() {
 		AllowedMethods:   []string{"GET", "POST", "PUT"},
 		AllowedHeaders:   []string{"Authorization", "Content-Type"},
 		ExposedHeaders:   []string{"Authorization", "Content-Type"},
-		Debug:            true,
+		Debug:            config.Debug,
 	})
 
 	m := negroniprometheus.NewMiddleware("chingu")
