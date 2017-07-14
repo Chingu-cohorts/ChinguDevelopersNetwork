@@ -46,7 +46,7 @@ export default {
     return {
       post: {
         title: '',
-        content: 'Hello world!'
+        content: ''
       }
     }
   },
