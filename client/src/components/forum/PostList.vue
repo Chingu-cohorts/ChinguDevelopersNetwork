@@ -27,8 +27,8 @@
           >New Post</router-link>
         </template>
         <div class="box member-of-the-day">
-          <h2 class="has-text-centered is-primary">Member of the day</h2>
-          <img class="image is-128x128" src="https://gravatar.com/avatar/3196ff4ca2acf9464de8a7c5b5e62957?s=256">
+          <h2 class="has-text-centered is-primary">Quote of the day</h2>
+          <p><q>Education is a progressive discovery of our own ignorance.</q> - Will Durant</p>
         </div>
       </div>
 
