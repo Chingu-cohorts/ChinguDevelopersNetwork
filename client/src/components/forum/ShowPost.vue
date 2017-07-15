@@ -29,15 +29,22 @@
         </div>
       </div>
     </template>
+
+    <new-comment></new-comment>
   </div>
 </template>
 
 <script>
 import MarkdownIt from 'markdown-it'
+import NewComment from '@/components/forum/NewComment'
 import { gravatar } from '@/components/utils'
 
 export default {
   name: 'ShowPost',
+
+  components: {
+    NewComment
+  },
 
   methods: {
     stuff () {
