@@ -6,6 +6,9 @@
           &copy; <a href="https://github.com/Chingu-cohorts">Chingu Developers Network</a> - {{ currentYear }}
         </p>
         <p>
+          <a>Terms of Service</a> - <a>Privacy Policy</a>
+        </p>
+        <p>
           <a class="icon" href="https://github.com/Chingu-cohorts/ChinguCentral">
             <i class="fa fa-github"></i>
           </a>
