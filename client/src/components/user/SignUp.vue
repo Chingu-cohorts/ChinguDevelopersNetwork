@@ -48,7 +48,7 @@
           </div>
           <div class="field">
             <p class="control">
-              <button class="button is-primary" type="submit" v-on:click="registerUser">
+              <button class="button is-primary" type="submit" @click="registerUser">
                 Register
               </button>
             </p>
@@ -145,6 +145,7 @@ export default {
   box-shadow: none;
   border-radius: 0;
   color: #f9f9f9;
+  text-shadow: -2px 0px 1px #000;
 }
 
 .signup-container input:focus {
