@@ -15,7 +15,7 @@
         <div class="field">
           <label class="label">Title</label>
           <p class="control">
-            <input class="input" type="text" v-model="post.title" placeholder="I got an awesome idea!">
+            <input class="input" type="text" v-model="post.title" placeholder="I have an awesome idea!">
           </p>
         </div>
 
