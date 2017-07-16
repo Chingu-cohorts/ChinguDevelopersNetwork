@@ -102,4 +102,8 @@ figure img {
 .username {
   font-weight: 700;
 }
+
+.content {
+  line-height: 1.7em;
+}
 </style>
