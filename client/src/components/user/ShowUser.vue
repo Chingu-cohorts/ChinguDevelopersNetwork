@@ -6,19 +6,22 @@
         <figure class="image is-256x256">
           <img :src="userGravatar">
         </figure>
-        <h1 class="title">
+        <h1 class="title" v-if="currentUser.first_name">
           {{ currentUser.first_name }} {{ currentUser.last_name }}
         </h1>
         <h2 class="subtitle">
           {{ currentUser.username }}
         </h2>
-        <a href="https://twitter.com/im_oxy">
+        <a :href="userTwitter" v-if="currentUser.twitter_username">
           <i class="fa fa-twitter"></i>
         </a>
-        <a href="https://github.com/Oxyrus">
+        <a :href="userGithub" v-if="currentUser.github_username">
           <i class="fa fa-github"></i>
         </a>
-        <a href="https://linkedin.com/Oxyrus">
+        <a :href="userMedium" v-if="currentUser.medium_username">
+          <i class="fa fa-medium"></i>
+        </a>
+        <a :href="userLinkedin" v-if="currentUser.linkedin_username">
           <i class="fa fa-linkedin"></i>
         </a>
       </div>
@@ -44,7 +47,7 @@
         <div class="level-item has-text-centered">
           <div>
             <p class="heading">Recommended by</p>
-            <p class="title">243</p>
+            <p class="title">{{ userRecommendations }}</p>
           </div>
         </div>
       </nav>
@@ -68,38 +71,7 @@
 
         <div class="column">
 
-          <article class="media">
-            <figure class="media-left">
-              <p class="image is-64x64">
-                <img src="http://lorempixel.com/128/128/">
-              </p>
-            </figure>
-            <div class="media-content">
-              <div class="content">
-                <p>
-                  <strong>John Smith</strong> <small>@johnsmith</small> <small>31m</small>
-                  <br>
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
-                </p>
-              </div>
-              <nav class="level is-mobile">
-                <div class="level-left">
-                  <a class="level-item">
-                    <span class="icon is-small"><i class="fa fa-reply"></i></span>
-                  </a>
-                  <a class="level-item">
-                    <span class="icon is-small"><i class="fa fa-retweet"></i></span>
-                  </a>
-                  <a class="level-item">
-                    <span class="icon is-small"><i class="fa fa-heart"></i></span>
-                  </a>
-                </div>
-              </nav>
-            </div>
-          </article>
-
         </div>
-
       </div>
     </div>
   </section>
@@ -121,15 +93,13 @@ export default {
       if (state.currentUser.about) {
         return state.currentUser.about
       }
-
-      return 'No about'
+      return 'The user hasn\'t added information yet.'
     },
 
     userCompletedProjects (state) {
       if (state.currentUser.projects) {
         return state.currentUser.projects.length
       }
-
       return '0'
     },
 
@@ -138,9 +108,36 @@ export default {
       return reputation(experience)
     },
 
+    userRecommendations (state) {
+      if (state.currentUser.recommendations) {
+        return state.currentUser.recommendations.length
+      }
+      return '0'
+    },
+
     userGravatar (state) {
       let { email } = state.currentUser
       return gravatar(email)
+    },
+
+    userTwitter (state) {
+      let twitterUsername = state.currentUser.twitter_username
+      return `https://twitter.com/${twitterUsername}`
+    },
+
+    userGithub (state) {
+      let githubUsername = state.currentUser.github_username
+      return `https://github.com/${githubUsername}`
+    },
+
+    userMedium (state) {
+      let mediumUsername = state.currentUser.medium_username
+      return `https://medium.com/@${mediumUsername}`
+    },
+
+    userLinkedin (state) {
+      let linkedinUsername = state.currentUser.linkedin_username
+      return `https://linkedin/${linkedinUsername}`
     }
   },
 
