@@ -10,6 +10,8 @@ import ShowPost from '@/components/forum/ShowPost'
 import NewPost from '@/components/forum/NewPost'
 import SignIn from '@/components/user/SignIn'
 import SignUp from '@/components/user/SignUp'
+import TermsOfService from '@/components/misc/TermsOfService'
+import Privacy from '@/components/misc/Privacy'
 
 Vue.use(Router)
 
@@ -64,6 +66,16 @@ export default new Router({
       path: '/new-post',
       name: 'NewPost',
       component: NewPost
+    },
+    {
+      path: '/tos',
+      name: 'TermsOfService',
+      component: TermsOfService
+    },
+    {
+      path: '/privacy',
+      name: 'PrivacyPolicy',
+      component: Privacy
     }
   ],
   mode: 'history'
