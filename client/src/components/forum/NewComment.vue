@@ -9,7 +9,7 @@
     <markdown-editor v-model="comment.content" ref="markdownEditor"></markdown-editor>
     <div class="field">
       <p class="control">
-        <button class="button">Post comment</button>
+        <button class="button" @click="saveComment">Post comment</button>
       </p>
     </div>
   </div>
@@ -43,6 +43,28 @@ export default {
     userGravatar () {
       let { email } = this.loggedUser
       return gravatar(email)
+    }
+  },
+
+  methods: {
+    saveComment (e) {
+      e.preventDefault()
+
+      let postId = this.$route.params.id
+
+      let { content } = this.comment
+
+      let comment = {
+        content,
+        post_id: postId
+      }
+
+      this.$store.dispatch('CREATE_FORUM_COMMENT', comment).then(() => {
+        this.$store.dispatch('LOAD_FORUM_POST', postId)
+        this.comment.content = ''
+      }).catch(err => {
+        console.error(err)
+      })
     }
   }
 }
