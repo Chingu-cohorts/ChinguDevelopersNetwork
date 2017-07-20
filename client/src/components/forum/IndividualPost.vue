@@ -63,7 +63,6 @@ export default {
       if (props.post.comments) {
         return props.post.comments.length
       }
-
       return '0'
     },
 
