@@ -17,7 +17,7 @@ func ListPosts(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	defer db.Close()
 
 	var posts []models.Post
-	db.Order("updated_at desc").Preload("User").Find(&posts)
+	db.Order("updated_at desc").Preload("User").Preload("Comments").Find(&posts)
 
 	respBody, err := json.MarshalIndent(posts, "", " ")
 	if err != nil {
