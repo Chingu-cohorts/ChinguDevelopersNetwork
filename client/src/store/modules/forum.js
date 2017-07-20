@@ -42,6 +42,24 @@ const actions = {
         reject()
       })
     })
+  },
+
+  CREATE_FORUM_COMMENT ({ commit }, comment) {
+    return new Promise((resolve, reject) => {
+      http.post(`/posts/${comment.post_id}/comments`, {
+        content: comment.content
+      }).then(res => {
+        console.log(res.data)
+        resolve()
+      }).catch(err => {
+        if (err.response) {
+          console.log(err.response.data)
+        } else {
+          console.error(err)
+        }
+        reject()
+      })
+    })
   }
 }
 
