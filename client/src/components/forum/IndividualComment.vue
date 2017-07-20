@@ -2,16 +2,14 @@
 <article class="media">
   <figure class="media-left">
     <p class="image is-64x64">
-      <img src="http://bulma.io/images/placeholders/128x128.png">
+      <img :src="userGravatar">
     </p>
   </figure>
   <div class="media-content">
     <div class="content">
       <p>
-        <strong>Barbara Middleton</strong>
-        <br>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis porta eros lacus, nec ultricies elit blandit non. Suspendisse pellentesque mauris sit amet dolor blandit rutrum. Nunc in tempus turpis.
-        <br>
+        <strong>{{ comment.user.username }}</strong>
+        <br>{{ comment.content }}<br>
         <small><a>Like</a> · <a>Reply</a> · 3 hrs</small>
       </p>
     </div>
