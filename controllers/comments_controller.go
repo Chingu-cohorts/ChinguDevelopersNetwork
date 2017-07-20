@@ -43,18 +43,34 @@ func CreateComment(w http.ResponseWriter, r *http.Request, ps httprouter.Params)
 
 	// If the comment actually has content, the user exists and so does the post
 	// then we can proceed to save it to the database
-	// TBD: Lookup for the post in the db, also for the user to check for valid data
-	if comment.Content != "" && comment.UserID != 0 && comment.PostID != 0 {
-		db.Create(&comment)
-	} else {
+	// TBD: Check the db for valid user data
+
+	// Find the post in the database
+	var post models.Post
+	db.First(&post, postID)
+
+	// We make sure the post exists and that it's NOT locked
+	if post.ID != 0 && post.IsLocked == false {
+		if comment.Content != "" && comment.UserID != 0 && comment.PostID != 0 {
+			db.Create(&comment)
+
+			respBody, err := json.MarshalIndent(comment, "", " ")
+			if err != nil {
+				log.Fatalf("Error returning created comment: %v", err)
+			}
+
+			utils.JSONResponse(w, respBody, http.StatusCreated)
+			return
+		}
+
 		utils.JSONMessage(w, "Content is required", http.StatusBadRequest)
 		return
 	}
 
-	respBody, err := json.MarshalIndent(comment, "", " ")
-	if err != nil {
-		log.Fatalf("Error returning created comment: %v", err)
+	if post.IsLocked {
+		utils.JSONMessage(w, "This post is locked and doesn't allow new comments", http.StatusForbidden)
+		return
 	}
 
-	utils.JSONResponse(w, respBody, http.StatusCreated)
+	utils.JSONMessage(w, "The post was not found", http.StatusNotFound)
 }
