@@ -34,7 +34,7 @@ func ShowPost(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 	var post models.Post
 
-	db.Preload("User").First(&post, ps.ByName("postID"))
+	db.Preload("User").Preload("Comments.User").First(&post, ps.ByName("postID"))
 
 	// If the post exists, it's ID must be different than 0
 	if post.ID != 0 {
