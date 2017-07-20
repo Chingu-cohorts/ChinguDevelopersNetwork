@@ -1,19 +1,24 @@
 <template>
-<article class="media" v-if="loggedUser.id">
-  <figure class="media-left">
-    <p class="image is-64x64">
-      <img :src="userGravatar">
-    </p>
-  </figure>
-  <div class="media-content">
-    <markdown-editor v-model="comment.content" ref="markdownEditor"></markdown-editor>
-    <div class="field">
-      <p class="control">
-        <button class="button" @click="saveComment">Post comment</button>
+<div>
+  <article class="media" v-if="loggedUser.id">
+    <figure class="media-left">
+      <p class="image is-64x64">
+        <img :src="userGravatar">
       </p>
+    </figure>
+    <div class="media-content">
+      <markdown-editor v-model="comment.content" ref="markdownEditor"></markdown-editor>
+      <div class="field">
+        <p class="control">
+          <button class="button is-success is-outlined" @click="saveComment">Post comment</button>
+        </p>
+      </div>
     </div>
-  </div>
-</article>
+  </article>
+  <p v-else>
+    You must be logged in to be able to interact with others.
+  </p>
+</div>
 </template>
 
 <script>
