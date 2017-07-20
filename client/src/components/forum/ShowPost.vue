@@ -30,12 +30,19 @@
       </div>
     </template>
 
+    <individual-comment
+      v-for="comment in currentPost.comments"
+      :comment="comment"
+      :key="comment.id">
+    </individual-comment>
+
     <new-comment></new-comment>
   </div>
 </template>
 
 <script>
 import MarkdownIt from 'markdown-it'
+import IndividualComment from '@/components/forum/IndividualComment'
 import NewComment from '@/components/forum/NewComment'
 import Spinner from '@/components/Spinner'
 import { gravatar } from '@/components/utils'
@@ -43,15 +50,22 @@ import { gravatar } from '@/components/utils'
 export default {
   name: 'ShowPost',
 
+  data () {
+    return {
+      interval: null
+    }
+  },
+
   components: {
     NewComment,
-    Spinner
+    Spinner,
+    IndividualComment
   },
 
   methods: {
-    stuff () {
-      let { id, slug } = this.$route.params
-      return id + slug
+    loadPost () {
+      let { id } = this.$route.params
+      this.$store.dispatch('LOAD_FORUM_POST', id)
     }
   },
 
@@ -74,6 +88,12 @@ export default {
   mounted () {
     let { id } = this.$route.params
     this.$store.dispatch('LOAD_FORUM_POST', id)
+
+    this.interval = setInterval(() => this.loadPost(), 30000)
+  },
+
+  beforeDestroy () {
+    clearInterval(this.interval)
   }
 }
 </script>
