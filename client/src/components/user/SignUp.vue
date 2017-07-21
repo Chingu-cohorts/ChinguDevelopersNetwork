@@ -53,7 +53,7 @@
               </button>
             </p>
           </div>
-          <p class="has-text-centered">By registering you agree to our <a>Terms of Service</a></p>
+          <p class="has-text-centered">By registering you agree to our <router-link :to="{ name: 'TermsOfService' }">Terms of Service</router-link></p>
         </div>
       </div>
     </div>
