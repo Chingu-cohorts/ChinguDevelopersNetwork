@@ -10,6 +10,7 @@ import ShowPost from '@/components/forum/ShowPost'
 import NewPost from '@/components/forum/NewPost'
 import SignIn from '@/components/user/SignIn'
 import SignUp from '@/components/user/SignUp'
+import Settings from '@/components/user/Settings'
 import TermsOfService from '@/components/misc/TermsOfService'
 import Privacy from '@/components/misc/Privacy'
 
@@ -51,6 +52,11 @@ export default new Router({
       path: '/signin',
       name: 'SignIn',
       component: SignIn
+    },
+    {
+      path: '/settings',
+      name: 'Settings',
+      component: Settings
     },
     {
       path: '/forum',
