@@ -64,6 +64,7 @@ func main() {
 	r.GET("/api/users", controllers.ListUsers)
 	r.GET("/api/users/:username", controllers.ShowUser)
 	r.POST("/api/users", controllers.CreateUser)
+	r.PUT("/api/users", utils.AuthRequest(controllers.UpdateUser))
 	r.POST("/api/users/login", controllers.Login)
 	r.DELETE("/api/users/:username", utils.AuthRequest(controllers.DeleteUser))
 	r.GET("/api/currentuser", utils.AuthRequest(controllers.CurrentUser))
