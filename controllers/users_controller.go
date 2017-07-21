@@ -189,6 +189,47 @@ func DeleteUser(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	utils.JSONMessage(w, "User not found", http.StatusOK)
 }
 
+// UpdateUser saves the new data for a given user
+func UpdateUser(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	db := utils.InitDB()
+	defer db.Close()
+
+	// The user that comes along the PUT request
+	var user models.User
+	decoder := json.NewDecoder(r.Body)
+	err := decoder.Decode(&user)
+	if err != nil {
+		utils.JSONMessage(w, "Invalid data", http.StatusBadRequest)
+		return
+	}
+
+	// Get the user id from the JWT
+	token := r.Header.Get("Authorization")
+
+	// Read the data from the JWT
+	tokenData, _ := utils.ReadJWT(token)
+	user.ID = tokenData.User.ID
+
+	// We want to make sure a non-admin user
+	// is not making himself an admin
+	var savedUser models.User
+
+	// We lookup for the user and write the data to
+	// the savedUser variable
+	db.First(&savedUser, user.ID)
+
+	// If the user is not an admin already, force it
+	// to have a false value, which means admin can
+	// only be given through database access
+	if !savedUser.IsAdmin {
+		user.IsAdmin = false
+	}
+
+	db.Model(&user).Updates(user)
+
+	utils.JSONMessage(w, "User updated successfully", http.StatusAccepted)
+}
+
 // CurrentUser returns the data for the logged in user
 func CurrentUser(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	db := utils.InitDB()
