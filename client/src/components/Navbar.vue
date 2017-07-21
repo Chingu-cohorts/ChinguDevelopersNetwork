@@ -45,6 +45,7 @@
     <div class="navbar-end">
       <template v-if="loggedUser.username">
         <a class="navbar-item" @click="reloadUser">{{ loggedUser.username }}</a>
+        <router-link :to="{ name: 'Settings' }" class="navbar-item">Settings</router-link>
         <a class="navbar-item" @click="logout">Logout</a>
       </template>
       <template v-else>
