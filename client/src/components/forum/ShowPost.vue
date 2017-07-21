@@ -97,7 +97,7 @@ export default {
     let { id } = this.$route.params
     this.$store.dispatch('LOAD_FORUM_POST', id)
 
-    this.interval = setInterval(() => this.loadPost(), 15000)
+    this.interval = setInterval(() => this.loadPost(), 5000)
   },
 
   beforeDestroy () {
