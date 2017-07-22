@@ -15,6 +15,12 @@
 			"revisionTime": "2017-06-08T00:51:49Z"
 		},
 		{
+			"checksumSHA1": "UAa/DG+OrnrW8AXPq3leHyvrUk0=",
+			"path": "github.com/gosimple/slug",
+			"revision": "f36922d6568f08b11d4e51b377e3e58291972ccc",
+			"revisionTime": "2017-06-17T21:50:39Z"
+		},
+		{
 			"checksumSHA1": "S7gqFZikH5ltabg/cmEe3QiOQ1I=",
 			"path": "github.com/jinzhu/gorm",
 			"revision": "9acaa33324bbcc78239a1c913d4f1292c12177b9",
@@ -57,6 +63,12 @@
 			"revisionTime": "2017-06-03T22:54:54Z"
 		},
 		{
+			"checksumSHA1": "pGMe9B9fhwoWKHzmlBcSKFl3k3s=",
+			"path": "github.com/prometheus/client_golang/prometheus",
+			"revision": "95b6848b5c5bb71e3f68cd512ae5a8153c35e41f",
+			"revisionTime": "2017-07-12T16:53:59Z"
+		},
+		{
 			"checksumSHA1": "hhV3odIET0K6zro/ixEdpbZ0bnI=",
 			"path": "github.com/rs/cors",
 			"revision": "8dd4211afb5d08dbb39a533b9bb9e4b486351df6",
@@ -67,6 +79,12 @@
 			"path": "github.com/urfave/negroni",
 			"revision": "3019daf414cfd2c51de68c3a535707c0de6e3d83",
 			"revisionTime": "2017-06-04T13:12:13Z"
+		},
+		{
+			"checksumSHA1": "UUMnu6WmPsmGVu4PkuNi6ByAYlo=",
+			"path": "github.com/zbindenren/negroni-prometheus",
+			"revision": "fc4e664b054e13e568e6cacd913d8d238545d88b",
+			"revisionTime": "2017-06-12T07:35:19Z"
 		},
 		{
 			"checksumSHA1": "UWjVYmoHlIfHzVIskELHiJQtMOI=",
