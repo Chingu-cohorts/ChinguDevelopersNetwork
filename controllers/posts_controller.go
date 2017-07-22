@@ -89,3 +89,30 @@ func CreatePost(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 	utils.JSONResponse(w, respBody, http.StatusCreated)
 }
+
+// DeletePost performs a soft delete on a post
+func DeletePost(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	db := utils.InitDB()
+	defer db.Close()
+
+	// We want to do verify that the post user id matches the user id contained
+	// in the JWT
+
+	// First we find the post in the database
+	var savedPost models.Post
+	db.First(&savedPost, ps.ByName("postID"))
+
+	// Then, we get the user object from the JWT
+	token := r.Header.Get("Authorization")
+	tokenData, _ := utils.ReadJWT(token)
+	userID := tokenData.User.ID
+
+	// Now we can compare the post user_id and the jwt user_id
+	if savedPost.UserID == userID {
+		db.Delete(&savedPost)
+		utils.JSONMessage(w, "Post deleted", http.StatusOK)
+		return
+	}
+
+	utils.JSONMessage(w, "An error ocurred deleting the post", http.StatusNotFound)
+}
