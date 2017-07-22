@@ -44,7 +44,11 @@
 
     <div class="navbar-end">
       <template v-if="loggedUser.username">
-        <a class="navbar-item" @click="reloadUser">{{ loggedUser.username }}</a>
+        <a class="navbar-item" @click="reloadUser">
+          <figure class="image is-32x32">
+            <img :src="userGravatar" class="avatar">
+          </figure>
+        </a>
         <router-link :to="{ name: 'Settings' }" class="navbar-item">Settings</router-link>
         <a class="navbar-item" @click="logout">Logout</a>
       </template>
@@ -62,6 +66,8 @@
 </template>
 
 <script>
+import { gravatar } from '@/components/utils'
+
 export default {
   name: 'navbar',
 
@@ -74,6 +80,11 @@ export default {
   computed: {
     loggedUser () {
       return this.$store.state.user.loggedUser
+    },
+
+    userGravatar (state) {
+      let { email } = state.loggedUser
+      return gravatar(email)
     }
   },
 
@@ -107,4 +118,12 @@ export default {
 .navbar {
   border-bottom: 1px solid #f9f9f9;
 }
+
+.navbar-item img {
+  max-height: none;
+}
+
+.navbar-brand .navbar-item img {
+  max-height: 1.75rem;
+} 
 </style>
