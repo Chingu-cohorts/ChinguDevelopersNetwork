@@ -87,10 +87,15 @@ func main() {
 
 	// Temporary port to test in heroku
 	port := os.Getenv("PORT")
+	thing := ":" + port
+
+	if port == "" {
+		port = config.Port
+	}
 
 	// Configure server
 	s := &http.Server{
-		Addr:           port,
+		Addr:           thing,
 		Handler:        n,
 		ReadTimeout:    10 * time.Second,
 		WriteTimeout:   10 * time.Second,
