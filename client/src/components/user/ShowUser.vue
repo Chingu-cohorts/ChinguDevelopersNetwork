@@ -1,6 +1,6 @@
 <template>
 <div>
-  <section class="hero user-profile-background">
+  <section class="hero user-profile-background" v-bind:class="{ admin : currentUser.is_admin }">
     <div class="hero-body">
       <div class="container has-text-centered">
         <figure class="image is-256x256">
@@ -150,7 +150,11 @@ export default {
 
 <style scoped>
 .user-profile-background {
-  background-image: linear-gradient(135deg, #81FBB8 0%, #28C76F 100%)
+  background-image: linear-gradient(135deg, #81fbb8 0%, #15df89 100%)
+}
+
+.admin {
+  background-image: linear-gradient(135deg, #28a0dc 0%, #15df89 100%)
 }
 
 .hero-body .title, .subtitle {
