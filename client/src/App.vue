@@ -49,4 +49,10 @@ export default {
 .fade-enter, .fade-leave-active {
   opacity: 0
 }
+
+.avatar {
+  border-radius: 100%;
+  -webkit-border-radius: 100%;
+  -moz-border-radius: 100%;
+}
 </style>
