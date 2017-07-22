@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/Chingu-cohorts/ChinguCentral/controllers"
@@ -84,9 +85,16 @@ func main() {
 	n.Use(m)
 	n.UseHandler(r)
 
+	// Temporary port to test in heroku
+	port := os.Getenv("PORT")
+
+	if port == "" {
+		port = config.Port
+	}
+
 	// Configure server
 	s := &http.Server{
-		Addr:           config.Port,
+		Addr:           port,
 		Handler:        n,
 		ReadTimeout:    10 * time.Second,
 		WriteTimeout:   10 * time.Second,
