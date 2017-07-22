@@ -44,7 +44,7 @@ func main() {
 	c := cors.New(cors.Options{
 		AllowedOrigins:   []string{"*"},
 		AllowCredentials: true,
-		AllowedMethods:   []string{"GET", "POST", "PUT"},
+		AllowedMethods:   []string{"GET", "POST", "PUT", "DELETE"},
 		AllowedHeaders:   []string{"Authorization", "Content-Type"},
 		ExposedHeaders:   []string{"Authorization", "Content-Type"},
 		Debug:            config.Debug,
@@ -75,6 +75,7 @@ func main() {
 	r.GET("/api/posts", controllers.ListPosts)
 	r.GET("/api/posts/:postID", controllers.ShowPost)
 	r.POST("/api/posts", utils.AuthRequest(controllers.CreatePost))
+	r.DELETE("/api/posts/:postID", utils.AuthRequest(controllers.DeletePost))
 
 	r.POST("/api/posts/:postID/comments", utils.AuthRequest(controllers.CreateComment))
 
