@@ -3,7 +3,7 @@
   <article class="media" v-if="loggedUser.id">
     <figure class="media-left">
       <p class="image is-64x64">
-        <img :src="userGravatar">
+        <img :src="userGravatar" class="avatar" :alt="loggedUser.username">
       </p>
     </figure>
     <div class="media-content">
