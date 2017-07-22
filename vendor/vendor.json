@@ -1,0 +1,85 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "IkAYIhxmvTQKEJvclIZJoVh9ats=",
+			"path": "github.com/dgrijalva/jwt-go",
+			"revision": "a539ee1a749a2b895533f979515ac7e6e0f5b650",
+			"revisionTime": "2017-06-08T00:51:49Z"
+		},
+		{
+			"checksumSHA1": "AZcW/5d7TKL2kYIjdMLL1LwPAeo=",
+			"path": "github.com/dgrijalva/jwt-go/request",
+			"revision": "a539ee1a749a2b895533f979515ac7e6e0f5b650",
+			"revisionTime": "2017-06-08T00:51:49Z"
+		},
+		{
+			"checksumSHA1": "S7gqFZikH5ltabg/cmEe3QiOQ1I=",
+			"path": "github.com/jinzhu/gorm",
+			"revision": "9acaa33324bbcc78239a1c913d4f1292c12177b9",
+			"revisionTime": "2017-05-04T14:08:37Z"
+		},
+		{
+			"checksumSHA1": "t2znJxa37Yz+uEkhnGjvPhlMKrs=",
+			"path": "github.com/jinzhu/gorm/dialects/postgres",
+			"revision": "9acaa33324bbcc78239a1c913d4f1292c12177b9",
+			"revisionTime": "2017-05-04T14:08:37Z"
+		},
+		{
+			"checksumSHA1": "tUQ1pHvWxAcPFmveZtlmCR9H4TY=",
+			"path": "github.com/jinzhu/inflection",
+			"revision": "1c35d901db3da928c72a72d8458480cc9ade058f",
+			"revisionTime": "2017-01-02T12:52:26Z"
+		},
+		{
+			"checksumSHA1": "sxbnDRe5qgQ1D0e8higLspM/e/8=",
+			"path": "github.com/julienschmidt/httprouter",
+			"revision": "975b5c4c7c21c0e3d2764200bf2aa8e34657ae6e",
+			"revisionTime": "2017-04-30T22:20:11Z"
+		},
+		{
+			"checksumSHA1": "WEQZdpNnu8s3ykJMobevACBYmxQ=",
+			"path": "github.com/lib/pq",
+			"revision": "8837942c3e09574accbc5f150e2c5e057189cace",
+			"revisionTime": "2017-06-03T22:54:54Z"
+		},
+		{
+			"checksumSHA1": "j07H1x0lqV9f/OyqS73qov0r0ww=",
+			"path": "github.com/lib/pq/hstore",
+			"revision": "8837942c3e09574accbc5f150e2c5e057189cace",
+			"revisionTime": "2017-06-03T22:54:54Z"
+		},
+		{
+			"checksumSHA1": "bP3nAXruMQIWlDBfTP6ifOskIFk=",
+			"path": "github.com/lib/pq/oid",
+			"revision": "8837942c3e09574accbc5f150e2c5e057189cace",
+			"revisionTime": "2017-06-03T22:54:54Z"
+		},
+		{
+			"checksumSHA1": "hhV3odIET0K6zro/ixEdpbZ0bnI=",
+			"path": "github.com/rs/cors",
+			"revision": "8dd4211afb5d08dbb39a533b9bb9e4b486351df6",
+			"revisionTime": "2017-06-08T16:51:55Z"
+		},
+		{
+			"checksumSHA1": "GjPpHuVg9iSFR3Lzl8EEzjCDObQ=",
+			"path": "github.com/urfave/negroni",
+			"revision": "3019daf414cfd2c51de68c3a535707c0de6e3d83",
+			"revisionTime": "2017-06-04T13:12:13Z"
+		},
+		{
+			"checksumSHA1": "UWjVYmoHlIfHzVIskELHiJQtMOI=",
+			"path": "golang.org/x/crypto/bcrypt",
+			"revision": "a48ac81e47fd6f9ed1258f3b60ae9e75f93cb7ed",
+			"revisionTime": "2017-07-06T12:31:36Z"
+		},
+		{
+			"checksumSHA1": "oVPHWesOmZ02vLq2fglGvf+AMgk=",
+			"path": "golang.org/x/crypto/blowfish",
+			"revision": "a48ac81e47fd6f9ed1258f3b60ae9e75f93cb7ed",
+			"revisionTime": "2017-07-06T12:31:36Z"
+		}
+	],
+	"rootPath": "github.com/Chingu-cohorts/ChinguCentral"
+}
