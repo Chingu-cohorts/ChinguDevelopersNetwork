@@ -5,7 +5,7 @@
       <div class="column is-one-quarter-mobile is-2-desktop">
         <div class="media-left">
           <figure class="image is-64x64">
-            <img :src="userGravatar" alt="User avatar">
+            <img :src="userGravatar" class="avatar" :alt="post.user.username">
           </figure>
         </div>
       </div>
@@ -16,7 +16,7 @@
             <p>
               <router-link
                 :to="{name: 'ShowPost', params: { id: post.id, slug: postSlug }}">{{ post.title }}
-                </router-link> <small>@{{ post.user.username }}</small> <small>{{ timeAgo }}</small>
+                </router-link> <small>by {{ post.user.username }}</small> <small>{{ timeAgo }}</small>
               <br>{{ truncatePost }}
             </p>
           </div>
@@ -78,10 +78,6 @@ export default {
 </script>
 
 <style scoped>
-img {
-  border-radius: 50%;
-}
-
 figure {
   margin: 0 auto;
 }
