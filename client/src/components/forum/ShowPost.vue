@@ -10,7 +10,7 @@
             <div class="column is-hidden-mobile is-2-desktop">
               <div class="box has-text-centered user-box">
                 <figure class="image is-128x128">
-                  <img :src="userGravatar">
+                  <img :src="userGravatar" class="avatar" :alt="currentPost.user.username">
                 </figure>
                 <div>
                   <a class="username" v-bind:class="{ admin: currentPost.user.is_admin }">{{ currentPost.user.username }}</a>
@@ -24,6 +24,16 @@
                   <h1 class="has-text-centered">{{ currentPost.title }}</h1>
                   <hr>
                   <div v-html="content">{{ currentPost.content }}</div>
+                </div>
+                <div class="post-actions" v-if="loggedUser.id === currentPost.user.id">
+                  <div class="block is-clearfix">
+                    <a class="button is-danger is-outlined is-small is-pulled-right">
+                      <i class="fa fa-trash"></i>
+                    </a>
+                    <a class="button is-primary is-outlined is-small is-pulled-right">
+                      <i class="fa fa-pencil"></i>
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -82,6 +92,10 @@ export default {
       return this.$store.state.forum.currentPost
     },
 
+    loggedUser () {
+      return this.$store.state.user.loggedUser
+    },
+
     userGravatar (state) {
       let { email } = state.currentPost.user
       return gravatar(email)
@@ -128,9 +142,8 @@ hr {
   margin-bottom: 1em;
 }
 
-figure img {
-  border-radius: 50%;
-  margin: 0.5em 0;
+.post-container figure img {
+  margin-top: -1em;
 }
 
 .user-box {
@@ -144,10 +157,18 @@ figure img {
 }
 
 .admin {
-  color: #28a0dc;
+  color: #000;
 }
 
 .content {
   line-height: 1.7em;
+}
+
+.post-actions .block {
+  margin-top: 1em;
+}
+
+.post-actions .block .button {
+  margin-left: 1em;
 }
 </style>
