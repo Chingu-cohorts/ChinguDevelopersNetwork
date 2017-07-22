@@ -4,7 +4,7 @@
     <div class="hero-body">
       <div class="container has-text-centered">
         <figure class="image is-256x256">
-          <img :src="userGravatar">
+          <img :src="userGravatar" class="avatar" :alt="currentUser.username">
         </figure>
         <h1 class="title" v-if="currentUser.first_name">
           {{ currentUser.first_name }} {{ currentUser.last_name }}
@@ -57,15 +57,11 @@
       <div class="columns feed">
 
         <div class="column is-one-quarter">
-          <div class="content">
-            <h2>About</h2>
-            <p>{{ userAbout }}</p>
-          </div>
-          <div class="block has-text-centered">
-            <a class="button is-primary is-outlined">Contact</a>
-          </div>
-          <div class="block has-text-centered">
-            <a class="button is-danger is-outlined">Recommend</a>
+          <div class="box">
+            <div class="content">
+              <h2>About</h2>
+              <p>{{ userAbout }}</p>
+            </div>
           </div>
         </div>
 
@@ -150,11 +146,11 @@ export default {
 
 <style scoped>
 .user-profile-background {
-  background-image: linear-gradient(135deg, #81fbb8 0%, #15df89 100%)
+  background-image: linear-gradient(135deg, #15df89 0%, #28a0dc 100%)
 }
 
 .admin {
-  background-image: linear-gradient(135deg, #28a0dc 0%, #15df89 100%)
+  background-image: linear-gradient(135deg, #000 0%, #6f6f6f 100%)
 }
 
 .hero-body .title, .subtitle {
@@ -176,8 +172,6 @@ export default {
 }
 
 .hero-body figure img {
-  border-radius: 50%;
-  border: 1px solid gray;
   box-shadow: 0 3px 2px rgba(0, 0, 0, 0.3);
   transition: all 0.3s ease-in-out;
 }
@@ -199,7 +193,7 @@ hr {
   margin-top: 2em;
 }
 
-.media .image img {
-  border-radius: 50%;
+.feed .box {
+  background-color: #fbfbfb;
 }
 </style>
