@@ -27,3 +27,7 @@ import:
 - package: github.com/zbindenren/negroni-prometheus
   version: ~0.1.0
 - package: github.com/beorn7/perks
+  subpackages:
+  - histogram
+  - quantile
+  - topk
