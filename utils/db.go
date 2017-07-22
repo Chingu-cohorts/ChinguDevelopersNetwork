@@ -2,7 +2,6 @@ package utils
 
 import (
 	"log"
-	"os"
 
 	"github.com/jinzhu/gorm"
 	// Required to use PostgreSQL
@@ -16,16 +15,12 @@ func InitDB() *gorm.DB {
 	//	log.Fatalf("Error loading config file for the database: %v", err)
 	// }
 
-	host := os.Getenv("DB_HOST")
-	user := os.Getenv("DB_USER")
-	password := os.Getenv("DB_PASSWORD")
-	dbname := os.Getenv("DB_NAME")
+	// host := os.Getenv("DB_HOST")
+	// user := os.Getenv("DB_USER")
+	// password := os.Getenv("DB_PASSWORD")
+	// dbname := os.Getenv("DB_NAME")
 
-	var dbParameters = "host=" + host +
-		" user=" + user +
-		" dbname=" + password +
-		" sslmode=disable" +
-		" password=" + dbname
+	var dbParameters = "postgres://deoggavbdbyvbz:69aa072ec89331d558d935ae85488983b482975701a7a01c9eaccd9ecfd2c524@ec2-54-243-107-66.compute-1.amazonaws.com:5432/de2rrpjmckuilt"
 
 	db, err := gorm.Open("postgres", dbParameters)
 	if err != nil {
