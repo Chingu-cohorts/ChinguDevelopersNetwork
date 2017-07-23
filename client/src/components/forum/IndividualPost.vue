@@ -2,7 +2,7 @@
 <div class="box">
   <div class="columns">
     <article class="media">
-      <div class="column is-one-quarter-mobile is-2-desktop">
+      <div class="column is-3-mobile is-2-desktop">
         <div class="media-left">
           <figure class="image is-64x64">
             <img :src="userGravatar" class="avatar" :alt="post.user.username">
@@ -10,20 +10,21 @@
         </div>
       </div>
 
-      <div class="column is-half-mobile is-8-desktop">
+      <div class="column is-5-mobile is-8-desktop">
         <div class="media-content">
           <div class="content">
-            <p>
-              <router-link
-                :to="{name: 'ShowPost', params: { id: post.id, slug: postSlug }}">{{ post.title }}
-                </router-link> <small>by {{ post.user.username }}</small> <small>{{ timeAgo }}</small>
-              <br>{{ truncatePost }}
+            <router-link
+              :to="{name: 'ShowPost', params: { id: post.id, slug: postSlug }}">{{ post.title }}
+              </router-link> <small>by {{ post.user.username }}</small> <small>{{ timeAgo }}</small>
+            <br>
+            <p class="is-hidden-mobile">
+              {{ truncatePost }}
             </p>
           </div>
         </div>
       </div>
 
-      <div class="column is one-quarter-mobile is-2-desktop">
+      <div class="column is-4-mobile is-2-desktop">
         <div class="media-right has-text-centered">
           <h2>{{ commentsCount }}</h2>
           <span>Comments</span>
