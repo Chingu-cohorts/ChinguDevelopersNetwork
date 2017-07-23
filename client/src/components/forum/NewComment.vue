@@ -24,6 +24,7 @@
 <script>
 import { markdownEditor } from 'vue-simplemde'
 import { gravatar } from '@/components/utils'
+import { http } from '@/api'
 
 export default {
   name: 'new-comment',
@@ -64,11 +65,18 @@ export default {
         post_id: postId
       }
 
-      this.$store.dispatch('CREATE_FORUM_COMMENT', comment).then(() => {
+      http.post(`/posts/${comment.post_id}/comments`, {
+        content: comment.content
+      }).then(res => {
+        console.log(res.data)
         this.$store.dispatch('LOAD_FORUM_POST', postId)
         this.comment.content = ''
       }).catch(err => {
-        console.error(err)
+        if (err.response) {
+          console.log(err.response.data)
+        } else {
+          console.error(err)
+        }
       })
     }
   }

@@ -38,6 +38,7 @@
 
 <script>
 import { markdownEditor } from 'vue-simplemde'
+import { http } from '@/api'
 
 export default {
   name: 'NewPost',
@@ -70,10 +71,17 @@ export default {
         content
       }
 
-      this.$store.dispatch('CREATE_FORUM_POST', post).then(() => {
+      http.post('/posts', {
+        title: post.title,
+        content: post.content
+      }).then(res => {
         this.$router.push({ name: 'PostList' })
       }).catch(err => {
-        console.error(err)
+        if (err.response) {
+          console.log(err.response.data)
+        } else {
+          console.error(err)
+        }
       })
     }
   },

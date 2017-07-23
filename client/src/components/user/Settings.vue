@@ -67,7 +67,7 @@
           </p>
         </div>
 
-        <button class="button is-primary is-outlined">Save</button>
+        <button class="button is-primary is-outlined" @click="updateUser">Save</button>
       
       </div>
 
@@ -75,7 +75,7 @@
         <div class="user-data">
 
           <figure class="image is-128x128">
-            <img :src="userGravatar">
+            <img :src="userGravatar" class="avatar">
           </figure>
 
           <h2 class="has-text-centered">{{ loggedUser.first_name }} {{ loggedUser.last_name }}</h2>
@@ -88,6 +88,7 @@
 
 <script>
 import { gravatar } from '@/components/utils'
+import { http } from '@/api'
 
 export default {
   name: 'settings',
@@ -114,6 +115,20 @@ export default {
       let { email } = state.loggedUser
       return gravatar(email)
     }
+  },
+
+  methods: {
+    updateUser (e) {
+      let { user } = this
+
+      http.put('/users', {
+        ...user
+      }).then(res => {
+        this.$router.push({ name: 'ShowUser', params: { username: this.loggedUser.username } })
+      }, err => {
+        console.error(err)
+      })
+    }
   }
 }
 </script>
@@ -137,10 +152,6 @@ export default {
 
 .settings .user-data figure {
   margin: 0 auto;
-}
-
-.settings .user-data figure img {
-  border-radius: 100%;
 }
 
 .settings .user-data h2 {
