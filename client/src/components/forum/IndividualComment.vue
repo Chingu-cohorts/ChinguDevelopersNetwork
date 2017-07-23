@@ -1,35 +1,38 @@
 <template>
-<div class="forum-comment">
-  <div class="columns">
-    <div class="column is-hidden-mobile is-2-desktop">
-      <div class="box has-text-centered user-box">
-        <figure class="image is-128x128">
-          <img :src="userGravatar" class="avatar" :alt="comment.user.username">
-        </figure>
-        <div>
-          <router-link :to="{ name: 'ShowUser', params: { username: comment.user.username } }" class="username" v-bind:class="{ admin: comment.user.is_admin }">{{ comment.user.username }}</router-link>
-        </div>
+<div class="forum-comment columns">
+
+  <div class="column is-hidden-mobile is-2-desktop">
+    <div class="box has-text-centered user-box">
+      <figure class="image is-128x128">
+        <img :src="userGravatar" class="avatar" :alt="comment.user.username">
+      </figure>
+      <div>
+        <router-link :to="{ name: 'ShowUser', params: { username: comment.user.username } }" class="username" v-bind:class="{ admin: comment.user.is_admin }">{{ comment.user.username }}</router-link>
       </div>
     </div>
+  </div>
 
-    <div class="column is-12-mobile is-10-desktop">
-      <div class="box">
-        <div class="content">
-          <div v-html="content">{{ comment.content }}</div>
-        </div>
-        <div class="comment-actions" v-if="loggedUser.id === comment.user.id">
-          <div class="block is-clearfix">
-            <a class="button is-danger is-outlined is-small is-pulled-right">
-              <i class="fa fa-trash"></i>
-            </a>
-            <a class="button is-primary is-outlined is-small is-pulled-right">
-              <i class="fa fa-pencil"></i>
-            </a>
-          </div>
+  <div class="column is-12-mobile is-10-desktop">
+    <div class="box">
+      <div class="user-data is-hidden-tablet">
+        <p>By <router-link :to="{ name: 'ShowUser', params: { username: comment.user.username } }" class="username" v-bind:class="{ admin: comment.user.is_admin }">{{ comment.user.username }}</router-link></p>
+      </div>
+      <div class="content">
+        <div v-html="content">{{ comment.content }}</div>
+      </div>
+      <div class="comment-actions" v-if="loggedUser.id === comment.user.id">
+        <div class="block is-clearfix">
+          <a class="button is-danger is-outlined is-small is-pulled-right">
+            <i class="fa fa-trash"></i>
+          </a>
+          <a class="button is-primary is-outlined is-small is-pulled-right">
+            <i class="fa fa-pencil"></i>
+          </a>
         </div>
       </div>
     </div>
   </div>
+
 </div>  
 </template>
 
