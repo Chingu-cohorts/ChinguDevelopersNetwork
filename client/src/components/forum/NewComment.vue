@@ -1,7 +1,7 @@
 <template>
 <div>
   <article class="media" v-if="loggedUser.id">
-    <figure class="media-left">
+    <figure class="media-left is-hidden-mobile">
       <p class="image is-64x64">
         <img :src="userGravatar" class="avatar" :alt="loggedUser.username">
       </p>
@@ -9,8 +9,8 @@
     <div class="media-content">
       <markdown-editor v-model="comment.content" ref="markdownEditor"></markdown-editor>
       <div class="field">
-        <p class="control">
-          <button class="button is-success is-outlined" @click="saveComment">Post comment</button>
+        <p class="control" v-if="!loading">
+          <button class="button is-success is-outlined" @click="handleCommentSubmit">Post comment</button>
         </p>
       </div>
     </div>
@@ -37,7 +37,8 @@ export default {
     return {
       comment: {
         content: ''
-      }
+      },
+      loading: false
     }
   },
 
@@ -53,31 +54,45 @@ export default {
   },
 
   methods: {
-    saveComment (e) {
+    // Starts the process of saving a comment
+    handleCommentSubmit (e) {
       e.preventDefault()
-
-      let postId = this.$route.params.id
 
       let { content } = this.comment
 
-      let comment = {
-        content,
-        post_id: postId
-      }
+      // If there's actually something in the comment
+      if (content !== '') {
+        this.loading = true
 
+        let postId = this.$route.params.id
+
+        let comment = {
+          content,
+          post_id: postId
+        }
+
+        // With the data in place, we can send the POST request
+        this.saveComment(comment, postId)
+      }
+    },
+
+    // Gets the comment and a postId and does a
+    // POST request to the API endpoint
+    saveComment (comment, postId) {
       http.post(`/posts/${comment.post_id}/comments`, {
         content: comment.content
       }).then(res => {
-        console.log(res.data)
         this.$store.dispatch('LOAD_FORUM_POST', postId)
-        this.comment.content = ''
+        this.resetState()
       }).catch(err => {
-        if (err.response) {
-          console.log(err.response.data)
-        } else {
-          console.error(err)
-        }
+        console.error(err)
       })
+    },
+
+    // Reset everything to its original state
+    resetState () {
+      this.comment.content = ''
+      this.loading = false
     }
   }
 }
