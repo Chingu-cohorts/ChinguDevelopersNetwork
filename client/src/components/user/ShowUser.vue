@@ -6,12 +6,8 @@
         <figure class="image is-256x256">
           <img :src="userGravatar" class="avatar" :alt="currentUser.username">
         </figure>
-        <h1 class="title" v-if="currentUser.first_name">
-          {{ currentUser.first_name }} {{ currentUser.last_name }}
-        </h1>
-        <h2 class="subtitle">
-          {{ currentUser.username }}
-        </h2>
+        <h1 class="title" v-if="currentUser.first_name">{{ currentUser.first_name }} {{ currentUser.last_name }}</h1>
+        <h2 class="subtitle">{{ currentUser.username }}</h2>
         <a :href="userTwitter" v-if="currentUser.twitter_username">
           <i class="fa fa-twitter"></i>
         </a>
