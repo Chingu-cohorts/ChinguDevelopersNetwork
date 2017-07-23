@@ -133,7 +133,7 @@ export default {
 
     userLinkedin (state) {
       let linkedinUsername = state.currentUser.linkedin_username
-      return `https://linkedin/${linkedinUsername}`
+      return `https://linkedin.com/${linkedinUsername}`
     }
   },
 
