@@ -5,8 +5,8 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/Chingu-cohorts/ChinguCentral/models"
-	"github.com/Chingu-cohorts/ChinguCentral/utils"
+	"github.com/Chingu-cohorts/ChinguDevelopersNetwork/models"
+	"github.com/Chingu-cohorts/ChinguDevelopersNetwork/utils"
 	"github.com/gosimple/slug"
 	"github.com/julienschmidt/httprouter"
 )

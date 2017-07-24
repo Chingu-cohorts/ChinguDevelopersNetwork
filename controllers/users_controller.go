@@ -8,8 +8,8 @@ import (
 
 	"golang.org/x/crypto/bcrypt"
 
-	"github.com/Chingu-cohorts/ChinguCentral/models"
-	"github.com/Chingu-cohorts/ChinguCentral/utils"
+	"github.com/Chingu-cohorts/ChinguDevelopersNetwork/models"
+	"github.com/Chingu-cohorts/ChinguDevelopersNetwork/utils"
 	"github.com/julienschmidt/httprouter"
 )
 

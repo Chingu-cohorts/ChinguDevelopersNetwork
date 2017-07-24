@@ -6,9 +6,9 @@ import (
 	"os"
 	"time"
 
-	"github.com/Chingu-cohorts/ChinguCentral/controllers"
-	"github.com/Chingu-cohorts/ChinguCentral/models"
-	"github.com/Chingu-cohorts/ChinguCentral/utils"
+	"github.com/Chingu-cohorts/ChinguDevelopersNetwork/controllers"
+	"github.com/Chingu-cohorts/ChinguDevelopersNetwork/models"
+	"github.com/Chingu-cohorts/ChinguDevelopersNetwork/utils"
 	"github.com/julienschmidt/httprouter"
 	"github.com/phyber/negroni-gzip/gzip"
 	"github.com/prometheus/client_golang/prometheus"

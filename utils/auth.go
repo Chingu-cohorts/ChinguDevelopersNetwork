@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/Chingu-cohorts/ChinguCentral/models"
+	"github.com/Chingu-cohorts/ChinguDevelopersNetwork/models"
 	jwt "github.com/dgrijalva/jwt-go"
 	"github.com/dgrijalva/jwt-go/request"
 	"github.com/julienschmidt/httprouter"

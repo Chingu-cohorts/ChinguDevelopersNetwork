@@ -5,7 +5,7 @@ import (
 	"log"
 	"os"
 
-	"github.com/Chingu-cohorts/ChinguCentral/models"
+	"github.com/Chingu-cohorts/ChinguDevelopersNetwork/models"
 )
 
 // CohortSeed represents the data contained in the cohorts.json file
