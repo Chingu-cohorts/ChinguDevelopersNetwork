@@ -28,7 +28,12 @@ func CreateComment(w http.ResponseWriter, r *http.Request, ps httprouter.Params)
 	// Get the user id from the token
 	token := r.Header.Get("Authorization")
 	// We should handle the error, someday
-	tokenData, _ := utils.ReadJWT(token)
+	tokenData, err := utils.ReadJWT(token)
+	if err != nil {
+		utils.JSONMessage(w, "Error reading token while creating post", http.StatusInternalServerError)
+		return
+	}
+
 	comment.UserID = tokenData.User.ID
 
 	// It's actually pretty stupid but there are quite a few
