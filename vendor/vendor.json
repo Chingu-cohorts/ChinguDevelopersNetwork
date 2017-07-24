@@ -81,6 +81,12 @@
 			"revisionTime": "2016-04-24T11:30:07Z"
 		},
 		{
+			"checksumSHA1": "gMv86qedkAaV6DFgIH9Pr3/dXzg=",
+			"path": "github.com/phyber/negroni-gzip/gzip",
+			"revision": "8118ae63850fee22b2fe43cea81d3bc149774503",
+			"revisionTime": "2017-03-23T13:29:14Z"
+		},
+		{
 			"checksumSHA1": "pGMe9B9fhwoWKHzmlBcSKFl3k3s=",
 			"path": "github.com/prometheus/client_golang/prometheus",
 			"revision": "95b6848b5c5bb71e3f68cd512ae5a8153c35e41f",
