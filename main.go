@@ -10,6 +10,7 @@ import (
 	"github.com/Chingu-cohorts/ChinguCentral/models"
 	"github.com/Chingu-cohorts/ChinguCentral/utils"
 	"github.com/julienschmidt/httprouter"
+	"github.com/phyber/negroni-gzip/gzip"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/rs/cors"
 	"github.com/urfave/negroni"
@@ -81,7 +82,10 @@ func main() {
 	r.POST("/api/posts/:postID/comments", utils.AuthRequest(controllers.CreateComment))
 
 	n := negroni.Classic()
+	n.Use(gzip.Gzip(gzip.DefaultCompression))
+	// Cors
 	n.Use(c)
+	// Prometheus
 	n.Use(m)
 	n.UseHandler(r)
 
