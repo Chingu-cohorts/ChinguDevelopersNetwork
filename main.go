@@ -90,11 +90,12 @@ func main() {
 	n.UseHandler(r)
 
 	// Temporary port to test on heroku
-	port := ":" + os.Getenv("PORT")
-
 	// If there is no env variable called port
 	// then use whatever is inside the config file
-	if port == "" {
+	var port string
+	if os.Getenv("PORT") != "" {
+		port = ":" + os.Getenv("PORT")
+	} else {
 		port = config.Port
 	}
 
