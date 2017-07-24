@@ -66,7 +66,12 @@ func CreatePost(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 	// Get the user id from the token and assign it
 	token := r.Header.Get("Authorization")
-	tokenData, _ := utils.ReadJWT(token)
+	tokenData, err := utils.ReadJWT(token)
+	if err != nil {
+		utils.JSONMessage(w, "Error reading token while creating post", http.StatusInternalServerError)
+		return
+	}
+
 	post.UserID = tokenData.User.ID
 
 	// Check if there's a title and a content
@@ -104,7 +109,12 @@ func DeletePost(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 	// Then, we get the user object from the JWT
 	token := r.Header.Get("Authorization")
-	tokenData, _ := utils.ReadJWT(token)
+	tokenData, err := utils.ReadJWT(token)
+	if err != nil {
+		utils.JSONMessage(w, "Error reading token", http.StatusInternalServerError)
+		return
+	}
+
 	userID := tokenData.User.ID
 
 	// Now we can compare the post user_id and the jwt user_id

@@ -146,7 +146,7 @@ func Login(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 	db.Where("username = ?", username).First(&savedUser)
 
-	// If we found the user
+	// If we didn't find the user
 	if savedUser.ID == 0 {
 		utils.JSONMessage(w, "User not found", http.StatusNotFound)
 		return
@@ -179,7 +179,7 @@ func DeleteUser(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	var user models.User
 	db.Where("username = ?", ps.ByName("username")).First(&user)
 
-	// If we found the user
+	// If we found the user then we can proceed
 	if user.ID != 0 {
 		db.Delete(&user)
 		utils.JSONMessage(w, "User deleted", http.StatusOK)
@@ -207,7 +207,12 @@ func UpdateUser(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	token := r.Header.Get("Authorization")
 
 	// Read the data from the JWT
-	tokenData, _ := utils.ReadJWT(token)
+	tokenData, err := utils.ReadJWT(token)
+	if err != nil {
+		utils.JSONMessage(w, "Error ocurred reading the token", http.StatusInternalServerError)
+		return
+	}
+
 	user.ID = tokenData.User.ID
 
 	// We want to make sure a non-admin user
@@ -239,17 +244,18 @@ func CurrentUser(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	token := r.Header.Get("Authorization")
 
 	// Read the data from the JWT
-	tokenData, _ := utils.ReadJWT(token)
+	tokenData, err := utils.ReadJWT(token)
+	if err != nil {
+		utils.JSONMessage(w, "Something ocurred while reading the token", http.StatusInternalServerError)
+		return
+	}
 
 	// The data contained in the token is old, all we need
 	// is the id, so we can look up for the user in the database
-	// and return the data there
+	// and return the data
 	userID := tokenData.User.ID
 
 	var user models.User
-
-	//db.Preload("Cohort").First(&user, userID)
-	//db.Model(&user).Association("Projects").Find(&user.Projects)
 
 	db.Where("id = ?", userID).Preload("Cohort").First(&user)
 	db.Model(&user).Association("Projects").Find(&user.Projects)
