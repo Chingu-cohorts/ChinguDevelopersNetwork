@@ -1,4 +1,4 @@
-# ChinguCentral
+# Chingu Developers Network
 
 The future home for the Chingu project.
 
