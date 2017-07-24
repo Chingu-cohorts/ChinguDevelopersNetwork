@@ -4,7 +4,7 @@
     <router-link
       :to="{name: 'Hello'}"
       class="navbar-item">
-      <img src="https://i.imgur.com/CH034bi.png" alt="The Zoo">
+      <img src="/static/images/logo.png" alt="Chingu Developers Network">
     </router-link>
 
     <div class="navbar-burger burger" data-target="navMenu" @click="collapse">
