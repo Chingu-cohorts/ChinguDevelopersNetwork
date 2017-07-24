@@ -32,6 +32,8 @@ func JSONMessage(w http.ResponseWriter, message string, code int) {
 
 // JSONResponse simplifies returning JSON formatted structures
 func JSONResponse(w http.ResponseWriter, json []byte, code int) {
+	w.Header().Set("Vary", "Accept-Encoding")
+	w.Header().Set("Content-Encoding", "gzip")
 	w.Header().Set("Content-Type", "application/json; charset=utf-8")
 	w.WriteHeader(code)
 	w.Write(json)
