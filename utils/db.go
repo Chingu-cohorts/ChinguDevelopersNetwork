@@ -17,7 +17,7 @@ func InitDB() *gorm.DB {
 	}
 
 	// dbEnv would be an string like "postgres://user:pwd..."
-	dbEnv := os.Getenv("DB_URL")
+	dbEnv := os.Getenv("DATABASE_URL")
 
 	var dbParameters string
 
