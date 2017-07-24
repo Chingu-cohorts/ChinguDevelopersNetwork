@@ -13,17 +13,30 @@
                   <img :src="userGravatar" class="avatar" :alt="currentPost.user.username">
                 </figure>
                 <div>
-                  <a class="username" v-bind:class="{ admin: currentPost.user.is_admin }">{{ currentPost.user.username }}</a>
+                  <router-link 
+                    :to="{ name: 'ShowUser', params: { username: currentPost.user.username } }"
+                    class="username"
+                    v-bind:class="{ admin: currentPost.user.is_admin }">{{ currentPost.user.username }}</router-link>
                 </div>
               </div>
             </div>
 
             <div class="column is-12-mobile is-10-desktop">
-              <div class="box">
+              <div class="box" style="padding-top: 3.5em">
                 <div class="content">
-                  <h1 class="has-text-centered">{{ currentPost.title }}</h1>
+                  <div class="has-text-centered">
+                    <h1 class="post-title">{{ currentPost.title }}</h1>
+                    <p class="is-hidden-tablet">
+                      <router-link
+                        :to="{ name: 'ShowUser', params: { username: currentPost.user.username } }"
+                        class="username"
+                        v-bind:class="{ admin: currentPost.user.is_admin }">
+                        {{ currentPost.user.username }}
+                      </router-link>
+                    </p>
+                  </div>
                   <hr>
-                  <div v-html="content">{{ currentPost.content }}</div>
+                  <div class="post-content" v-html="content">{{ currentPost.content }}</div>
                 </div>
                 <div class="post-actions" v-if="loggedUser.id === currentPost.user.id">
                   <div class="block is-clearfix">
@@ -134,12 +147,16 @@ export default {
 
 hr {
   width: 40%;
-  margin: 0 auto;
+  margin: 1.5em auto;
 }
 
 .forum-post {
   margin-top: 1em;
   margin-bottom: 1em;
+}
+
+.forum-post .post-title {
+  text-transform: uppercase;
 }
 
 .post-container figure img {
@@ -160,8 +177,10 @@ hr {
   color: #000;
 }
 
-.content {
+.post-content {
+  color: #333;
   line-height: 1.7em;
+  letter-spacing: 1px;
 }
 
 .post-actions .block {
@@ -170,5 +189,12 @@ hr {
 
 .post-actions .block .button {
   margin-left: 1em;
+}
+
+@media screen and (max-width: 768px) {
+  .post-content {
+    font-size: 1.2em;
+    text-align: justify;
+  }
 }
 </style>

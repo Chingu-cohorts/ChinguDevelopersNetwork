@@ -26,7 +26,9 @@
             <button class="button is-primary" @click="savePost">Submit</button>
           </p>
           <p class="control">
-            <button class="button is-link">Cancel</button>
+            <router-link
+              :to="{ name: 'PostList' }"
+              class="button is-danger is-outlined">Cancel</router-link>
           </p>
         </div>
       </div>
@@ -38,6 +40,7 @@
 
 <script>
 import { markdownEditor } from 'vue-simplemde'
+import { http } from '@/api'
 
 export default {
   name: 'NewPost',
@@ -70,10 +73,17 @@ export default {
         content
       }
 
-      this.$store.dispatch('CREATE_FORUM_POST', post).then(() => {
+      http.post('/posts', {
+        title: post.title,
+        content: post.content
+      }).then(res => {
         this.$router.push({ name: 'PostList' })
       }).catch(err => {
-        console.error(err)
+        if (err.response) {
+          console.log(err.response.data)
+        } else {
+          console.error(err)
+        }
       })
     }
   },
@@ -90,5 +100,12 @@ export default {
 .new-post {
   margin-top: 2em;
   margin-bottom: 2em;
+}
+
+@media screen and (max-width: 768px) {
+  .new-post {
+    margin-left: 1em;
+    margin-right: 1em;
+  }
 }
 </style>

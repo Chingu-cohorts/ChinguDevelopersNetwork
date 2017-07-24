@@ -1,5 +1,5 @@
 import * as types from '../mutation-types'
-import { http } from '../api'
+import { http } from '@/api'
 
 // Initial state
 const state = {
@@ -22,43 +22,6 @@ const actions = {
       commit(types.SET_CURRENT_POST_DATA, { post: res.data })
     }, err => {
       console.error(err)
-    })
-  },
-
-  CREATE_FORUM_POST ({ commit }, post) {
-    return new Promise((resolve, reject) => {
-      http.post('/posts', {
-        title: post.title,
-        content: post.content
-      }).then(res => {
-        console.log(res.data)
-        resolve()
-      }).catch(err => {
-        if (err.response) {
-          console.log(err.response.data)
-        } else {
-          console.error(err)
-        }
-        reject()
-      })
-    })
-  },
-
-  CREATE_FORUM_COMMENT ({ commit }, comment) {
-    return new Promise((resolve, reject) => {
-      http.post(`/posts/${comment.post_id}/comments`, {
-        content: comment.content
-      }).then(res => {
-        console.log(res.data)
-        resolve()
-      }).catch(err => {
-        if (err.response) {
-          console.log(err.response.data)
-        } else {
-          console.error(err)
-        }
-        reject()
-      })
     })
   }
 }

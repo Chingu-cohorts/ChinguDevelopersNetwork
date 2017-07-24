@@ -38,6 +38,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import { http } from '@/api'
 
 export default {
   name: 'sign-in',
@@ -72,10 +73,18 @@ export default {
         password
       }
 
-      this.$store.dispatch('POST_LOGIN_DATA', user).then(() => {
+      http.post('/users/login', {
+        username: user.username,
+        password: user.password
+      }).then(res => {
+        localStorage.setItem('token', res.data.token)
         window.location = '/'
       }).catch(err => {
-        console.error(err)
+        if (err.response) {
+          console.log(err.response)
+        } else {
+          console.error(err)
+        }
       })
     }
   }

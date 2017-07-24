@@ -63,6 +63,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import { http } from '@/api'
 
 export default {
   name: 'sign-up',
@@ -97,10 +98,18 @@ export default {
       let isValid = this.validateUser(user)
 
       if (isValid) {
-        this.$store.dispatch('POST_REGISTRATION_DATA', user).then(() => {
+        http.post('/users', {
+          username: user.username,
+          email: user.email,
+          password: user.password
+        }).then(res => {
           this.$router.push({name: 'SignIn'})
         }).catch(err => {
-          console.error(err)
+          if (err.response) {
+            console.log(err.response.data)
+          } else {
+            console.error(err)
+          }
         })
       }
     },
