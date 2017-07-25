@@ -10,12 +10,13 @@ The future home for the Chingu project.
 ## Setup
 
 1. Make sure you have Golang, PostgreSQL and Node 6+ installed.
-2. Compile the code `$ go build`.
-3. Run the binary generated (name depends on your OS).
-4. Open a new terminal and cd into the client.
-5. Fetch the dependencies `$ yarn`
-6. Run the development server `$ yarn start`
-7. Have fun! Visit [http://localhost:8080](http://localhost:8080).
+2. Get the code with `$ go get -u github.com/Chingu-cohorts/ChinguDevelopersNetwork`.
+3. Compile the code `$ go build`.
+4. Run the binary generated (name depends on your OS).
+5. Open a new terminal and cd into the client.
+6. Fetch the dependencies `$ npm i`
+7. Run the development server `$ npm start`
+8. Have fun! API runs on [http://localhost:8081](http://localhost:8081) and client on [http://localhost:8080](http://localhost:8080).
 
 ## License
 
