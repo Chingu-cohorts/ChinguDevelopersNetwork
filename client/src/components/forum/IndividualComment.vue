@@ -18,9 +18,10 @@
         <p>By <router-link :to="{ name: 'ShowUser', params: { username: comment.user.username } }" class="username" v-bind:class="{ admin: comment.user.is_admin }">{{ comment.user.username }}</router-link></p>
       </div>
       <div class="content">
-        <div v-html="content">{{ comment.content }}</div>
+        <div class="comment-content" v-html="content">{{ comment.content }}</div>
       </div>
       <div class="comment-actions" v-if="loggedUser.id === comment.user.id">
+        <hr>
         <div class="block is-clearfix">
           <a class="button is-danger is-outlined is-small is-pulled-right">
             <i class="fa fa-trash"></i>
@@ -87,8 +88,11 @@ export default {
   color: #000;
 }
 
-.content {
+.comment-content {
+  color: #333;
+  text-align: justify;
   line-height: 1.7em;
+  letter-spacing: 1px;
 }
 
 .comment-actions .block {
