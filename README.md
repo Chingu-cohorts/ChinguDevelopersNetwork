@@ -7,6 +7,23 @@ The future home for the Chingu project.
 * Backend: Golang, PostgreSQL.
 * Frontend: Vue.
 
+## Roadmap
+
+This is an ambitious project, it already took hundreds of hours of development and we're just getting started. Please keep in mind that I ([oxyrus](https://github.com/Oxyrus)) work on it in my spare time (I study software engineering and work as frontend developer), it means that the features may take a while to get implemented, but we will get there.
+
+- [x] Authentication
+- [x] User profile
+- [x] Forums
+- [x] Cohorts
+- [ ] Post likes
+- [ ] User projects (on the works)
+- [ ] Search
+- [ ] Recruiters panel
+- [ ] Mentions
+- [ ] Notifications
+
+As you can see, these are very basic features but most are not implemented yet, if you want to contribute to the project and start working on any of these feel free to contact either chance or me in the slack channels.
+
 ## Setup
 
 1. Make sure you have Golang, PostgreSQL and Node 6+ installed.
