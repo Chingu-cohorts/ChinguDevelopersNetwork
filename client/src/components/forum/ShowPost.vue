@@ -179,6 +179,7 @@ hr {
 
 .post-content {
   color: #333;
+  text-align: justify;
   line-height: 1.7em;
   letter-spacing: 1px;
 }
@@ -189,12 +190,5 @@ hr {
 
 .post-actions .block .button {
   margin-left: 1em;
-}
-
-@media screen and (max-width: 768px) {
-  .post-content {
-    font-size: 1.2em;
-    text-align: justify;
-  }
 }
 </style>
