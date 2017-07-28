@@ -22,7 +22,7 @@ func init() {
 	db := utils.InitDB()
 	defer db.Close()
 
-	db.AutoMigrate(&models.Cohort{}, &models.User{}, &models.Project{}, &models.Post{}, &models.Comment{})
+	db.AutoMigrate(&models.Cohort{}, &models.User{}, &models.Project{}, &models.Aptitude{}, &models.Post{}, &models.Comment{})
 
 	cohorts, err := utils.LoadCohortSeed("cohorts.json")
 	if err != nil {
@@ -52,7 +52,7 @@ func main() {
 		Debug:            config.Debug,
 	})
 
-	m := negroniprometheus.NewMiddleware("chingu")
+	m := negroniprometheus.NewMiddleware("ChinguDevelopersNetwork")
 
 	// Instantiate router
 	r := httprouter.New()
@@ -73,6 +73,7 @@ func main() {
 
 	r.GET("/api/projects", controllers.ListProjects)
 	r.GET("/api/projects/:id", controllers.ShowProject)
+	r.POST("/api/projects", utils.AuthRequest(controllers.CreateProject))
 
 	r.GET("/api/posts", controllers.ListPosts)
 	r.GET("/api/posts/:postID", controllers.ShowPost)
