@@ -20,11 +20,11 @@ type User struct {
 	LinkedinUsername string `json:"linkedin_username,omitempty"`
 
 	Cohort   Cohort `json:"cohort,omitempty"`
-	CohortID uint   `json:"cohort_id"`
+	CohortID uint   `gorm:"default:null" json:"cohort_id"`
 
-	Projects []Project `gorm:"many2many:user_projects" json:"projects,omitempty"`
+	Aptitudes []Aptitude `gorm:"many2many:user_aptitudes" json:"aptitudes,omitempty"`
+	Projects  []Project  `gorm:"many2many:user_projects" json:"projects,omitempty"`
 
-	Posts []Post `json:"posts,omitempty"`
-
+	Posts    []Post    `json:"posts,omitempty"`
 	Comments []Comment `json:"comments,omitempty"`
 }
