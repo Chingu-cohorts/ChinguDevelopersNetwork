@@ -1,0 +1,49 @@
+{
+  "aptitudes": [
+    {
+      "name": "JavaScript"
+    },
+    {
+      "name": "C/C++"
+    },
+    {
+      "name": "Java"
+    },
+    {
+      "name": "Python"
+    },
+    {
+      "name": "Ruby"
+    },
+    {
+      "name": "Go"
+    },
+    {
+      "name": "Elixir"
+    },
+    {
+      "name": "C#"
+    },
+    {
+      "name": "MongoDB"
+    },
+    {
+      "name": "React.js"
+    },
+    {
+      "name": "Angular"
+    },
+    {
+      "name": "Vue.js"
+    },
+    {
+      "name": "Design"
+    },
+    {
+      "name": "UI/UX"
+    },
+    {
+      "name": "Project Management"
+    }
+  ]
+}
