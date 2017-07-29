@@ -1,7 +1,7 @@
 {
-  "name": "chingu-central",
-  "version": "1.0.0",
-  "description": "A Vue.js project",
+  "name": "chingu-developers-network",
+  "version": "0.0.1-alpha.1",
+  "description": "Client to consume the ChinguDevelopersNetwork API",
   "author": "Chingu Development Group",
   "private": true,
   "scripts": {
