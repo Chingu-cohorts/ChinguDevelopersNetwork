@@ -70,6 +70,7 @@ func main() {
 
 	// Comments routes
 	r.POST("/api/posts/:postID/comments", utils.AuthRequest(controllers.CreateComment))
+	r.DELETE("/api/posts/:postID/comments/:commentID", utils.AuthRequest(controllers.DeleteComment))
 
 	// Panic recover, request/response logger, static file serving
 	n := negroni.Classic()
