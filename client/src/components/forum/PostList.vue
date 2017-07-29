@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import IndividualPost from './IndividualPost'
+import IndividualPost from '@/components/forum/IndividualPost'
 
 export default {
   name: 'PostList',
@@ -72,7 +72,7 @@ export default {
   mounted () {
     this.$store.dispatch('LOAD_POSTS_LIST')
 
-    this.interval = setInterval(() => this.loadData(), 30000)
+    this.interval = setInterval(() => this.loadData(), 20000)
   },
 
   beforeDestroy () {

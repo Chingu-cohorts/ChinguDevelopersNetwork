@@ -76,7 +76,7 @@ import MarkdownIt from 'markdown-it'
 import IndividualComment from '@/components/forum/IndividualComment'
 import NewComment from '@/components/forum/NewComment'
 import Spinner from '@/components/Spinner'
-import { gravatar } from '@/components/utils'
+import { gravatar } from '@/utils'
 
 export default {
   name: 'ShowPost',
@@ -124,7 +124,7 @@ export default {
     let { id } = this.$route.params
     this.$store.dispatch('LOAD_FORUM_POST', id)
 
-    this.interval = setInterval(() => this.loadPost(), 5000)
+    this.interval = setInterval(() => this.loadPost(), 20000)
   },
 
   beforeDestroy () {

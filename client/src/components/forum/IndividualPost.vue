@@ -37,7 +37,7 @@
 
 <script>
 import moment from 'moment'
-import { gravatar } from '@/components/utils'
+import { gravatar } from '@/utils'
 
 export default {
   name: 'IndividualPost',

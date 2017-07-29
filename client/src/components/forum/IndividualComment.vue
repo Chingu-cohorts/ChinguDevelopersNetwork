@@ -39,7 +39,7 @@
 
 <script>
 import MarkdownIt from 'markdown-it'
-import { gravatar } from '@/components/utils'
+import { gravatar } from '@/utils'
 
 export default {
   name: 'individual-comment',

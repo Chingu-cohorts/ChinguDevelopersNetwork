@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import IndividualUser from './IndividualUser'
+import IndividualUser from '@/components/user/IndividualUser'
 
 export default {
   name: 'user-list',

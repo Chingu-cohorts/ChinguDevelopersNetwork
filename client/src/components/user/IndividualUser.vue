@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import { gravatar } from '@/components/utils'
+import { gravatar } from '@/utils'
 
 export default {
   name: 'individual-user',

@@ -71,7 +71,7 @@
 </template>
 
 <script>
-import { reputation, gravatar } from '@/components/utils'
+import { reputation, gravatar } from '@/utils'
 
 export default {
   name: 'show-user',

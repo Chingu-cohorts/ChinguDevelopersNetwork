@@ -23,7 +23,7 @@
 
 <script>
 import { markdownEditor } from 'vue-simplemde'
-import { gravatar } from '@/components/utils'
+import { gravatar } from '@/utils'
 import { http } from '@/api'
 
 export default {

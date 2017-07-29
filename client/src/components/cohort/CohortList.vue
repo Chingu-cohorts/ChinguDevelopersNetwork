@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import IndividualCohort from './IndividualCohort'
+import IndividualCohort from '@/components/cohort/IndividualCohort'
 
 export default {
   name: 'cohort-list',

@@ -8,14 +8,21 @@
         <div class="field">
           <label class="label">First Name</label>
           <div class="control">
-            <input class="input" type="text" placeholder="First name" v-model="user.first_name">
+            <input class="input shrink" type="text" placeholder="First name" v-model="user.first_name">
           </div>
         </div>
 
         <div class="field">
           <label class="label">Last Name</label>
           <div class="control">
-            <input class="input" type="text" placeholder="Last name" v-model="user.last_name">
+            <input class="input shrink" type="text" placeholder="Last name" v-model="user.last_name">
+          </div>
+        </div>
+
+        <div class="field">
+          <label class="label">About</label>
+          <div class="control">
+            <textarea class="textarea" v-model="user.about"></textarea>
           </div>
         </div>
 
@@ -87,7 +94,7 @@
 </template>
 
 <script>
-import { gravatar } from '@/components/utils'
+import { gravatar } from '@/utils'
 import { http } from '@/api'
 
 export default {
@@ -98,6 +105,7 @@ export default {
       user: {
         first_name: '',
         last_name: '',
+        about: '',
         github_username: '',
         medium_username: '',
         linkedin_username: '',
@@ -156,5 +164,14 @@ export default {
 
 .settings .user-data h2 {
   font-weight: 700;
+}
+
+.settings .input {
+  min-width: 400px;
+  max-width: 400px;
+}
+
+.settings .shrink {
+  width: 40%;
 }
 </style>
