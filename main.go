@@ -24,6 +24,7 @@ func init() {
 
 	db.AutoMigrate(&models.Cohort{}, &models.User{}, &models.Project{}, &models.Aptitude{}, &models.Post{}, &models.Comment{})
 
+	// Load cohorts from file
 	cohorts, err := utils.LoadCohortSeed("cohorts.json")
 	if err != nil {
 		log.Fatalf("Something went wrong reading the cohorts file: %v", err)
@@ -34,11 +35,13 @@ func init() {
 		db.Create(&cohort)
 	}
 
+	// Load aptitudes from file
 	aptitudes, err := utils.LoadAptitudeSeed("aptitudes.json")
 	if err != nil {
 		log.Fatalf("Something went wrong reading the aptitudes file: %v", err)
 	}
 
+	// Iterate over aptitudes to save them
 	for _, aptitude := range aptitudes.Aptitudes {
 		db.Create(&aptitude)
 	}
@@ -61,17 +64,21 @@ func main() {
 		Debug:            config.Debug,
 	})
 
+	// For some nice-to-have metrics
 	m := negroniprometheus.NewMiddleware("ChinguDevelopersNetwork")
 
 	// Instantiate router
 	r := httprouter.New()
 
+	// Prometheus route
 	r.Handler("GET", "/metrics", prometheus.Handler())
 
+	// Cohorts routes
 	r.GET("/api/cohorts", controllers.ListCohorts)
 	r.GET("/api/cohorts/:name", controllers.ShowCohort)
 	r.POST("/api/cohorts", utils.AuthRequest(controllers.CreateCohort))
 
+	// User routes
 	r.GET("/api/users", controllers.ListUsers)
 	r.GET("/api/users/:username", controllers.ShowUser)
 	r.POST("/api/users", controllers.CreateUser)
@@ -80,23 +87,32 @@ func main() {
 	r.DELETE("/api/users/:username", utils.AuthRequest(controllers.DeleteUser))
 	r.GET("/api/currentuser", utils.AuthRequest(controllers.CurrentUser))
 
+	// Projects routes
 	r.GET("/api/projects", controllers.ListProjects)
 	r.GET("/api/projects/:id", controllers.ShowProject)
 	r.POST("/api/projects", utils.AuthRequest(controllers.CreateProject))
 
+	// Posts routes
 	r.GET("/api/posts", controllers.ListPosts)
 	r.GET("/api/posts/:postID", controllers.ShowPost)
 	r.POST("/api/posts", utils.AuthRequest(controllers.CreatePost))
 	r.DELETE("/api/posts/:postID", utils.AuthRequest(controllers.DeletePost))
 
+	// Comments routes
 	r.POST("/api/posts/:postID/comments", utils.AuthRequest(controllers.CreateComment))
 
+	// Panic recover, request/response logger, static file serving
 	n := negroni.Classic()
+	// Gzip responses
 	n.Use(gzip.Gzip(gzip.DefaultCompression))
-	// Cors
+
+	// Use Cors
 	n.Use(c)
-	// Prometheus
+
+	// Use Prometheus
 	n.Use(m)
+
+	// Use router instance
 	n.UseHandler(r)
 
 	// Temporary port to test on heroku
