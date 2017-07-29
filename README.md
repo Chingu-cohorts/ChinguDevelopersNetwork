@@ -2,11 +2,6 @@
 
 The future home for the Chingu project.
 
-## Stack
-
-* Backend: Golang, PostgreSQL.
-* Frontend: Vue.
-
 ## Roadmap
 
 This is an ambitious project, it already took hundreds of hours of development and we're just getting started. Please keep in mind that I work on it in my spare time, it means that the features may take a while to get implemented, but we will get there. You can always use the issues to suggest new features or modifications to the existing uses, please check the [existing ones](https://github.com/Chingu-cohorts/ChinguDevelopersNetwork/issues?q=is%3Aopen+is%3Aissue+label%3Asuggestion) before opening a new issue.
@@ -23,6 +18,11 @@ This is an ambitious project, it already took hundreds of hours of development a
 - [ ] Notifications
 
 As you can see, these are very basic features but most are not implemented yet, if you want to contribute to the project and start working on any of these feel free to contact either chance or me in the slack channels.
+
+## Stack
+
+* Backend: Golang, PostgreSQL.
+* Frontend: Vue.
 
 ## Setup
 
