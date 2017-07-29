@@ -33,6 +33,15 @@ func init() {
 	for _, cohort := range cohorts.Cohorts {
 		db.Create(&cohort)
 	}
+
+	aptitudes, err := utils.LoadAptitudeSeed("aptitudes.json")
+	if err != nil {
+		log.Fatalf("Something went wrong reading the aptitudes file: %v", err)
+	}
+
+	for _, aptitude := range aptitudes.Aptitudes {
+		db.Create(&aptitude)
+	}
 }
 
 func main() {
