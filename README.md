@@ -9,7 +9,7 @@ The future home for the Chingu project.
 
 ## Roadmap
 
-This is an ambitious project, it already took hundreds of hours of development and we're just getting started. Please keep in mind that I ([oxyrus](https://github.com/Oxyrus)) work on it in my spare time (I study software engineering and work as frontend developer), it means that the features may take a while to get implemented, but we will get there.
+This is an ambitious project, it already took hundreds of hours of development and we're just getting started. Please keep in mind that I work on it in my spare time, it means that the features may take a while to get implemented, but we will get there. You can always use the issues to suggest new features or modifications to the existing uses, please check the [existing ones](https://github.com/Chingu-cohorts/ChinguDevelopersNetwork/issues?q=is%3Aopen+is%3Aissue+label%3Asuggestion) before opening a new issue.
 
 - [x] Authentication
 - [x] User profile
