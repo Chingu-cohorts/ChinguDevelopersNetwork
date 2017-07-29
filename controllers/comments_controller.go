@@ -79,3 +79,37 @@ func CreateComment(w http.ResponseWriter, r *http.Request, ps httprouter.Params)
 
 	utils.JSONMessage(w, "The post was not found", http.StatusNotFound)
 }
+
+// DeleteComment destroys a comment with given ID
+func DeleteComment(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	db := utils.InitDB()
+	defer db.Close()
+
+	// We need to verify that the one trying to delete the comment
+	// is the same who created it
+
+	// First we find the comment in the database
+	var savedComment models.Comment
+	db.First(&savedComment, ps.ByName("commentID"))
+
+	// Then we get the user id from the JWT
+	token := r.Header.Get("Authorization")
+	tokenData, err := utils.ReadJWT(token)
+	if err != nil {
+		utils.JSONMessage(w, "Error reading token", http.StatusInternalServerError)
+		return
+	}
+
+	userID := tokenData.User.ID
+
+	// Compare the user id of who created the post
+	// with the one stored in the token
+	// then proceed with the delete
+	if savedComment.User.ID == userID {
+		db.Delete(&savedComment)
+		utils.JSONMessage(w, "Comment deleted", http.StatusOK)
+		return
+	}
+
+	utils.JSONMessage(w, "An error ocurring deleting the comment", http.StatusNotFound)
+}
