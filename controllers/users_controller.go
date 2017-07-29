@@ -215,6 +215,12 @@ func UpdateUser(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 
 	user.ID = tokenData.User.ID
 
+	// Nope, you're not modifying your own experience
+	if user.Experience != 0 {
+		utils.JSONMessage(w, "Not going to happen", http.StatusBadRequest)
+		return
+	}
+
 	// We want to make sure a non-admin user
 	// is not making himself an admin
 	var savedUser models.User
