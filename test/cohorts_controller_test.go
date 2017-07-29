@@ -1,10 +1,13 @@
 package controllers
 
 import (
+	"fmt"
+	"log"
 	"net/http"
 	"net/http/httptest"
 	"testing"
 
+	"github.com/Chingu-cohorts/ChinguDevelopersNetwork/controllers"
 	"github.com/julienschmidt/httprouter"
 )
 
@@ -12,7 +15,7 @@ import (
 // the file path so the tests pass
 
 func TestListCohorts(t *testing.T) {
-	handler := ListCohorts
+	handler := controllers.ListCohorts
 	router := httprouter.New()
 
 	router.GET("/api/cohorts", handler)
