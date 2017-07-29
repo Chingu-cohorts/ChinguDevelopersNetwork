@@ -75,6 +75,12 @@
 			"revisionTime": "2017-06-03T22:54:54Z"
 		},
 		{
+			"checksumSHA1": "W/tT2Jct7NIgjTThSvqxUWd8FOw=",
+			"path": "github.com/mattn/go-colorable",
+			"revision": "5ffa492f0a052801e332fdc7eb2ad8dcac2d1aa4",
+			"revisionTime": "2017-07-29T11:33:00Z"
+		},
+		{
 			"checksumSHA1": "bQ9BML+wAZd81vdDAOC1U+yN8dU=",
 			"path": "github.com/matttproud/golang_protobuf_extensions/pbutil",
 			"revision": "c12348ce28de40eed0136aa2b644d0ee0650e56c",
@@ -139,6 +145,12 @@
 			"path": "github.com/rs/cors",
 			"revision": "8dd4211afb5d08dbb39a533b9bb9e4b486351df6",
 			"revisionTime": "2017-06-08T16:51:55Z"
+		},
+		{
+			"checksumSHA1": "dVgxGaZhqKYnZ+v0L34A5+xtnaQ=",
+			"path": "github.com/sirupsen/logrus",
+			"revision": "181d419aa9e2223811b824e8f0b4af96f9ba9302",
+			"revisionTime": "2017-07-28T07:42:14Z"
 		},
 		{
 			"checksumSHA1": "j2knOv7MqQumL4WMCwHIS3n1O7g=",

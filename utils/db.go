@@ -5,6 +5,7 @@ import (
 	"os"
 
 	"github.com/jinzhu/gorm"
+	"github.com/sirupsen/logrus"
 	// Required to use PostgreSQL
 	_ "github.com/jinzhu/gorm/dialects/postgres"
 )
@@ -31,11 +32,24 @@ func InitDB() *gorm.DB {
 			" password=" + config.Database.Password
 	}
 
+	// Create connection to the database
 	db, err := gorm.Open("postgres", dbParameters)
 	if err != nil {
 		log.Fatalf("Couldn't create connection to the database: %v", err)
 	}
 
+	// Use logrus as our logger
+	var log = logrus.New()
+
+	// Configure instance of logger
+	log.Out = os.Stdout
+	log.Level = logrus.InfoLevel
+
+	// Everything above info level will be logged
+	log.SetLevel(log.Level)
+
+	// Configure DB log
+	db.SetLogger(log)
 	db.LogMode(true)
 
 	return db

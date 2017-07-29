@@ -10,14 +10,20 @@ import (
 	"github.com/Chingu-cohorts/ChinguDevelopersNetwork/models"
 	"github.com/Chingu-cohorts/ChinguDevelopersNetwork/utils"
 	"github.com/julienschmidt/httprouter"
+	colorable "github.com/mattn/go-colorable"
 	"github.com/phyber/negroni-gzip/gzip"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/rs/cors"
+	"github.com/sirupsen/logrus"
 	"github.com/urfave/negroni"
 	negroniprometheus "github.com/zbindenren/negroni-prometheus"
 )
 
 func init() {
+	// To use cool colors in windows
+	logrus.SetFormatter(&logrus.TextFormatter{ForceColors: true})
+	logrus.SetOutput(colorable.NewColorableStdout())
+
 	// When initializing the application, we must run the migrations
 	db := utils.InitDB()
 	defer db.Close()
@@ -27,23 +33,31 @@ func init() {
 	// Load cohorts from file
 	cohorts, err := utils.LoadCohortSeed("cohorts.json")
 	if err != nil {
-		log.Fatalf("Something went wrong reading the cohorts file: %v", err)
+		logrus.Panic("Could not read the cohorts file")
 	}
 
 	// Iterate over cohorts to save them
 	for _, cohort := range cohorts.Cohorts {
 		db.Create(&cohort)
+
+		logrus.WithFields(logrus.Fields{
+			"cohort": &cohort,
+		}).Info("Saving cohort")
 	}
 
 	// Load aptitudes from file
 	aptitudes, err := utils.LoadAptitudeSeed("aptitudes.json")
 	if err != nil {
-		log.Fatalf("Something went wrong reading the aptitudes file: %v", err)
+		logrus.Panic("Could not read the aptitudes file")
 	}
 
 	// Iterate over aptitudes to save them
 	for _, aptitude := range aptitudes.Aptitudes {
 		db.Create(&aptitude)
+
+		logrus.WithFields(logrus.Fields{
+			"aptitude": &aptitude,
+		}).Info("Saving aptitude")
 	}
 }
 
@@ -51,7 +65,7 @@ func main() {
 	// Load the config file
 	config, err := utils.LoadSettings("config.json")
 	if err != nil {
-		log.Fatalf("Something went wrong reading the config file: %v", err)
+		logrus.WithError(err)
 	}
 
 	// Setup CORS
