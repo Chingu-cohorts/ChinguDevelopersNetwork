@@ -35,6 +35,20 @@ As you can see, these are very basic features but most are not implemented yet, 
 7. Run the development server `$ npm start`
 8. Have fun! API runs on [http://localhost:8081](http://localhost:8081) and client on [http://localhost:8080](http://localhost:8080).
 
+## FAQ
+
+### Why did you chose Vue over React?
+
+Vue allows us to do a quicker development with all the features we would need from the React world.
+
+### Why Go?
+
+I'm completely aware of other technologies (Rails, Django, Laravel, etc.) but none of them provided an easy way to create cool APIs. Phoenix did, but it's undergoing a lot of changes. That and a little bit of curiosity about Go led us to use it.
+
+### Are you going to release a mobil app?
+
+It should be possible to create the application, however there is a payment required by Google in order to submit applications to the Play Store and we are not rich. So not in our current plans.
+
 ## License
 
 Copyright (C) 2017  Project Chingu
