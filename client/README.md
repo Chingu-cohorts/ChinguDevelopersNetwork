@@ -1,6 +1,6 @@
-# chingu-central
+# ChinguDevelopersNetwork
 
-> A Vue.js project
+The client to consume our API, it powers the Chingu website.
 
 ## Build Setup
 
