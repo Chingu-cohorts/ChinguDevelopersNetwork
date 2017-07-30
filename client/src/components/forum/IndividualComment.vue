@@ -23,7 +23,7 @@
       <div class="comment-actions" v-if="loggedUser.id === comment.user.id">
         <hr>
         <div class="block is-clearfix">
-          <a class="button is-danger is-outlined is-small is-pulled-right">
+          <a class="button is-danger is-outlined is-small is-pulled-right" @click="deleteComment">
             <i class="fa fa-trash"></i>
           </a>
           <a class="button is-primary is-outlined is-small is-pulled-right">
@@ -40,6 +40,7 @@
 <script>
 import MarkdownIt from 'markdown-it'
 import { gravatar } from '@/utils'
+import { http } from '@/api'
 
 export default {
   name: 'individual-comment',
@@ -59,6 +60,25 @@ export default {
     content (props) {
       let md = new MarkdownIt()
       return md.render(props.comment.content)
+    }
+  },
+
+  methods: {
+    deleteComment (e) {
+      e.preventDefault()
+
+      let postId = this.$route.params.id
+      let commentId = this.comment.id
+
+      http.delete(`/posts/${postId}/comments/${commentId}`).then(res => {
+        this.$store.dispatch('LOAD_FORUM_POST', postId)
+      }).catch(err => {
+        if (err.response) {
+          console.log(err.response.data)
+        } else {
+          console.error(err)
+        }
+      })
     }
   }
 }
