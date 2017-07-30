@@ -37,8 +37,8 @@
             <img :src="userGravatar" class="avatar">
           </figure>
         </a>
-        <router-link :to="{ name: 'Settings' }" class="navbar-item">Settings</router-link>
-        <a class="navbar-item" @click="logout">Logout</a>
+        <router-link :to="{ name: 'Settings' }" class="navbar-item"><i class="fa fa-cog"></i></router-link>
+        <a class="navbar-item" @click="logout"><i class="fa fa-sign-out"></i></a>
       </template>
       <template v-else>
         <router-link
