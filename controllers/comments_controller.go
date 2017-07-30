@@ -105,7 +105,7 @@ func DeleteComment(w http.ResponseWriter, r *http.Request, ps httprouter.Params)
 	// Compare the user id of who created the post
 	// with the one stored in the token
 	// then proceed with the delete
-	if savedComment.User.ID == userID {
+	if savedComment.UserID == userID {
 		db.Delete(&savedComment)
 		utils.JSONMessage(w, "Comment deleted", http.StatusOK)
 		return
