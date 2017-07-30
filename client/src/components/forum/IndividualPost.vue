@@ -17,9 +17,7 @@
               :to="{name: 'ShowPost', params: { id: post.id, slug: postSlug }}">{{ post.title }}
               </router-link> <small>by {{ post.user.username }}</small> <small>{{ timeAgo }}</small>
             <br>
-            <p class="is-hidden-mobile">
-              {{ truncatePost }}
-            </p>
+            <p class="is-hidden-mobile">{{ truncatePost }}</p>
           </div>
         </div>
       </div>
