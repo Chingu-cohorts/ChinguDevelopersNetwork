@@ -40,7 +40,7 @@
                 </div>
                 <div class="post-actions" v-if="loggedUser.id === currentPost.user.id">
                   <div class="block is-clearfix">
-                    <a class="button is-danger is-outlined is-small is-pulled-right">
+                    <a class="button is-danger is-outlined is-small is-pulled-right" @click="deletePost">
                       <i class="fa fa-trash"></i>
                     </a>
                     <a class="button is-primary is-outlined is-small is-pulled-right">
@@ -77,6 +77,7 @@ import IndividualComment from '@/components/forum/IndividualComment'
 import NewComment from '@/components/forum/NewComment'
 import Spinner from '@/components/Spinner'
 import { gravatar } from '@/utils'
+import { http } from '@/api'
 
 export default {
   name: 'ShowPost',
@@ -97,6 +98,22 @@ export default {
     loadPost () {
       let { id } = this.$route.params
       this.$store.dispatch('LOAD_FORUM_POST', id)
+    },
+
+    deletePost (e) {
+      e.preventDefault()
+
+      let { id } = this.currentPost
+
+      http.delete(`/posts/${id}`).then(res => {
+        this.$router.push({ name: 'PostList' })
+      }).catch(err => {
+        if (err.response) {
+          console.log(err.response.data)
+        } else {
+          console.error(err)
+        }
+      })
     }
   },
 
