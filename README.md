@@ -43,11 +43,11 @@ Vue allows us to do a quicker development with all the features we would need fr
 
 ### Why Go?
 
-I'm completely aware of other technologies (Rails, Django, Laravel, etc.) but none of them provided an easy way to create cool APIs. Phoenix did, but it's undergoing a lot of changes. That and a little bit of curiosity about Go led us to use it.
+We're completely aware of other technologies (Rails, Django, Laravel, etc.) but none of them provided an easy way to create cool APIs. Phoenix did, but it's undergoing a lot of changes. That and a little bit of curiosity about Go led us to use it.
 
-### Are you going to release a mobil app?
+### Are you going to release a mobile application?
 
-It should be possible to create the application, however there is a payment required by Google in order to submit applications to the Play Store and we are not rich. So not in our current plans.
+There are no plans for such app.
 
 ## License
 
