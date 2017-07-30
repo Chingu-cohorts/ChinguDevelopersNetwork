@@ -18,10 +18,14 @@ const actions = {
   },
 
   LOAD_FORUM_POST ({ commit }, postId) {
-    http.get('/posts/' + postId).then(res => {
-      commit(types.SET_CURRENT_POST_DATA, { post: res.data })
-    }, err => {
-      console.error(err)
+    return new Promise((resolve, reject) => {
+      http.get('/posts/' + postId).then(res => {
+        commit(types.SET_CURRENT_POST_DATA, { post: res.data })
+        resolve()
+      }, err => {
+        console.error(err)
+        reject(err)
+      })
     })
   }
 }
