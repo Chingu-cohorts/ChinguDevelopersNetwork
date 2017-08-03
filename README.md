@@ -4,7 +4,7 @@ The future home for the Chingu project.
 
 ## Roadmap
 
-This is an ambitious project, it already took hundreds of hours of development and we're just getting started. Please keep in mind that I work on it in my spare time, it means that the features may take a while to get implemented, but we will get there. You can always use the issues to suggest new features or modifications to the existing uses, please check the [existing ones](https://github.com/Chingu-cohorts/ChinguDevelopersNetwork/issues?q=is%3Aopen+is%3Aissue+label%3Asuggestion) before opening a new issue.
+This is an ambitious project, it already took hundreds of hours of development and we're just getting started. Please keep in mind that I work on it in my spare time, it means that the features may take a while to get implemented, but we will get there. You can always use the issues to suggest new features or modifications to the existing uses, please check the [existing ones](https://github.com/Chingu-cohorts/ChinguDevelopersNetwork/issues?q=is%3Aopen+is%3Aissue+label%3Asuggestion) before opening a new issue. If you're submitting a pull request with new features, make sure you have discussed it with one of the maintainers, otherwise, chances are it will get rejected.
 
 - [x] Authentication
 - [x] User profile
