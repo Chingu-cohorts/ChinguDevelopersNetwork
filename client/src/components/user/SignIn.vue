@@ -30,7 +30,9 @@
 
           <p class="has-text-centered">{{ error }}</p>
 
-          <div class="field">
+          <spinner v-if="loading"></spinner>
+
+          <div class="field" v-if="!loading">
             <p class="control">
               <button class="button is-primary" type="submit" @click="loginUser">
                 Login
@@ -47,7 +49,9 @@
 
 <script>
 import { mapState } from 'vuex'
+
 import { http } from '@/api'
+import Spinner from '@/components/misc/Spinner'
 
 export default {
   name: 'sign-in',
@@ -58,8 +62,13 @@ export default {
         username: '',
         password: ''
       },
-      error: ''
+      error: '',
+      loading: false
     }
+  },
+
+  components: {
+    Spinner
   },
 
   computed: mapState([
@@ -76,6 +85,8 @@ export default {
     loginUser (e) {
       e.preventDefault()
 
+      this.loading = true
+
       let {username, password} = this.user
 
       let user = {
@@ -83,10 +94,22 @@ export default {
         password
       }
 
+      // If the user introduced an username and a password we can proceed
+      let isUserValid = this.verifyUser(user)
+
+      if (isUserValid) {
+        this.handleLogin(user)
+      } else {
+        this.error = 'Username and password are required'
+        this.loading = false
+      }
+    },
+
+    handleLogin (user) {
       http.post('/users/login', {
-        username: user.username,
-        password: user.password
+        ...user
       }).then(res => {
+        this.loading = false
         localStorage.setItem('token', res.data.token)
         window.location = '/'
       }).catch(err => {
@@ -98,11 +121,23 @@ export default {
           } else if (code === 401) {
             this.error = message
           }
+
           console.log(err)
         } else {
           console.error(err)
         }
+
+        this.loading = false
       })
+    },
+
+    // Returns true if the user has valid data
+    verifyUser (user) {
+      if (user.username !== '' && user.password !== '') {
+        return true
+      }
+
+      return false
     }
   }
 }
