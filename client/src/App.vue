@@ -9,8 +9,8 @@
 </template>
 
 <script>
-import Navbar from '@/components/Navbar'
-import MainFooter from '@/components/MainFooter'
+import Navbar from '@/components/misc/Navbar'
+import MainFooter from '@/components/misc/MainFooter'
 
 let token = localStorage.getItem('token')
 
