@@ -9,69 +9,71 @@ export default {
 </script>
 
 <style scoped>
-.loader,
-.loader:before,
-.loader:after {
-  background: #00d1b2;
-  -webkit-animation: load1 1s infinite ease-in-out;
-  animation: load1 1s infinite ease-in-out;
-  width: 1em;
-  height: 4em;
-}
-
 .loader {
-  color: #00d1b2;
+  font-size: 10px;
+  margin: 50px auto;
   text-indent: -9999em;
-  margin: 88px auto;
+  width: 11em;
+  height: 11em;
+  border-radius: 50%;
+  background: #ffffff;
+  background: -moz-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+  background: -webkit-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+  background: -o-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+  background: -ms-linear-gradient(left, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
+  background: linear-gradient(to right, #ffffff 10%, rgba(255, 255, 255, 0) 42%);
   position: relative;
-  font-size: 11px;
+  -webkit-animation: load3 1.4s infinite linear;
+  animation: load3 1.4s infinite linear;
   -webkit-transform: translateZ(0);
   -ms-transform: translateZ(0);
   transform: translateZ(0);
-  -webkit-animation-delay: -0.16s;
-  animation-delay: -0.16s;
-}
-
-.loader:before,
-.loader:after {
-  position: absolute;
-  top: 0;
-  content: '';
 }
 
 .loader:before {
-  left: -1.5em;
-  -webkit-animation-delay: -0.32s;
-  animation-delay: -0.32s;
+  width: 50%;
+  height: 50%;
+  background: #ffffff;
+  border-radius: 100% 0 0 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: '';
 }
 
 .loader:after {
-  left: 1.5em;
+  background: #15df89;
+  width: 75%;
+  height: 75%;
+  border-radius: 50%;
+  content: '';
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
 }
 
-@-webkit-keyframes load1 {
-  0%,
-  80%,
-  100% {
-    box-shadow: 0 0;
-    height: 4em;
+@-webkit-keyframes load3 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
   }
-  40% {
-    box-shadow: 0 -2em;
-    height: 5em;
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 
-@keyframes load1 {
-  0%,
-  80%,
-  100% {
-    box-shadow: 0 0;
-    height: 4em;
+@keyframes load3 {
+  0% {
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
   }
-  40% {
-    box-shadow: 0 -2em;
-    height: 5em;
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg);
   }
 }
 </style>
