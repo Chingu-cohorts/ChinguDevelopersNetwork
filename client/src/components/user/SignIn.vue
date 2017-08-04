@@ -109,13 +109,17 @@ export default {
       http.post('/users/login', {
         ...user
       }).then(res => {
+        // The login was successful, set the token and redirect
         this.loading = false
         localStorage.setItem('token', res.data.token)
         window.location = '/'
       }).catch(err => {
+        // Something went wrong
         if (err.response) {
           let { code, message } = err.response.data
 
+          // 404 no user with that username
+          // 401 wrong password
           if (code === 400) {
             this.error = message
           } else if (code === 401) {
