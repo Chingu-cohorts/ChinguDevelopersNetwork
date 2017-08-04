@@ -3,9 +3,12 @@
   <div class="columns">
     <div class="container">
       <div class="column is-half is-offset-one-quarter signup-container">
+
         <h1 class="title has-text-centered">Time to make history</h1>
+
         <div class="form-container">
           <p class="has-text-centered description">Take a new path, join a community like no one, do the unimaginable.</p>
+
           <div class="field">
             <p class="control has-icons-left">
               <input class="input" type="text" placeholder="First name" v-model="user.first_name">
@@ -13,7 +16,9 @@
                 <i class="fa fa-address-book"></i>
               </span>
             </p>
+            <p class="help is-warning" v-if="!user.first_name">Optional</p>
           </div>
+
           <div class="field">
             <p class="control has-icons-left">
               <input class="input" type="text" placeholder="Last name" v-model="user.last_name">
@@ -21,7 +26,9 @@
                 <i class="fa fa-grav"></i>
               </span>
             </p>
+            <p class="help is-warning" v-if="!user.last_name">Optional</p>
           </div>
+
           <div class="field">
             <p class="control has-icons-left">
               <input class="input" type="text" placeholder="Username" v-model="user.username" required>
@@ -29,7 +36,9 @@
                 <i class="fa fa-user"></i>
               </span>
             </p>
+            <p class="help is-primary" v-if="!user.username">Required</p>
           </div>
+
           <div class="field">
             <p class="control has-icons-left">
               <input class="input" type="text" placeholder="Email" v-model="user.email" required>
@@ -37,7 +46,9 @@
                 <i class="fa fa-envelope"></i>
               </span>
             </p>
+            <p class="help is-primary" v-if="!user.email">Required</p>
           </div>
+
           <div class="field">
             <p class="control has-icons-left">
               <input class="input" type="password" placeholder="Password" v-model="user.password" required>
@@ -45,15 +56,23 @@
                 <i class="fa fa-lock"></i>
               </span>
             </p>
+            <p class="help is-primary" v-if="!user.password">Required</p>
           </div>
-          <div class="field">
+
+          <p class="has-text-centered">{{ error }}</p>
+
+          <spinner v-if="loading"></spinner>
+
+          <div class="field" v-if="!loading">
             <p class="control">
               <button class="button is-primary" type="submit" @click="registerUser">
                 Register
               </button>
             </p>
           </div>
+
           <p class="has-text-centered">By registering you agree to our <router-link :to="{ name: 'TermsOfService' }">Terms of Service</router-link></p>
+
         </div>
       </div>
     </div>
@@ -63,7 +82,9 @@
 
 <script>
 import { mapState } from 'vuex'
+
 import { http } from '@/api'
+import Spinner from '@/components/misc/Spinner'
 
 export default {
   name: 'sign-up',
@@ -76,8 +97,14 @@ export default {
         username: '',
         email: '',
         password: ''
-      }
+      },
+      error: '',
+      loading: false
     }
+  },
+
+  components: {
+    Spinner
   },
 
   computed: mapState([
@@ -93,25 +120,34 @@ export default {
   methods: {
     registerUser (e) {
       e.preventDefault()
-      let user = this.user
 
+      this.loading = true
+
+      let user = this.user
       let isValid = this.validateUser(user)
 
       if (isValid) {
-        http.post('/users', {
-          username: user.username,
-          email: user.email,
-          password: user.password
-        }).then(res => {
-          this.$router.push({name: 'SignIn'})
-        }).catch(err => {
-          if (err.response) {
-            console.log(err.response.data)
-          } else {
-            console.error(err)
-          }
-        })
+        this.handleRegistration(user)
+      } else {
+        this.error = 'Username, email and password are required'
       }
+
+      this.loading = false
+    },
+
+    handleRegistration (user) {
+      http.post('/users', {
+        ...user
+      }).then(res => {
+        this.$router.push({name: 'SignIn'})
+        console.log(res)
+      }).catch(err => {
+        if (err.response.data.message) {
+          this.error = err.response.data.message
+        } else {
+          console.error(err)
+        }
+      })
     },
 
     // If you know of a better way to do it
