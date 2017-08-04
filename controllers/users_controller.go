@@ -84,19 +84,40 @@ func CreateUser(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 		// There's an user with the same email and username
 		if existingUserWithEmail.ID != 0 && existingUserWithUsername.ID != 0 {
-			utils.JSONMessage(w, "Username and email already taken", http.StatusOK)
+			message := &models.ErrorMessage{Message: "Username and email already taken"}
+			respBody, err := json.Marshal(message)
+			if err != nil {
+				log.Println("Error returning existing username and email taken")
+				return
+			}
+
+			utils.JSONResponse(w, respBody, http.StatusBadRequest)
 			return
 		}
 
 		// Email already registered
 		if existingUserWithEmail.ID != 0 {
-			utils.JSONMessage(w, "Email already registered", http.StatusOK)
+			message := &models.ErrorMessage{Message: "Email already registered"}
+			respBody, err := json.Marshal(message)
+			if err != nil {
+				log.Println("Error returning existing email error")
+				return
+			}
+
+			utils.JSONResponse(w, respBody, http.StatusBadRequest)
 			return
 		}
 
 		// Username already registered
 		if existingUserWithUsername.ID != 0 {
-			utils.JSONMessage(w, "Username already registered", http.StatusOK)
+			message := &models.ErrorMessage{Message: "Username already registered"}
+			respBody, err := json.Marshal(message)
+			if err != nil {
+				log.Println("Error returning existing username error")
+				return
+			}
+
+			utils.JSONResponse(w, respBody, http.StatusBadRequest)
 			return
 		}
 
