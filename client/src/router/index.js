@@ -1,8 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Hello from '@/components/Hello'
-import CohortList from '@/components/cohort/CohortList'
-import ShowCohort from '@/components/cohort/ShowCohort'
+
+import Home from '@/components/Home'
 import UserList from '@/components/user/UserList'
 import ShowUser from '@/components/user/ShowUser'
 import PostList from '@/components/forum/PostList'
@@ -20,18 +19,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Hello',
-      component: Hello
-    },
-    {
-      path: '/cohorts',
-      name: 'CohortList',
-      component: CohortList
-    },
-    {
-      path: '/cohorts/:name',
-      name: 'ShowCohort',
-      component: ShowCohort
+      name: 'Home',
+      component: Home
     },
     {
       path: '/users',
