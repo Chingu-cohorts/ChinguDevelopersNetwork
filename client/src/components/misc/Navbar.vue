@@ -2,7 +2,7 @@
 <nav class="navbar">
   <div class="navbar-brand">
     <router-link
-      :to="{name: 'Hello'}"
+      :to="{ name: 'Home' }"
       class="navbar-item">
       <img src="/static/images/logo.png" alt="Chingu Developers Network">
     </router-link>
@@ -16,10 +16,6 @@
 
   <div id="navMenu" class="navbar-menu" v-bind:class="{'is-active': collapsed}">
     <div class="navbar-start">
-      <router-link
-        :to="{ name: 'CohortList'}"
-        exact-active-class="is-active"
-        class="navbar-item">Cohorts</router-link>
       <router-link
         :to="{ name: 'UserList'}"
         exact-active-class="is-active"

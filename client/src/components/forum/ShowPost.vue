@@ -77,9 +77,10 @@
 
 <script>
 import MarkdownIt from 'markdown-it'
+
 import IndividualComment from '@/components/forum/IndividualComment'
 import NewComment from '@/components/forum/NewComment'
-import Spinner from '@/components/Spinner'
+import Spinner from '@/components/misc/Spinner'
 import { gravatar } from '@/utils'
 import { http } from '@/api'
 

@@ -6,14 +6,6 @@
           <h1 class="title">Cohorts</h1>
           <h2 class="subtitle">Join a community and take your skills to the next level</h2>
 
-          <div class="columns is-multiline row">
-            <individual-cohort
-              v-for="cohort in cohorts"
-              :cohort="cohort"
-              :key="cohort.id"
-            ></individual-cohort>
-          </div>
-
           <h3 class="has-text-centered">And many more...</h3>
 
           <div class="block has-text-centered">
@@ -118,25 +110,8 @@
 </template>
 
 <script>
-import IndividualCohort from '@/components/cohort/IndividualCohort'
-
 export default {
-  name: 'hello',
-
-  components: {
-    IndividualCohort
-  },
-
-  computed: {
-    cohorts () {
-      let cohortList = this.$store.state.cohort.cohorts.slice(0, 3)
-      return cohortList
-    }
-  },
-
-  mounted () {
-    this.$store.dispatch('LOAD_COHORTS_LIST')
-  }
+  name: 'home'
 }
 </script>
 
