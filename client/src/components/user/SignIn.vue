@@ -3,9 +3,13 @@
   <div class="columns">
     <div class="container">
       <div class="column is-half is-offset-one-quarter signin-container">
+
         <h1 class="title has-text-centered">Login</h1>
+
         <div class="form-container">
+
           <p class="has-text-centered description">Start interacting with the community.</p>
+
           <div class="field">
             <p class="control has-icons-left">
               <input class="input" type="text" placeholder="Username" v-model="user.username" required>
@@ -14,6 +18,7 @@
               </span>
             </p>
           </div>
+
           <div class="field">
             <p class="control has-icons-left">
               <input class="input" type="password" placeholder="Password" v-model="user.password" required>
@@ -22,6 +27,9 @@
               </span>
             </p>
           </div>
+
+          <p class="has-text-centered">{{ error }}</p>
+
           <div class="field">
             <p class="control">
               <button class="button is-primary" type="submit" @click="loginUser">
@@ -29,6 +37,7 @@
               </button>
             </p>
           </div>
+
         </div>
       </div>
     </div>
@@ -48,7 +57,8 @@ export default {
       user: {
         username: '',
         password: ''
-      }
+      },
+      error: ''
     }
   },
 
@@ -81,7 +91,14 @@ export default {
         window.location = '/'
       }).catch(err => {
         if (err.response) {
-          console.log(err.response)
+          let { code, message } = err.response.data
+
+          if (code === 400) {
+            this.error = message
+          } else if (code === 401) {
+            this.error = message
+          }
+          console.log(err)
         } else {
           console.error(err)
         }
