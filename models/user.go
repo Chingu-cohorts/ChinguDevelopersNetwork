@@ -14,10 +14,9 @@ type User struct {
 	Experience        uint   `gorm:"default:0" json:"experience"`
 	IsAdmin           bool   `gorm:"default:false" json:"is_admin"`
 
-	GithubUsername   string `json:"github_username,omitempty"`
-	MediumUsername   string `json:"medium_username,omitempty"`
-	TwitterUsername  string `json:"twitter_username,omitempty"`
-	LinkedinUsername string `json:"linkedin_username,omitempty"`
+	GithubUsername  string `json:"github_username,omitempty"`
+	MediumUsername  string `json:"medium_username,omitempty"`
+	TwitterUsername string `json:"twitter_username,omitempty"`
 
 	Cohort   Cohort `json:"cohort,omitempty"`
 	CohortID uint   `gorm:"default:null" json:"cohort_id"`
