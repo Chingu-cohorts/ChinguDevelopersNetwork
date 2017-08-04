@@ -5,15 +5,12 @@
         <h1>User Settings</h1>
         <p>Update your preferences</p>
 
-        <div class="field">
-          <label class="label">First Name</label>
+        <h2>Name</h2>
+        <div class="field is-grouped">
           <div class="control">
-            <input class="input shrink" type="text" placeholder="First name" v-model="user.first_name">
+            <input class="input" type="text" placeholder="First name" v-model="user.first_name">
           </div>
-        </div>
 
-        <div class="field">
-          <label class="label">Last Name</label>
           <div class="control">
             <input class="input shrink" type="text" placeholder="Last name" v-model="user.last_name">
           </div>
@@ -21,57 +18,48 @@
 
         <div class="field">
           <label class="label">About</label>
-          <div class="control">
+          <p class="control is-expanded">
             <textarea class="textarea" v-model="user.about"></textarea>
+          </p>
+        </div>
+
+        <h2>Social Networks</h2>
+        <p>Only include your username.</p>
+        <div class="field is-grouped is-grouped-multiline">
+          
+          <div class="field has-addons">
+            <p class="control">
+              <a class="button is-static">
+                <i class="fa fa-github"></i>
+              </a>
+            </p>
+            <p class="control">
+              <input class="input" type="text" placeholder="GitHub username" v-model="user.github_username">
+            </p>
           </div>
-        </div>
 
-        <label class="label">GitHub</label>
-        <div class="field has-addons">
-          <p class="control">
-            <a class="button is-static">
-              github.com/
-            </a>
-          </p>
-          <p class="control">
-            <input class="input" type="text" placeholder="GitHub username" v-model="user.github_username">
-          </p>
-        </div>
+          <div class="field has-addons">
+            <p class="control">
+              <a class="button is-static">
+                <i class="fa fa-medium"></i>
+              </a>
+            </p>
+            <p class="control">
+              <input class="input" type="text" placeholder="Medium username" v-model="user.medium_username">
+            </p>
+          </div>
 
-        <label class="label">Medium</label>
-        <div class="field has-addons">
-          <p class="control">
-            <a class="button is-static">
-              medium.com/@
-            </a>
-          </p>
-          <p class="control">
-            <input class="input" type="text" placeholder="Medium username" v-model="user.medium_username">
-          </p>
-        </div>
+          <div class="field has-addons">
+            <p class="control">
+              <a class="button is-static">
+                <i class="fa fa-twitter"></i>
+              </a>
+            </p>
+            <p class="control">
+              <input class="input" type="text" placeholder="Twitter username" v-model="user.twitter_username">
+            </p>
+          </div>
 
-        <label class="label">LinkedIn</label>
-        <div class="field has-addons">
-          <p class="control">
-            <a class="button is-static">
-              linkedin.com/
-            </a>
-          </p>
-          <p class="control">
-            <input class="input" type="text" placeholder="LinkedIn username" v-model="user.linkedin_username">
-          </p>
-        </div>
-
-        <label class="label">Twitter</label>
-        <div class="field has-addons">
-          <p class="control">
-            <a class="button is-static">
-              twitter.com/
-            </a>
-          </p>
-          <p class="control">
-            <input class="input" type="text" placeholder="Twitter username" v-model="user.twitter_username">
-          </p>
         </div>
 
         <button class="button is-primary is-outlined" @click="updateUser">Save</button>
@@ -108,7 +96,6 @@ export default {
         about: '',
         github_username: '',
         medium_username: '',
-        linkedin_username: '',
         twitter_username: ''
       }
     }
@@ -142,13 +129,16 @@ export default {
 </script>
 
 <style scoped>
+h1, h2, h3 {
+  font-weight: 700;
+}
+
 .settings {
   margin-top: 2em;
   margin-bottom: 2em;
 }
 
 .settings h1 {
-  font-weight: 700;
   font-size: 2em;
 }
 
@@ -164,14 +154,5 @@ export default {
 
 .settings .user-data h2 {
   font-weight: 700;
-}
-
-.settings .input {
-  min-width: 400px;
-  max-width: 400px;
-}
-
-.settings .shrink {
-  width: 40%;
 }
 </style>
