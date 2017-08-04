@@ -148,14 +148,17 @@ func Login(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 	// If we didn't find the user
 	if savedUser.ID == 0 {
-		utils.JSONMessage(w, "User not found", http.StatusNotFound)
+		utils.JSONMessage(w, "There is no user with that username", http.StatusBadRequest)
 		return
 	}
+
+	//  if subtle.ConstantTimeCompare([]byte(r.FormValue("password")), []byte("password123")) == 1 {
+	//  }
 
 	// Compares the saved hash with the password sent in the request
 	err = bcrypt.CompareHashAndPassword([]byte(savedUser.EncryptedPassword), []byte(user.Password))
 	if err != nil {
-		utils.JSONMessage(w, "Wrong password", http.StatusBadRequest)
+		utils.JSONMessage(w, "Wrong password", http.StatusUnauthorized)
 		return
 	}
 
