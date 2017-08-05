@@ -138,6 +138,20 @@ export default {
 
     saveEdit (e, post) {
       this.toggleEdit(e, post)
+
+      // If there are changes in the content
+      // save them in our db
+      if (this.editedPost.content !== this.currentPost.content) {
+        let postURL = `/posts/${this.currentPost.id}`
+
+        http.put(postURL, {
+          content: this.editedPost.content
+        }).then(res => {
+          console.log(res)
+        }).catch(err => {
+          console.error(err)
+        })
+      }
     }
   },
 
