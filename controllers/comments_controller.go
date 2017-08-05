@@ -80,6 +80,38 @@ func CreateComment(w http.ResponseWriter, r *http.Request, ps httprouter.Params)
 	utils.JSONMessage(w, "The post was not found", http.StatusNotFound)
 }
 
+// UpdateComment saves a new content for a given commment
+func UpdateComment(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	db := utils.InitDB()
+	defer db.Close()
+
+	var savedComment models.Comment
+	db.First(&savedComment, ps.ByName("commentID"))
+
+	token := r.Header.Get("Authorization")
+	tokenData, err := utils.ReadJWT(token)
+	if err != nil {
+		utils.JSONMessage(w, "Error reading token while updating comment", http.StatusInternalServerError)
+		return
+	}
+
+	if savedComment.UserID == tokenData.User.ID {
+		var comment models.Comment
+		decoder := json.NewDecoder(r.Body)
+		err := decoder.Decode(&comment)
+		if err != nil {
+			utils.JSONMessage(w, "Invalid data", http.StatusBadRequest)
+			return
+		}
+
+		db.Model(&savedComment).Updates(comment)
+		utils.JSONMessage(w, "Comment updated", http.StatusOK)
+		return
+	}
+
+	utils.JSONMessage(w, "You can't update others users comments", http.StatusUnauthorized)
+}
+
 // DeleteComment destroys a comment with given ID
 func DeleteComment(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	db := utils.InitDB()
