@@ -18,7 +18,11 @@
         <p>By <router-link :to="{ name: 'ShowUser', params: { username: comment.user.username } }" class="username" v-bind:class="{ admin: comment.user.is_admin }">{{ comment.user.username }}</router-link></p>
       </div>
       <div class="content">
-        <div class="comment-content" v-html="content">{{ comment.content }}</div>
+
+        <div class="comment-content" v-show="!editedComment.edit" v-html="content">{{ editedComment.content }}</div>
+
+        <textarea ref="commentInput" v-model="editedComment.content" v-show="editedComment.edit" v-on:blur="saveEdit(this, editedComment)"></textarea>
+      
       </div>
       <div class="comment-actions" v-if="loggedUser.id === comment.user.id">
         <hr>
@@ -27,7 +31,7 @@
             <i class="fa fa-trash"></i>
           </a>
           <a class="button is-primary is-outlined is-small is-pulled-right">
-            <i class="fa fa-pencil"></i>
+            <i class="fa fa-pencil" @click="toggleEdit(this, editedComment)"></i>
           </a>
         </div>
       </div>
@@ -44,6 +48,15 @@ import { http } from '@/api'
 
 export default {
   name: 'individual-comment',
+
+  data () {
+    return {
+      editedComment: {
+        content: '',
+        edit: false
+      }
+    }
+  },
 
   props: ['comment'],
 
@@ -79,7 +92,43 @@ export default {
           console.error(err)
         }
       })
+    },
+
+    toggleEdit (e, comment) {
+      this.editedComment.edit = !this.editedComment.edit
+
+      if (this.editedComment.edit) {
+        this.$nextTick(() => {
+          this.$refs.commentInput.focus()
+        })
+      }
+    },
+
+    saveEdit (e, comment) {
+      this.toggleEdit(e, comment)
+
+      // If there are changes in the content
+      // save them in our db
+      if (this.editedComment.content !== this.comment.content) {
+        let postId = this.$route.params.id
+        let commentId = this.comment.id
+
+        let commentURL = `/posts/${postId}/comments/${commentId}`
+
+        http.put(commentURL, {
+          content: this.editedComment.content
+        }).then(res => {
+          console.log(res)
+          this.$store.dispatch('LOAD_FORUM_POST', postId)
+        }).catch(err => {
+          console.error(err)
+        })
+      }
     }
+  },
+
+  mounted () {
+    this.editedComment.content = this.comment.content
   }
 }
 </script>
@@ -121,5 +170,10 @@ export default {
 
 .comment-actions .block .button {
   margin-left: 1em;
+}
+
+textarea {
+  width: 100%;
+  min-height: 300px;
 }
 </style>
