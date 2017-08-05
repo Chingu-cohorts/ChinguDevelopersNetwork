@@ -66,6 +66,7 @@ func main() {
 	r.GET("/api/posts", controllers.ListPosts)
 	r.GET("/api/posts/:postID", controllers.ShowPost)
 	r.POST("/api/posts", utils.AuthRequest(controllers.CreatePost))
+	r.PUT("/api/posts/:postID", utils.AuthRequest(controllers.UpdatePost))
 	r.DELETE("/api/posts/:postID", utils.AuthRequest(controllers.DeletePost))
 
 	// Comments routes

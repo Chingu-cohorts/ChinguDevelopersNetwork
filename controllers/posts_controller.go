@@ -95,6 +95,43 @@ func CreatePost(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	utils.JSONResponse(w, respBody, http.StatusCreated)
 }
 
+// UpdatePost performs an update to an existing post
+func UpdatePost(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	db := utils.InitDB()
+	defer db.Close()
+
+	// We have to get the user id from the token
+	// Also get the post from the db and compare
+	// the two ids
+	var savedPost models.Post
+	db.First(&savedPost, ps.ByName("postID"))
+
+	token := r.Header.Get("Authorization")
+	tokenData, err := utils.ReadJWT(token)
+	if err != nil {
+		utils.JSONMessage(w, "Error reading token while updating post", http.StatusInternalServerError)
+		return
+	}
+
+	// Only if the one updating the post is the one who created it
+	if savedPost.UserID == tokenData.User.ID {
+		// The post that comes along with the request
+		var post models.Post
+		decoder := json.NewDecoder(r.Body)
+		err := decoder.Decode(&post)
+		if err != nil {
+			utils.JSONMessage(w, "Invalid data", http.StatusBadRequest)
+			return
+		}
+
+		db.Model(&savedPost).Updates(post)
+		utils.JSONMessage(w, "Post updated", http.StatusOK)
+		return
+	}
+
+	utils.JSONMessage(w, "You can't update other users posts", http.StatusUnauthorized)
+}
+
 // DeletePost performs a soft delete on a post
 func DeletePost(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	db := utils.InitDB()
