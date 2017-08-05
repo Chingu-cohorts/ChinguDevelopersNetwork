@@ -71,6 +71,7 @@ func main() {
 
 	// Comments routes
 	r.POST("/api/posts/:postID/comments", utils.AuthRequest(controllers.CreateComment))
+	r.PUT("/api/posts/:postID/comments/:commentID", utils.AuthRequest(controllers.UpdateComment))
 	r.DELETE("/api/posts/:postID/comments/:commentID", utils.AuthRequest(controllers.DeleteComment))
 
 	// Panic recover, request/response logger, static file serving
