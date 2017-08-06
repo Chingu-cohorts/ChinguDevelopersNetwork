@@ -11,11 +11,11 @@
 
   <div class="container new-post">
     <div class="columns">
-      <div class="column is-half is-offset-one-quarter">
+      <div class="column is-8 is-offset-2">
         <div class="field">
           <label class="label">Title</label>
           <p class="control">
-            <input class="input" type="text" v-model="post.title" placeholder="I have an awesome idea!">
+            <input class="input" type="text" v-model="post.title">
           </p>
         </div>
 
@@ -23,7 +23,7 @@
 
         <div class="field is-grouped">
           <p class="control">
-            <button class="button is-primary" @click="savePost">Submit</button>
+            <button class="button is-primary is-outlined" @click="savePost">Submit</button>
           </p>
           <p class="control">
             <router-link
