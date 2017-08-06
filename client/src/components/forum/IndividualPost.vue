@@ -15,7 +15,7 @@
           <div class="content">
             <router-link
               :to="{name: 'ShowPost', params: { id: post.id, slug: postSlug }}">{{ post.title }}
-              </router-link> <small>by {{ post.user.username }}</small> <small>{{ timeAgo }}</small>
+              </router-link> <small>by <strong>{{ post.user.username }}</strong></small> <small>{{ timeAgo }}</small>
             <br>
             <p class="is-hidden-mobile">{{ truncatePost }}</p>
           </div>
