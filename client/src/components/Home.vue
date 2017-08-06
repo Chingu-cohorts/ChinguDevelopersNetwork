@@ -33,7 +33,7 @@
           <div class="column is-one-third">
             <div class="card">
               <div class="card-content">
-                <p class="title quote">
+                <p class="quote">
                   “An amazing collaborative experience beyond my expectations.”
                 </p>
                 <p class="subtitle">
@@ -46,7 +46,7 @@
           <div class="column is-one-third">
             <div class="card">
               <div class="card-content">
-                <p class="title quote">
+                <p class="quote">
                   “I honestly don't believe I've seen any collaboration environment produce this much overall "learning" ever, really.”
                 </p>
                 <p class="subtitle">
@@ -59,7 +59,7 @@
           <div class="column is-one-third">
             <div class="card">
               <div class="card-content">
-                <p class="title quote">
+                <p class="quote">
                   “Learn with other developers, you start as noob and become a pro with a family of devs.”
                 </p>
                 <p class="subtitle">
@@ -95,7 +95,7 @@
           </div>
 
           <div class="block has-text-centered">
-            <a class="button is-primary is-inverted is-outlined is-medium">
+            <a class="button is-primary is-outlined is-medium">
               <span class="icon">
                 <i class="fa fa-check"></i>
               </span>
