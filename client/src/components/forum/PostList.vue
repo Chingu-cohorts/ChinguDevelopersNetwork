@@ -1,6 +1,6 @@
 <template>
 <div>
-  <section class="hero is-medium is-dark is-bold">
+  <section class="hero is-small is-dark is-bold">
     <div class="hero-body">
       <div class="container">
         <h1 class="title">Forum</h1>
