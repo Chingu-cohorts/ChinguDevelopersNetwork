@@ -3,7 +3,7 @@
     <div class="columns">
       <div class="column is-8-desktop">
         <h1>User Settings</h1>
-        <p>Update your preferences</p>
+        <p style="margin-bottom: 1rem;">Update your preferences</p>
 
         <h2>Name</h2>
         <div class="field is-grouped">
@@ -154,5 +154,9 @@ h1, h2, h3 {
 
 .settings .user-data h2 {
   font-weight: 700;
+}
+
+.settings .field:not(:last-child) {
+  margin-right: 0.8rem;
 }
 </style>
