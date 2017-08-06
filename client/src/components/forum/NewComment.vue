@@ -12,6 +12,7 @@
         <p class="control" v-if="!loading">
           <button class="button is-success is-outlined" @click="handleCommentSubmit">Post comment</button>
         </p>
+        <spinner v-if="loading"></spinner>
       </div>
     </div>
   </article>
@@ -23,14 +24,17 @@
 
 <script>
 import { markdownEditor } from 'vue-simplemde'
+
 import { gravatar } from '@/utils'
 import { http } from '@/api'
+import Spinner from '@/components/misc/Spinner'
 
 export default {
   name: 'new-comment',
 
   components: {
-    markdownEditor
+    markdownEditor,
+    Spinner
   },
 
   data () {
