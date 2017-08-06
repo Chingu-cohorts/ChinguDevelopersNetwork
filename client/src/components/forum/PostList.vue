@@ -11,14 +11,6 @@
   <div class="container">
     <div class="columns forum-container">
 
-      <div class="column is-8">
-        <individual-post
-          v-for="post in posts"
-          :post="post"
-          :key="post.id">
-        </individual-post>
-      </div>
-
       <div class="column is-4">
         <template v-if="loggedUser.username">
           <router-link
@@ -27,9 +19,18 @@
           >New Post</router-link>
         </template>
         <div class="box member-of-the-day">
-          <h2 class="has-text-centered is-primary">Quote of the day</h2>
-          <p><q>Education is a progressive discovery of our own ignorance.</q> - Will Durant</p>
+          <h2 class="has-text-centered is-primary">Important</h2>
+          <p>During the beta period try to break as many things as you can.</p>
         </div>
+      </div>
+
+
+      <div class="column is-8">
+        <individual-post
+          v-for="post in posts"
+          :post="post"
+          :key="post.id">
+        </individual-post>
       </div>
 
     </div>
