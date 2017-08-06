@@ -9,7 +9,7 @@
           <h3 class="has-text-centered">And many more...</h3>
 
           <div class="block has-text-centered">
-            <a class="button is-primary is-inverted is-outlined is-large">
+            <a class="button is-primary is-outlined is-large">
               <span class="icon">
                 <i class="fa fa-fire"></i>
               </span>
@@ -23,7 +23,7 @@
 
     <section class="section">
       <div class="container">
-        <h1 class="title">What devs are saying</h1>
+        <h1 class="title">Our technique works</h1>
         <h2 class="subtitle">
           Hundreds of developers have joined <strong>Chingu</strong>, here's what they say about their experience
         </h2>
@@ -77,7 +77,7 @@
       <div class="hero-body">
         <div class="container has-text-centered">
           <h1 class="title">Share your love</h1>
-          <h2 class="subtitle">Running this community is expensive, help us with a donation</h2>
+          <h2 class="subtitle">Running this community takes thousands of hours from our volunteers, allow us to continue doing what we love</h2>
 
           <div class="field">
             <label class="label">Amount</label>
