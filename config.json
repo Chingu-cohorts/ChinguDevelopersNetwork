@@ -3,7 +3,7 @@
     "host": "localhost",
     "name": "chingucentral",
     "user": "postgres",
-    "password": "postgresql"
+    "password": "postgres"
   },
   "port": ":8081",
   "debug": true
