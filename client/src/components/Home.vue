@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="home">
     <section class="hero is-dark is-bold">
       <div class="hero-body">
         <div class="container">
