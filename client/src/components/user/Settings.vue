@@ -1,32 +1,53 @@
 <template>
-  <div class="container settings">
+  <div class="container">
+    
+    <h1 class="has-text-centered">Settings</h1>
+    <p class="has-text-centered">Change your preferences and update your profile.</p>
+
     <div class="columns">
-      <div class="column is-8-desktop">
-        <h1>User Settings</h1>
-        <p style="margin-bottom: 1rem;">Update your preferences</p>
 
-        <h2>Name</h2>
-        <div class="field is-grouped">
-          <div class="control">
-            <input class="input" type="text" placeholder="First name" v-model="user.first_name">
-          </div>
+      <div class="column is-4">
 
-          <div class="control">
-            <input class="input shrink" type="text" placeholder="Last name" v-model="user.last_name">
-          </div>
-        </div>
+        <div class="user-data">
 
-        <div class="field">
-          <label class="label">About</label>
-          <p class="control is-expanded">
-            <textarea class="textarea" v-model="user.about"></textarea>
+          <figure class="image is-128x128">
+            <img :src="userGravatar" class="avatar">
+          </figure>
+
+          <h2 class="has-text-centered">{{ loggedUser.first_name }} {{ loggedUser.last_name }}</h2>
+          <p class="has-text-centered">{{ loggedUser.username }}</p>
+          <p class="has-text-centered">{{ loggedUser.about }}</p>
+
+          <p class="has-text-centered">
+            <a><i class="fa fa-twitter"></i></a>
+            <a><i class="fa fa-github"></i></a>
+            <a><i class="fa fa-medium"></i></a>
           </p>
-        </div>
 
-        <h2>Social Networks</h2>
-        <p>Only include your username.</p>
-        <div class="field is-grouped is-grouped-multiline">
-          
+        </div> <!-- user-data -->
+
+      </div> <!-- col-4 -->
+
+      <div class="column is-8">
+
+        <div class="form-container">
+
+          <div class="field is-grouped">
+            <div class="control">
+              <input class="input" type="text" placeholder="First name" v-model="user.first_name">
+            </div>
+
+            <div class="control">
+              <input class="input" type="text" placeholder="Last name" v-model="user.last_name">
+            </div>
+          </div>
+
+          <div class="field">
+            <p class="control is-expanded">
+              <textarea class="textarea" v-model="user.about"></textarea>
+            </p>
+          </div>
+
           <div class="field has-addons">
             <p class="control">
               <a class="button is-static">
@@ -60,25 +81,15 @@
             </p>
           </div>
 
-        </div>
+          <button class="button is-primary is-outlined" @click="updateUser">Update</button>
 
-        <button class="button is-primary is-outlined" @click="updateUser">Save</button>
-      
-      </div>
+        </div> <!-- form-container -->
 
-      <div class="column is-4-desktop">
-        <div class="user-data">
+      </div> <!-- col-8 -->
 
-          <figure class="image is-128x128">
-            <img :src="userGravatar" class="avatar">
-          </figure>
+    </div> <!-- columns -->
 
-          <h2 class="has-text-centered">{{ loggedUser.first_name }} {{ loggedUser.last_name }}</h2>
-          <p class="has-text-centered">{{ loggedUser.username }}</p>
-        </div>
-      </div>
-    </div>
-  </div>
+  </div> <!-- container -->
 </template>
 
 <script>
@@ -129,30 +140,39 @@ export default {
 </script>
 
 <style scoped>
+.form-container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.columns {
+  margin: 0;
+}
+
+.is-grouped .control {
+  max-width: 48%;
+}
+
 h1, h2, h3 {
   font-weight: 700;
 }
 
-.settings {
-  margin-top: 2em;
-  margin-bottom: 2em;
-}
-
-.settings h1 {
-  font-size: 2em;
-}
-
-.settings .user-data {
+.user-data {
   padding: 2em 0;
   color: #fff;
   background-color: #15df89;
 }
 
-.settings .user-data figure {
+.user-data .fa {
+  color: #ffffff;
+  margin: 1rem;
+}
+
+.user-data figure {
   margin: 0 auto;
 }
 
-.settings .user-data h2 {
+.user-data h2 {
   font-weight: 700;
 }
 
