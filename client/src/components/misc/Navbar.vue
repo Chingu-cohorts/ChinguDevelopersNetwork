@@ -32,9 +32,10 @@
           <figure class="image is-32x32">
             <img :src="userGravatar" class="avatar">
           </figure>
+          <span class="is-hidden-desktop">Profile</span>
         </a>
-        <router-link :to="{ name: 'Settings' }" class="navbar-item"><i class="fa fa-cog"></i></router-link>
-        <a class="navbar-item" @click="logout"><i class="fa fa-sign-out"></i></a>
+        <router-link :to="{ name: 'Settings' }" class="navbar-item"><i class="fa fa-cog"></i> <span class="is-hidden-desktop">Settings</span></router-link>
+        <a class="navbar-item" @click="logout"><i class="fa fa-sign-out"></i> <span class="is-hidden-desktop">Logout</span></a>
       </template>
       <template v-else>
         <router-link
