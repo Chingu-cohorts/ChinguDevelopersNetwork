@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <section class="hero is-dark is-bold">
+    <section class="hero is-dark is-bold banner">
       <div class="hero-body">
         <div class="container">
           <h1 class="title">Cohorts</h1>
@@ -127,5 +127,11 @@ export default {
 
 .field .control {
   text-align: center;
+}
+
+.banner {
+  background: url(/static/images/home.png) no-repeat center center fixed;
+  background-size: cover;
+  height: 100%;
 }
 </style>
