@@ -16,7 +16,7 @@ func ListPostsReports(w http.ResponseWriter, r *http.Request, _ httprouter.Param
 	defer db.Close()
 
 	var postReports []models.PostReport
-	db.Where("is_closed = ?", false).Find(&postReports)
+	db.Where("is_closed = ?", "false").Find(&postReports)
 
 	respBody, err := json.MarshalIndent(postReports, "", " ")
 	if err != nil {
@@ -32,7 +32,7 @@ func ListCommentsReports(w http.ResponseWriter, r *http.Request, _ httprouter.Pa
 	defer db.Close()
 
 	var commentReports []models.CommentReport
-	db.Where("is_closed = ?", false).Find(&commentReports)
+	db.Where("is_closed = ?", "false").Find(&commentReports)
 
 	respBody, err := json.MarshalIndent(commentReports, "", " ")
 	if err != nil {
