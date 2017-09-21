@@ -1,70 +1,47 @@
 <template>
   <div class="home">
-    <section class="banner">
+    <section class="chingu">
       <div class="container has-text-centered">
 
-        <h1 class="title is-size-1">Chingu</h1>
-        <p class="subtitle is-size-4">We believe in free, high quality environments where you can work on your skills and become and rock star.</p>
-
-        <div class="block">
-          <a class="button is-primary is-large" style="color: #fff;">
-            <span class="icon">
-              <i class="fa fa-fire"></i>
-            </span>
-            <span>Apply</span>
-          </a>
+        <div class="image-header">
+          
         </div>
+        
+        <div class="columns">
+
+          <div class="column is-one-third">
+            <h3>join a cohort</h3>
+          </div>
+
+          <div class="column is-one-third">
+            <h2>meet your teammates</h2>
+            <p>Meet the people you'll spend the next few weeks working with on a build-to-learn-project!</p>
+          </div>
+
+          <div class="column is-one-third">
+            <h3>build your project</h3>
+          </div>
+
+        </div> <!-- columns -->
 
       </div> <!-- container -->
     </section>
 
-    <section class="hero is-dark">
-      <div class="hero-body">
-        <div class="container has-text-centered">
-          <h1 class="title">How it works</h1>
-          <p class="subtitle">We pair you with people at the same skill level, you build projects, gain experience, you become a rock star.</p>
+    <h2 class="has-text-centered">what devs are saying</h2>
 
-          <div class="columns">
-
-            <div class="column is-one-third contains-icon">
-              <img src="/static/images/icons/svg/leaf.svg" onerror="/static/images/icons/png/leaf.png">
-              <h2 class="is-size-2">1st</h2>
-              <p>You apply to join our amazing community.</p>
-            </div> <!-- column -->
-
-            <div class="column is-one-third contains-icon">
-              <img src="/static/images/icons/svg/leaves.svg" onerror="/static/images/icons/png/leaves.png">
-              <h2 class="is-size-2">2nd</h2>
-              <p>If you're accepted, you will join a cohort session and be paired in a team.</p>
-            </div> <!-- column -->
-            
-            <div class="column is-one-third contains-icon">
-              <img src="/static/images/icons/svg/tree.svg" onerror="/static/images/icons/png/tree.png">
-              <h2 class="is-size-2">3rd</h2>
-              <p>You build amazing projects with your team, then you decide if you want to continue with us or get a job (even both at the same time!)</p>
-            </div> <!-- column -->
-
-          </div> <!-- columns -->
-
-        </div> <!-- container -->
-      </div> <!-- hero-body -->
-    </section>
-
-    <section class="section">
+    <section class="section chingu">
       <div class="container">
-        <h2 class="title">Battle-tested method</h2>
-        <p class="subtitle">Thousands of developers have joined our community, hundreds have gotten jobs, here's what they say about their experience:</p>
 
         <div class="columns">
 
           <div class="column is-one-third">
             <div class="card">
-              <div class="card-content">
+              <div class="card-content has-text-centered">
                 <p class="quote">
                   “An amazing collaborative experience beyond my expectations.”
                 </p>
                 <p class="subtitle">
-                  periman2
+                  - periman2
                 </p>
               </div>
             </div>
@@ -72,12 +49,12 @@
 
           <div class="column is-one-third">
             <div class="card">
-              <div class="card-content">
+              <div class="card-content has-text-centered">
                 <p class="quote">
                   “I honestly don't believe I've seen any collaboration environment produce this much overall "learning" ever, really.”
                 </p>
                 <p class="subtitle">
-                  p1xt
+                  - p1xt
                 </p>
               </div>
             </div>
@@ -85,12 +62,12 @@
 
           <div class="column is-one-third">
             <div class="card">
-              <div class="card-content">
+              <div class="card-content has-text-centered">
                 <p class="quote">
                   “Learn with other developers, you start as noob and become a pro with a family of devs.”
                 </p>
                 <p class="subtitle">
-                  trion129
+                  - trion129
                 </p>
               </div>
             </div>
@@ -101,37 +78,46 @@
       </div> <!-- container -->
     </section>
 
-    <section class="hero is-dark">
-      <div class="hero-body">
-        <div class="container has-text-centered">
-          <h2 class="title">Share your love</h2>
-          <p class="subtitle">Running this community takes thousands of hours from our volunteers, allow us to continue doing what we love</p>
+    <section class="section">
+      <div class="container has-text-centered">
+        <h2 class="title">share your love</h2>
 
-          <div class="field">
-            <label class="label">Amount</label>
-            <p class="control">
-              <span class="select">
-                <select>
-                  <option>$5</option>
-                  <option>$10</option>
-                  <option>$25</option>
-                  <option>$50</option>
-                  <option>$100</option>
-                </select>
-              </span>
-            </p>
+        <div class="columns is-centered">
+
+          <div class="column is-2-tablet">
+            <img src="/static/images/cookie-1.png">
           </div>
 
-          <div class="block has-text-centered">
-            <a class="button is-primary is-outlined is-medium">
-              <span class="icon">
-                <i class="fa fa-check"></i>
-              </span>
-              <span>Donate</span>
-            </a>
+          <div class="column is-4-tablet">
+            <p class="subtitle">running this community is expensive, help us out with a donation!</p>
+
+            <div class="is-inline-flex">
+            <div class="field">
+              <p class="control">
+                <span class="select">
+                  <select>
+                    <option>$5</option>
+                    <option>$10</option>
+                    <option>$25</option>
+                    <option>$50</option>
+                    <option>$100</option>
+                  </select>
+                </span>
+              </p>
+            </div>
+
+            <div class="block has-text-centered">
+              <a class="button">donate</a>
+            </div>
+            </div>
           </div>
 
-        </div>
+          <div class="column is-2-tablet">
+            <img src="/static/images/cookie-2.png">
+          </div>
+        
+        </div><!-- columns -->
+
       </div>
     </section>
   </div>
@@ -145,8 +131,59 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-.quote {
+h2 {
+  color: #1dabfe;
+  font-size: 2rem;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  padding: 2rem 0;
+}
+
+.chingu {
+  background-image: linear-gradient(135deg, #17c4fc 0%, #1fa2ff 100%);
+  color: #fff;
+}
+
+.chingu h2, .chingu h3 {
+  color: #fff;
+}
+
+.chingu h2 {
+  font-size: 1.4rem;
+  padding: 1rem 0;
+}
+
+.chingu h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 1rem 0;
+}
+
+.tabs a {
+  color: #fff;
+}
+
+.tabs a:hover {
+    border-bottom: none;
+    color: #fff;
+}
+
+.card {
+  box-shadow: none;
+}
+
+.card .card-content .quote {
+  color: #1dabfe;
   font-size: 1.5rem;
+}
+
+.card .card-content .subtitle {
+  color: gray;
+  font-style: italic;
+}
+
+.field {
+  margin-right: 1rem;
 }
 
 .field .label {
@@ -157,25 +194,13 @@ export default {
   text-align: center;
 }
 
-.banner {
-  color: #fff;
-  background-color: #000;
-  background: url(/static/images/home.jpg) no-repeat center center fixed;
-  background-size: cover;
-  height: 50vh;
-}
-
-.banner .title, 
-.banner .subtitle {
+.button {
+  background-color: #1dabfe;
   color: #fff;
 }
 
-.banner .title {
-  text-shadow: 3px 3px #000;
-}
-
-.banner .subtitle {
-  text-shadow: 1px 1px #000;
+.select select {
+  border: 1px solid #1dabfe;
 }
 
 .banner .container {

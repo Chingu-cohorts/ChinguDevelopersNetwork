@@ -1,13 +1,13 @@
 <template>
 <div>
-  <section class="hero user-profile-background" v-bind:class="{ admin : currentUser.is_admin }">
+  <section class="hero user-profile-background">
     <div class="hero-body">
       <div class="container has-text-centered">
         <figure class="image is-256x256">
           <img :src="userGravatar" class="avatar" :alt="currentUser.username">
         </figure>
         <h1 class="title" v-if="currentUser.first_name">{{ currentUser.first_name }} {{ currentUser.last_name }}</h1>
-        <h2 class="subtitle">{{ currentUser.username }}</h2>
+        <h2 class="subtitle">@{{ currentUser.username }}</h2>
         <a :href="userTwitter" v-if="currentUser.twitter_username">
           <i class="fa fa-twitter"></i>
         </a>
@@ -24,54 +24,51 @@
     </div>
   </section>
 
-  <section class="section">
+  <section class="section feed">
     <div class="container">
-      
-      <nav class="level">
-        <div class="level-item has-text-centered">
-          <div>
-            <p class="heading">Projects Completed</p>
-            <p class="title">{{ userCompletedProjects }}</p>
+      <div class="columns is-centered">
+
+        <div class="column is-5">
+          
+          <h2>About</h2>
+          <div class="about">
+            <p>{{ userAbout }}</p>
           </div>
-        </div>
-        <div class="level-item has-text-centered">
-          <div>
-            <p class="heading">Reputation</p>
-            <p class="title">{{ userReputationLevel }}</p>
+
+          <h2>Skills</h2>
+          <div class="skills">
+            <span class="tag is-medium">Go</span>
+            <span class="tag is-medium">Vue.js</span>
+            <span class="tag is-medium">Ruby on Rails</span>
+            <span class="tag is-medium">Elixir</span>
+            <span class="tag is-medium">JavaScript</span>
+            <span class="tag is-medium">C/C++</span>
           </div>
+
         </div>
-        <div class="level-item has-text-centered">
-          <div>
-            <p class="heading">Recommended by</p>
-            <p class="title">{{ userRecommendations }}</p>
+
+        <div class="column is-5">
+
+          <h2>Projects</h2>
+          <div class="projects">
+
           </div>
-        </div>
-      </nav>
 
-      <hr>
+          <h2>Posts</h2>
+          <div class="posts">
 
-      <div class="columns feed">
-
-        <div class="column is-one-quarter">
-          <div class="box">
-            <div class="content">
-              <h2>About</h2>
-              <p>{{ userAbout }}</p>
-            </div>
           </div>
-        </div>
-
-        <div class="column">
 
         </div>
-      </div>
-    </div>
+        
+      </div> <!-- columns -->
+    </div> <!-- container -->
   </section>
 </div>
 </template>
 
 <script>
-import { reputation, gravatar } from '@/utils'
+import { gravatar } from '@/utils'
 
 export default {
   name: 'show-user',
@@ -91,18 +88,6 @@ export default {
     userCompletedProjects (state) {
       if (state.currentUser.projects) {
         return state.currentUser.projects.length
-      }
-      return '0'
-    },
-
-    userReputationLevel (state) {
-      let { experience } = state.currentUser
-      return reputation(experience)
-    },
-
-    userRecommendations (state) {
-      if (state.currentUser.recommendations) {
-        return state.currentUser.recommendations.length
       }
       return '0'
     },
@@ -140,21 +125,46 @@ export default {
 }
 </script>
 
-<style scoped>
-.user-profile-background {
-  background-image: linear-gradient(135deg, #15df89 0%, #28a0dc 100%)
+<style lang="scss" scoped>
+$font: 'Raleway', sans-serif;
+$light_blue: #17c4fc;
+$darker_blue: #1fa2ff;
+$text_blue: #1dabfe;
+$text_color: #fff;
+$gray: #e9edef;
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font;
 }
 
-.admin {
-  background-image: linear-gradient(135deg, #000 0%, #6f6f6f 100%)
+.user-profile-background {
+  background-image: linear-gradient(135deg, $light_blue 0%, $darker_blue 100%);
+}
+
+.feed h2 {
+  color: $text_blue;
+  font-size: 1.6rem;
+  font-weight: 700;
+  padding: 1rem 0;
+}
+
+.feed .tag {
+  color: $text_color;
+  background-color: $text_blue;
+  margin: 0.5rem 0.5rem 0.5rem 0;
+}
+
+.feed .about {
+  background: $gray;
+  padding: 1rem;
 }
 
 .hero-body .title, .subtitle {
-  color: #fff;
+  color: $text_color;
 }
 
 .hero-body .fa {
-  color: #fff;
+  color: $text_color;
 }
 
 .is-256x256 {
@@ -178,18 +188,5 @@ export default {
 
 a .fa {
   margin: 0 0.3em;
-}
-
-hr {
-  margin: 0 auto;
-  width: 80%;
-}
-
-.feed {
-  margin-top: 2em;
-}
-
-.feed .box {
-  background-color: #fbfbfb;
 }
 </style>

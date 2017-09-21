@@ -32,7 +32,7 @@ export default {
 
 <style>
 #app {
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

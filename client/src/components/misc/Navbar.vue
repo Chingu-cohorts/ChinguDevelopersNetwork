@@ -101,7 +101,13 @@ export default {
 
 <style scoped>
 .navbar {
+  font-family: 'Raleway', sans-serif;
   border-bottom: 1px solid #f9f9f9;
+}
+
+.navbar .navbar-item {
+  color: #1dabfe;
+  font-weight: 700;
 }
 
 .navbar-item img {

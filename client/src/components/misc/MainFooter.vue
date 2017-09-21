@@ -3,7 +3,7 @@
     <div class="container">
       <div class="content has-text-centered">
         <p>
-          &copy; <a href="https://github.com/Chingu-cohorts">Chingu Developers Network</a> - {{ currentYear }}
+          <strong><a href="https://github.com/Chingu-cohorts">Chingu Developers Network</a> - {{ currentYear }}</strong>
         </p>
         <p>
           <router-link :to="{name: 'TermsOfService'}">Terms of Service</router-link> - <router-link :to="{name: 'PrivacyPolicy'}">Privacy Policy</router-link>
@@ -25,7 +25,6 @@
             </svg>
           </a>
         </p> <!-- social networks -->
-        <p><em>Icons by Freepik from Flaticon</em></p>
       </div>
     </div>
   </footer>
@@ -45,7 +44,7 @@ export default {
 
 <style scoped>
 .footer {
-  background-color: #15df89;
+  background-image: linear-gradient(135deg, #17c4fc 0%, #1fa2ff 100%);
   padding: 3rem 1.5rem 2rem;
 }
 
