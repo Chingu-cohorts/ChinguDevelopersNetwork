@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use App\Profile;
 use App\Http\Controllers\Controller;
 use App\Jobs\SendVerificationEmail;
 use Illuminate\Support\Facades\Validator;
@@ -66,7 +67,7 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'username' => $data['username'],
             'name' => $data['name'],
             'email' => $data['email'],
@@ -74,6 +75,10 @@ class RegisterController extends Controller
             'email_token' => base64_encode($data['email']),
             'slug' => str_slug($data['username']),
         ]);
+
+        // Create a new profile for the user
+        Profile::create(['user_id' => $user->id]);
+        return $user;
     }
 
     /**
