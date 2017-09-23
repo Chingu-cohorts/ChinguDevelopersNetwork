@@ -18,9 +18,9 @@ class CreateProfilesTable extends Migration
             $table->unsignedInteger('user_id');
             $table->string('location')->nullable();
             $table->text('about')->nullable();
+            $table->string('github')->nullable();
             $table->string('medium')->nullable();
             $table->string('twitter')->nullable();
-            $table->string('github')->nullable();
             $table->timestamps();
         });
     }
